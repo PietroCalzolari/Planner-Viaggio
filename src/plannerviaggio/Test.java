@@ -1,12 +1,12 @@
 package plannerviaggio;
-/*
+
 import src.plannerviaggio.Attività;
 import src.plannerviaggio.DBAttività;
 import src.plannerviaggio.DBViaggio;
 import src.plannerviaggio.SQLException;
 import src.plannerviaggio.Utente;
 import src.plannerviaggio.Viaggio;
-*/
+
 public class Test {
 	/*
 	 * Questa classe la useremo come Main per far andare la nostra applicazione e per testarla.
@@ -28,13 +28,12 @@ public class Test {
 		System.out.println("Se funziona sono troppo felice");
 
 		//provo i database
-/*		try {
+		try {
 			new DBViaggio().run();
 			new DBAttività().run();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-*/
-	}
+
 }
