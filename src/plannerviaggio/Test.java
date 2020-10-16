@@ -1,10 +1,10 @@
 package plannerviaggio;
-
 import database.DBAttivita;
 import database.DBViaggio;
 import graphicinterface.ControlPanel;
 
 import java.sql.SQLException;
+import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 
 public class Test {
 	/*
@@ -23,7 +23,7 @@ public class Test {
 		System.out.println("Se funziona sono troppo felice");
 		System.out.println("Speriamo funzioni anche questa volta");
 		new ControlPanel();
-		//provo i database
+		
 		try {
 			new DBViaggio().run();
 			new DBAttivita().run();
@@ -31,5 +31,4 @@ public class Test {
 			e.printStackTrace();
 		}
 	}
-
 }
