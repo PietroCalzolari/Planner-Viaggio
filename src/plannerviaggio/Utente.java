@@ -6,30 +6,30 @@ public class Utente {
 	 * Ha come attributi i seguenti:
 	 * name: nome dell'utente
 	 * surname: cognome dell'utente
-	 * age: et� dell'utente
+	 * eta: eta dell'utente
 	 * born: data di nascita dell'utente
 	 * codicefiscale: codicefiscale dell'utente
 	 * email: email dell'utente
-	 * city: la citt� di residenza dell'utente
+	 * citta: la citta di residenza dell'utente
 	 */
 	String nome;
 	String cognome;
-	double età;
+	double eta;
 	String dataNascita;
 	String codiceFiscale;
 	String email;
-	String città;
+	String citta;
 	
 	//Costruttore
-	public Utente(String nome, String cognome, double età, String dataNascita, String codiceFiscale, String email, String città) {
+	public Utente(String nome, String cognome, double eta, String dataNascita, String codiceFiscale, String email, String citta) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.età = età;
+		this.eta = eta;
 		this.dataNascita = dataNascita;
 		this.codiceFiscale = codiceFiscale;
 		this.email = email;
-		this.città = città;
+		this.citta = citta;
 	}
 
 	//Getters and Setters
@@ -49,12 +49,12 @@ public class Utente {
 		this.cognome = cognome;
 	}
 	
-	public double getEtà() {
-		return età;
+	public double getEta() {
+		return eta;
 	}
 
-	public void setEtà(double età) {
-		this.età = età;
+	public void setEta(double eta) {
+		this.eta = eta;
 	}
 
 	public String getDataNascita() {
@@ -81,19 +81,19 @@ public class Utente {
 		this.email = email;
 	}
 
-	public String getCittà() {
-		return città;
+	public String getCitta() {
+		return citta;
 	}
 
-	public void setCittà(String città) {
-		this.città = città;
+	public void setCitta(String citta) {
+		this.citta = citta;
 	}
 
 	//toString
 	@Override
 	public String toString() {
-		return "Utente [nome=" + nome + ", cognome=" + cognome + ", et�=" + età + ", dataNascita=" + dataNascita
-				+ ", codiceFiscale=" + codiceFiscale + ", email=" + email + ", citt�=" + città + "]";
+		return "Utente [nome=" + nome + ", cognome=" + cognome + ", eta=" + eta + ", dataNascita=" + dataNascita
+				+ ", codiceFiscale=" + codiceFiscale + ", email=" + email + ", citta=" + citta + "]";
 	}
 	
 }

@@ -3,13 +3,12 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import plannerviaggio.Attività;
+import plannerviaggio.Attivita;
 
-
-public class DBAttività {
+public class DBAttivita{
 	protected DBManager db;
 
-	public DBAttività() throws SQLException{
+	public DBAttivita() throws SQLException{
 		
 		try {
 			// Database manager for SQLite
@@ -37,7 +36,7 @@ public class DBAttività {
 	 * @throws SQLException
 	 */
 	public void printRow(ResultSet rs) throws SQLException {
-		System.out.println("id=" + rs.getInt("id") + ", nomeAttività=" + rs.getString("nomeAttività") + ", oraInizio="
+		System.out.println("id=" + rs.getInt("id") + ", nomeAttivita=" + rs.getString("nomeAttivita") + ", oraInizio="
 				+ rs.getString("oraInizio") + ", oraFine=" + rs.getString("oraFine") + ", luogo=" + rs.getString("luogo"));
 
 	}
@@ -49,7 +48,7 @@ public class DBAttività {
 	 * @throws SQLException
 	 */
 	public void testSelect() throws SQLException {
-		ResultSet rs = db.executeQuery("SELECT * FROM attività LIMIT 100");
+		ResultSet rs = db.executeQuery("SELECT * FROM attivita LIMIT 100");
 		while (rs.next()) {
 			printRow(rs);
 		}
@@ -61,13 +60,13 @@ public class DBAttività {
 	 * @throws SQLException
 	 */
 	
-	Attività museo = new Attività("Museo di quadri di roma", "11:30", "13:00", "Piazza");
+	Attivita museo = new Attivita("Museo di quadri di roma", "11:30", "13:00", "Piazza");
 	
 	public void testUpdate() throws SQLException {
 	
 		String query = String.format(
-				"INSERT INTO attività (id, nomeAttività, oraInizio, oraFine, luogo) VALUES (3, '%s', '%s', '%s', '%s')",
-				 museo.getNomeAttività(), museo.getOraInizio(), museo.getOraFine(), museo.getLuogo());
+				"INSERT INTO attivit� (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES (3, '%s', '%s', '%s', '%s')",
+				 museo.getNomeAttivita(), museo.getOraInizio(), museo.getOraFine(), museo.getLuogo());
 		db.executeUpdate(query);
 		
 	}
