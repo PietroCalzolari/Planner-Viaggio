@@ -2,34 +2,34 @@ package plannerviaggio;
 
 public class Utente {
 	/*
-	 * Questa Ë la classe con cui definiamo ogni Utente.
+	 * Questa ÔøΩ la classe con cui definiamo ogni Utente.
 	 * Ha come attributi i seguenti:
 	 * name: nome dell'utente
 	 * surname: cognome dell'utente
-	 * age: et‡ dell'utente
+	 * age: etÔøΩ dell'utente
 	 * born: data di nascita dell'utente
 	 * codicefiscale: codicefiscale dell'utente
 	 * email: email dell'utente
-	 * city: la citt‡ di residenza dell'utente
+	 * city: la cittÔøΩ di residenza dell'utente
 	 */
 	String nome;
 	String cognome;
-	double et‡;
+	double et√†;
 	String dataNascita;
 	String codiceFiscale;
 	String email;
-	String citt‡;
+	String citt√†;
 	
 	//Costruttore
-	public Utente(String nome, String cognome, double et‡, String dataNascita, String codiceFiscale, String email, String citt‡) {
+	public Utente(String nome, String cognome, double et√†, String dataNascita, String codiceFiscale, String email, String citt√†) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
-		this.et‡ = et‡;
+		this.et√† = et√†;
 		this.dataNascita = dataNascita;
 		this.codiceFiscale = codiceFiscale;
 		this.email = email;
-		this.citt‡ = citt‡;
+		this.citt√† = citt√†;
 	}
 
 	//Getters and Setters
@@ -49,12 +49,12 @@ public class Utente {
 		this.cognome = cognome;
 	}
 	
-	public double getEt‡() {
-		return et‡;
+	public double getEt√†() {
+		return et√†;
 	}
 
-	public void setEt‡(double et‡) {
-		this.et‡ = et‡;
+	public void setEt√†(double et√†) {
+		this.et√† = et√†;
 	}
 
 	public String getDataNascita() {
@@ -81,19 +81,19 @@ public class Utente {
 		this.email = email;
 	}
 
-	public String getCitt‡() {
-		return citt‡;
+	public String getCitt√†() {
+		return citt√†;
 	}
 
-	public void setCitt‡(String citt‡) {
-		this.citt‡ = citt‡;
+	public void setCitt√†(String citt√†) {
+		this.citt√† = citt√†;
 	}
 
 	//toString
 	@Override
 	public String toString() {
-		return "Utente [nome=" + nome + ", cognome=" + cognome + ", et‡=" + et‡ + ", dataNascita=" + dataNascita
-				+ ", codiceFiscale=" + codiceFiscale + ", email=" + email + ", citt‡=" + citt‡ + "]";
+		return "Utente [nome=" + nome + ", cognome=" + cognome + ", etÔøΩ=" + et√† + ", dataNascita=" + dataNascita
+				+ ", codiceFiscale=" + codiceFiscale + ", email=" + email + ", cittÔøΩ=" + citt√† + "]";
 	}
 	
 }

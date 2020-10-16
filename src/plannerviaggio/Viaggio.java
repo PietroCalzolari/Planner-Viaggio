@@ -1,30 +1,42 @@
 package plannerviaggio;
 
+import java.util.UUID;
+
 public class Viaggio {
 	
 	/*
 	 * Questa classe rappresenta i viaggi.
-	 * Un oggetto viaggio avrà i seguenti attributi:
+	 * Un oggetto viaggio avrï¿½ i seguenti attributi:
 	 * nomeViaggio: nome del viaggio
 	 * mezzo: il mezzo di trasporto del viaggio(aereo, treno, autobus, macchina, camper, ...)
 	 * partenza: data di partenza del viaggio
 	 * ritorno: data di ritorno o arrivo del viaggio
 	 */
 
+	UUID id;
 	String nomeViaggio;
 	String mezzo;
 	String partenza;
 	String ritorno;
 	
 	//costruttore
-	public Viaggio(String nomeViaggio, String mezzo, String partenza, String ritorno) {
+	public Viaggio(UUID id, String nomeViaggio, String mezzo, String partenza, String ritorno) {
 		super();
+		this.id = id;
 		this.nomeViaggio = nomeViaggio;
 		this.mezzo = mezzo;
 		this.partenza = partenza;
 		this.ritorno = ritorno;
 	}
 	//Getters and Setters
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	
 	public String getNomeViaggio() {
 		return nomeViaggio;
 	}
