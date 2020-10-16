@@ -19,6 +19,7 @@ public class Test {
 		System.out.println(martina);
 		System.out.println(museo);
 		System.out.println("Se funziona sono troppo felice");
+		System.out.println("Speriamo funzioni anche questa volta");
 
 		//provo i database
 		try {
