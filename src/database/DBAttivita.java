@@ -18,10 +18,10 @@ public class DBAttivita{
 			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL);
 			
 			
-			db.executeQuery("SELECT * FROM attività LIMIT 1");
+			db.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS attività");
-			db.executeUpdate("CREATE TABLE attività (" + "id INTEGER PRIMARY KEY, " + "nomeAttività VARCHAR(30), "
+			db.executeUpdate("CREATE TABLE attivita (" + "id INTEGER PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
 					+ "oraInizio TEXT, " + "oraFine TEXT, " + "luogo VARCHAR(30))");
 	
 		} catch (ClassNotFoundException e) {
@@ -65,7 +65,7 @@ public class DBAttivita{
 	public void testUpdate() throws SQLException {
 	
 		String query = String.format(
-				"INSERT INTO attivit� (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES (3, '%s', '%s', '%s', '%s')",
+				"INSERT INTO attivita (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES (3, '%s', '%s', '%s', '%s')",
 				 museo.getNomeAttivita(), museo.getOraInizio(), museo.getOraFine(), museo.getLuogo());
 		db.executeUpdate(query);
 		
