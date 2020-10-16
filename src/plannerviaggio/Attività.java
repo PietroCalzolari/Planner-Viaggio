@@ -1,38 +1,38 @@
 package plannerviaggio;
 
-public class Attività {
+public class AttivitÃ  {
 	
 	/* PER IL MOMENTO L'HO USATA COME CLASSE SEPARATA E NON SOTTOCLASSE DI VIAGGIO
 	 * 
-	 * (Questa è una classe che implementa la classe Viaggio poichè ogni Attività sarà
+	 * (Questa ï¿½ una classe che implementa la classe Viaggio poichï¿½ ogni Attivitï¿½ sarï¿½
 	 * incorporata in un viaggio.) 
 	 * Gli attributi sono:
-	 *  * nomeactivity: la stringa che usiamo per chiamare la attività o per descriverla a parole
-	 * dataactivity: la data in cui sarà la attività
-	 * orainizio: l'ora iniziale dell'attività
-	 * orafine: l'ora in cui l'attività finisce
+	 *  * nomeactivity: la stringa che usiamo per chiamare la attivitï¿½ o per descriverla a parole
+	 * dataactivity: la data in cui sarï¿½ la attivitï¿½
+	 * orainizio: l'ora iniziale dell'attivitï¿½
+	 * orafine: l'ora in cui l'attivitï¿½ finisce
 	 */
 
-	String nomeAttività;
+	String nomeAttivitÃ ;
 	String oraInizio;
 	String oraFine;
 	String luogo;
 	String ciaooooo;
 	//costruttore
-	public Attività(String nomeAttività, String oraInizio, String oraFine, String luogo) {
+	public AttivitÃ (String nomeAttivitÃ , String oraInizio, String oraFine, String luogo) {
 		super();
-		this.nomeAttività = nomeAttività;
+		this.nomeAttivitÃ  = nomeAttivitÃ ;
 		this.oraInizio = oraInizio;
 		this.oraFine = oraFine;
 		this.luogo = luogo;
 	}
 	//Getters and Setters
-	public String getNomeAttività() {
-		return nomeAttività;
+	public String getNomeAttivitÃ () {
+		return nomeAttivitÃ ;
 	}
 
-	public void setNomeAttività(String nomeAttività) {
-		this.nomeAttività = nomeAttività;
+	public void setNomeAttivitÃ (String nomeAttivitÃ ) {
+		this.nomeAttivitÃ  = nomeAttivitÃ ;
 	}
 
 	public String getOraInizio() {
@@ -62,7 +62,7 @@ public class Attività {
 	//toString
 	@Override
 	public String toString() {
-		return "Attività [nomeAttività=" + nomeAttività + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine
+		return "AttivitÃ  [nomeAttivitÃ =" + nomeAttivitÃ  + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine
 				+ ", luogo=" + luogo + "]";
 	}
 
