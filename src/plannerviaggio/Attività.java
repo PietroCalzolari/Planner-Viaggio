@@ -17,7 +17,7 @@ public class Attività {
 	String oraInizio;
 	String oraFine;
 	String luogo;
-
+	String ciaooooo;
 	//costruttore
 	public Attività(String nomeAttività, String oraInizio, String oraFine, String luogo) {
 		super();
