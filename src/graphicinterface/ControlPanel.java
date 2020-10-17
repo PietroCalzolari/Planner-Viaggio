@@ -1,23 +1,19 @@
 package graphicinterface;
 
 import java.awt.GridLayout;
+import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
+import de.javasoft.synthetica.simple2d.SyntheticaSimple2DLookAndFeel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
+import javax.swing.*;
 
 public class ControlPanel extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JButton iniziamo;
 	private JTextField nome;
 	private JLabel label;
-
+	private InitPanel inizitpanel;
+	
 	public ControlPanel() {
 		nome = new JTextField();
 		label = new JLabel("Come ti chiami?");
@@ -33,14 +29,7 @@ public class ControlPanel extends JFrame implements ActionListener{
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(500, 150);
 		setVisible(true);
-		try 
-		{
-		  UIManager.setLookAndFeel(new SyntheticaAluOxideLookAndFeel());
-		} 
-		catch (Exception e) 
-		{
-		  e.printStackTrace();
-		}
+
 	}
 
 	@Override
