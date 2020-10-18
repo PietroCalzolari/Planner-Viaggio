@@ -1,39 +1,76 @@
 package graphicinterface;
 
+import java.awt.Color;
 import java.awt.GridLayout;
-import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
-import de.javasoft.synthetica.simple2d.SyntheticaSimple2DLookAndFeel;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class ControlPanel extends JFrame implements ActionListener{
+public class ControlPanel extends JFrame implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
-	private JButton iniziamo;
-	private JTextField nome;
-	private JLabel label;
-	private InitPanel inizitpanel;
-	
+	private MenuBar menuBar;
+	private Menu file;
+	private MenuItem openFile; 
+	private MenuItem saveFile; 
+	private MenuItem close; 
+	private JTabbedPane tabbedPane;
+	private JPanel primopannello;
+	private JPanel secondopannello;
+
 	public ControlPanel() {
-		nome = new JTextField();
-		label = new JLabel("Come ti chiami?");
-		iniziamo = new JButton("INIZIAMO");
-		iniziamo.addActionListener(this);
+		menuBar = new MenuBar();
 		
-		JPanel p1 = new JPanel(new GridLayout(3,1));
-		p1.add(label);
-		p1.add(nome);
-		p1.add(iniziamo);
+		file = new Menu("file");
 		
-		setContentPane(p1);
+		openFile = new MenuItem("Open"); 
+		saveFile = new MenuItem("Save"); 
+		close = new MenuItem("Close"); 
+		
+		primopannello = new JPanel();
+		primopannello.setLayout(new GridLayout(3,1));
+		secondopannello = new JPanel();
+		secondopannello.setLayout(new GridLayout(3,1));
+		tabbedPane = new JTabbedPane();
+		tabbedPane.addTab("Primo Viaggio", primopannello);
+		tabbedPane.addTab("Secondo Viaggio", secondopannello);
+		
+		openFile.addActionListener(this);
+		file.add(openFile);
+		
+		saveFile.addActionListener(this);
+		file.add(saveFile);
+		
+		close.addActionListener(this);
+		file.add(close);
+		
+		
+		menuBar.add(file);
+		setMenuBar(menuBar);
+		
+		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
+		tabbedPane.addChangeListener(this);
+
+		setContentPane(tabbedPane);
+		primopannello.setBackground(Color.red);
+		secondopannello.setBackground(Color.magenta);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(500, 150);
 		setVisible(true);
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
