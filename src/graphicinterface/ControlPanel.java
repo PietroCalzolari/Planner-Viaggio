@@ -7,17 +7,23 @@ import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
+import de.javasoft.synthetica.simple2d.SyntheticaSimple2DLookAndFeel;
 
 public class ControlPanel extends JFrame implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 	private MenuBar menuBar;
 	private Menu file;
-	private MenuItem openFile; 
-	private MenuItem saveFile; 
-	private MenuItem close; 
+	private MenuItem openFile;
+	private MenuItem saveFile;
+	private MenuItem close;
 	private JTabbedPane tabbedPane;
 	private JPanel primopannello;
 	private JPanel secondopannello;
@@ -58,6 +64,15 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		setContentPane(tabbedPane);
 		primopannello.setBackground(Color.red);
 		secondopannello.setBackground(Color.magenta);
+		try {
+			UIManager.setLookAndFeel(new SyntheticaSimple2DLookAndFeel());
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(500, 150);
 		setVisible(true);
