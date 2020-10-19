@@ -41,7 +41,7 @@ public class DBViaggio {
 	 * @throws SQLException
 	 */
 	public void printRow(ResultSet rs) throws SQLException {
-		System.out.println("id=" + rs.getInt("id") + ", nomeViaggio=" + rs.getString("nomeViaggio") + ", Partenza="
+		System.out.println("id=" + rs.getString("id") + ", nomeViaggio=" + rs.getString("nomeViaggio") + ", Partenza="
 				+ rs.getString("Partenza") + ", Ritorno=" + rs.getString("Ritorno"));
  
 	}

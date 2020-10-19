@@ -13,28 +13,28 @@ public class Viaggio {
 	 * ritorno: data di ritorno o arrivo del viaggio
 	 */
 
-	UUID id;
+	UUID idViaggio;
 	String nomeViaggio;
 	String mezzo;
 	String partenza;
 	String ritorno;
 	
 	//costruttore
-	public Viaggio(UUID id, String nomeViaggio, String mezzo, String partenza, String ritorno) {
+	public Viaggio(UUID idViaggio, String nomeViaggio, String mezzo, String partenza, String ritorno) {
 		super();
-		this.id = id;
+		this.idViaggio = idViaggio;
 		this.nomeViaggio = nomeViaggio;
 		this.mezzo = mezzo;
 		this.partenza = partenza;
 		this.ritorno = ritorno;
 	}
 	//Getters and Setters
-	public UUID getId() {
-		return id;
+	public UUID getIdViaggio() {
+		return idViaggio;
 	}
 
-	public void setId(UUID id) {
-		this.id = id;
+	public void setIdViaggio(UUID idViaggio) {
+		this.idViaggio = idViaggio;
 	}
 	
 	public String getNomeViaggio() {
@@ -64,9 +64,8 @@ public class Viaggio {
 	//toString
 	@Override
 	public String toString() {
-		return "Viaggio [nomeViaggio=" + nomeViaggio + ", mezzo=" + mezzo + ", partenza=" + partenza + ", ritorno=" + ritorno
-				+ "]";
+		return "Viaggio [idViaggio=" + idViaggio + ", nomeViaggio=" + nomeViaggio + ", mezzo=" + mezzo + ", partenza="
+				+ partenza + ", ritorno=" + ritorno + "]";
 	}
 	
-
 }

@@ -1,32 +1,46 @@
 package plannerviaggio;
 
+import java.util.UUID;
+
 public class Attivita {
 
 	/* PER IL MOMENTO L'HO USATA COME CLASSE SEPARATA E NON SOTTOCLASSE DI VIAGGIO
 	 * 
-	 * (Questa è una classe che implementa la classe Viaggio poichè ogni Attività sarà
+	 * (Questa ï¿½ una classe che implementa la classe Viaggio poichï¿½ ogni Attivitï¿½ sarï¿½
 	 * incorporata in un viaggio.) 
 	 * Gli attributi sono:
-	 *  * nomeactivity: la stringa che usiamo per chiamare la attività o per descriverla a parole
-	 * dataactivity: la data in cui sarà la attività
-	 * orainizio: l'ora iniziale dell'attività
-	 * orafine: l'ora in cui l'attività finisce
+	 *  * nomeactivity: la stringa che usiamo per chiamare la attivitï¿½ o per descriverla a parole
+	 * dataactivity: la data in cui sarï¿½ la attivitï¿½
+	 * orainizio: l'ora iniziale dell'attivitï¿½
+	 * orafine: l'ora in cui l'attivitï¿½ finisce
 	 */
 
+	UUID idAttivita;
 	String nomeAttivita;
 	String oraInizio;
 	String oraFine;
 	String luogo;
 
 	//costruttore
-	public Attivita(String nomeAttivita, String oraInizio, String oraFine, String luogo) {
+	public Attivita(UUID idAttivita, String nomeAttivita, String oraInizio, String oraFine, String luogo) {
 		super();
+		this.idAttivita = idAttivita;
 		this.nomeAttivita = nomeAttivita;
 		this.oraInizio = oraInizio;
 		this.oraFine = oraFine;
 		this.luogo = luogo;
 	}
+	
+	
 	//Getters and Setters
+	public UUID getIdAttivita() {
+		return idAttivita;
+	}
+
+	public void setIdAttivita(UUID idAttivita) {
+		this.idAttivita = idAttivita;
+	}
+
 	public String getNomeAttivita() {
 		return nomeAttivita;
 	}
@@ -58,12 +72,13 @@ public class Attivita {
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
 	}
-
-	//toString
+	
+	
 	@Override
 	public String toString() {
-		return "Attivita  [nomeAttivita =" + nomeAttivita + ", oraInizio=" + oraInizio + ", oraFine=" + oraFine
-				+ ", luogo=" + luogo + "]";
+		return "Attivita [idAttivita=" + idAttivita + ", nomeAttivita=" + nomeAttivita + ", oraInizio=" + oraInizio
+				+ ", oraFine=" + oraFine + ", luogo=" + luogo + "]";
 	}
+	
 
 }

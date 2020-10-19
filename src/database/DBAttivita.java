@@ -3,7 +3,6 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import plannerviaggio.Attivita;
 
 public class DBAttivita{
 	protected DBManager db;
@@ -21,7 +20,7 @@ public class DBAttivita{
 			db.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS attività");
-			db.executeUpdate("CREATE TABLE attivita (" + "id INTEGER PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
+			db.executeUpdate("CREATE TABLE attivita (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
 					+ "oraInizio TEXT, " + "oraFine TEXT, " + "luogo VARCHAR(30))");
 	
 		} catch (ClassNotFoundException e) {
@@ -36,7 +35,7 @@ public class DBAttivita{
 	 * @throws SQLException
 	 */
 	public void printRow(ResultSet rs) throws SQLException {
-		System.out.println("id=" + rs.getInt("id") + ", nomeAttivita=" + rs.getString("nomeAttivita") + ", oraInizio="
+		System.out.println("id=" + rs.getString("id") + ", nomeAttivita=" + rs.getString("nomeAttivita") + ", oraInizio="
 				+ rs.getString("oraInizio") + ", oraFine=" + rs.getString("oraFine") + ", luogo=" + rs.getString("luogo"));
 
 	}
@@ -59,14 +58,10 @@ public class DBAttivita{
 	 * 
 	 * @throws SQLException
 	 */
-	
-	Attivita museo = new Attivita("Museo di quadri di roma", "11:30", "13:00", "Piazza");
-	
 	public void testUpdate() throws SQLException {
 	
 		String query = String.format(
-				"INSERT INTO attivita (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES (3, '%s', '%s', '%s', '%s')",
-				 museo.getNomeAttivita(), museo.getOraInizio(), museo.getOraFine(), museo.getLuogo());
+				"INSERT INTO attivita (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae79', 'Museo di quadri di roma', '11:30', '13:00', 'Piazza')");
 		db.executeUpdate(query);
 		
 	}

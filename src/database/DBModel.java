@@ -57,8 +57,8 @@ public class DBModel {
 		Viaggio v = new Viaggio(java.util.UUID.randomUUID(), nomeViaggio, mezzo, partenza, ritorno);
 		try {
 			String query = String.format(
-					"INSERT INTO viaggio (id, nomeViaggio, mezzo, partenza, ritorno) VALUES ('%s', %s, %s, %s, '%s')",
-					v.getId().toString(), v.getNomeViaggio(), v.getMezzo(), v.getPartenza(), v.getRitorno());
+					"INSERT INTO viaggio (idViaggio, nomeViaggio, mezzo, partenza, ritorno) VALUES ('%s', %s, %s, %s, '%s')",
+					v.getIdViaggio().toString(), v.getNomeViaggio(), v.getMezzo(), v.getPartenza(), v.getRitorno());
 			db.executeUpdate(query);
 			lv.add(v);
 		} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class DBModel {
 	
 	public void remove() {
 		try {
-			String query = String.format("DELETE FROM viaggio WHERE id='%s'", getSelectedItem().getId());
+			String query = String.format("DELETE FROM viaggio WHERE id='%s'", getSelectedItem().getIdViaggio());
 			db.executeUpdate(query);
 			lv.remove(selectedIndex);
 			previous();
@@ -81,7 +81,7 @@ public class DBModel {
 	}
 	
 	public void setnomeViaggio(String nomeViaggio) {
-		String query = String.format("UPDATE viaggio SET nomeViaggio=%s WHERE id='%s'", nomeViaggio, getSelectedItem().getId());
+		String query = String.format("UPDATE viaggio SET nomeViaggio=%s WHERE id='%s'", nomeViaggio, getSelectedItem().getIdViaggio());
 		try {
 			db.executeUpdate(query);
 			getSelectedItem().setNomeViaggio(nomeViaggio);
@@ -91,7 +91,7 @@ public class DBModel {
 	}
 	
 	public void setMezzo(String mezzo) {
-		String query = String.format("UPDATE viaggio SET mezzo=%s WHERE id='%s'", mezzo, getSelectedItem().getId());
+		String query = String.format("UPDATE viaggio SET mezzo=%s WHERE id='%s'", mezzo, getSelectedItem().getIdViaggio());
 		try {
 			db.executeUpdate(query);
 			getSelectedItem().setMezzo(mezzo);
@@ -101,7 +101,7 @@ public class DBModel {
 	}
 	
 	public void setPartenza(String partenza) {
-		String query = String.format("UPDATE viaggio SET partenza=%s WHERE id='%s'", partenza, getSelectedItem().getId());
+		String query = String.format("UPDATE viaggio SET partenza=%s WHERE id='%s'", partenza, getSelectedItem().getIdViaggio());
 		try {
 			db.executeUpdate(query);
 			getSelectedItem().setPartenza(partenza);
@@ -111,7 +111,7 @@ public class DBModel {
 	}
 	
 	public void setRitorno(String ritorno) {
-		String query = String.format("UPDATE viaggio SET ritorno=%s WHERE id='%s'", ritorno, getSelectedItem().getId());
+		String query = String.format("UPDATE viaggio SET ritorno=%s WHERE id='%s'", ritorno, getSelectedItem().getIdViaggio());
 		try {
 			db.executeUpdate(query);
 			getSelectedItem().setRitorno(ritorno);
