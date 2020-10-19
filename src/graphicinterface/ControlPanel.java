@@ -8,22 +8,20 @@ import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
-import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
-import de.javasoft.synthetica.simple2d.SyntheticaSimple2DLookAndFeel;
 
 public class ControlPanel extends JFrame implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
 	private MenuBar menuBar;
 	private Menu file;
+	private Menu aggiungi;
 	private MenuItem openFile;
 	private MenuItem saveFile;
 	private MenuItem close;
+	private MenuItem nuovoViaggio;
+	private MenuItem nuovaAttivita;
 	private JTabbedPane tabbedPane;
 	private JPanel primopannello;
 	private JPanel secondopannello;
@@ -31,11 +29,28 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 	public ControlPanel() {
 		menuBar = new MenuBar();
 		
-		file = new Menu("file");
+		file = new Menu("File");
+		aggiungi = new Menu("Aggiungi");
 		
-		openFile = new MenuItem("Open"); 
-		saveFile = new MenuItem("Save"); 
-		close = new MenuItem("Close"); 
+		openFile = new MenuItem("Open");
+		openFile.addActionListener(this);
+		file.add(openFile);
+		
+		saveFile = new MenuItem("Save");
+		saveFile.addActionListener(this);
+		file.add(saveFile);
+		
+		close = new MenuItem("Close");
+		close.addActionListener(this);
+		file.add(close);
+		
+		nuovoViaggio = new MenuItem("Nuovo Viaggio");
+		nuovoViaggio.addActionListener(this);
+		aggiungi.add(nuovoViaggio);
+		
+		nuovaAttivita = new MenuItem("Nuova Attivita");
+		nuovaAttivita.addActionListener(this);
+		aggiungi.add(nuovaAttivita);
 		
 		primopannello = new JPanel();
 		primopannello.setLayout(new GridLayout(3,1));
@@ -43,36 +58,17 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		secondopannello.setLayout(new GridLayout(3,1));
 		tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Primo Viaggio", primopannello);
-		tabbedPane.addTab("Secondo Viaggio", secondopannello);
-		
-		openFile.addActionListener(this);
-		file.add(openFile);
-		
-		saveFile.addActionListener(this);
-		file.add(saveFile);
-		
-		close.addActionListener(this);
-		file.add(close);
-		
+		tabbedPane.addTab("Secondo Viaggio", secondopannello);		
 		
 		menuBar.add(file);
+		menuBar.add(aggiungi);
 		setMenuBar(menuBar);
 		
 		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
 		tabbedPane.addChangeListener(this);
 
 		setContentPane(tabbedPane);
-		primopannello.setBackground(Color.red);
-		secondopannello.setBackground(Color.magenta);
-		try {
-			UIManager.setLookAndFeel(new SyntheticaSimple2DLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(500, 150);
 		setVisible(true);
