@@ -12,7 +12,7 @@ public class Test {
 	 * Non ha attributi e ha il metodo main.
 	 */
 	public static void main(String[] args) {
-		//new ControlPanel();
+		new ControlPanel();
 		try {
 			new DBViaggio().run();
 			new DBAttivita().run();
