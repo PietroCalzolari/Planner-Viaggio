@@ -58,19 +58,6 @@ public class DBViaggio {
 			printRow(rs);
 		}
 	}
-	
-	/**
-	 * Modifiche alla tabella viaggio 
-	 * 
-	 * @throws SQLException
-	 */
-	public void testUpdate() throws SQLException {
-		
-		modelV.insert("Milano", "Aereo", "10/05/2021", "15/05/2021");
-		modelV.insert("Roma", "Treno", "22/01/2021", "30/01/2021");
-		modelV.insert("Napoli", "Auto", "15/08/2021", "28/08/2021");
-		
-	}
 
 	
 	public void run() {
@@ -81,12 +68,10 @@ public class DBViaggio {
 			System.out.println("Something went wrong... " + e.getMessage());
 		}
 
-		try {
-			System.out.println("\n- updating database...");
-			testUpdate();
-		} catch (SQLException e) {
-			System.out.println("Something went wrong... " + e.getMessage());
-		}
+		System.out.println("\n- updating database...");
+		modelV.insert("Milano", "Aereo", "10/05/2021", "15/05/2021");
+		modelV.insert("Roma", "Treno", "22/01/2021", "30/01/2021");
+		modelV.insert("Napoli", "Auto", "15/08/2021", "28/08/2021");
 
 		try {
 			System.out.println("\n- reading database...");
@@ -96,9 +81,9 @@ public class DBViaggio {
 		}
 	}	
 	
+	
 	public void closeDB() {
 		try {
-			System.out.println("\n- closing database...");
 			dbV.close();
 		} catch (SQLException e) {
 			System.out.println("Something went wrong... " + e.getMessage());

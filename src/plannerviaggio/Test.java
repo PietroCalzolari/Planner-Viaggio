@@ -1,10 +1,10 @@
 package plannerviaggio;
 import database.DBAttivita;
+import database.DBUtente;
 import database.DBViaggio;
 import graphicinterface.ControlPanel;
 
 import java.sql.SQLException;
-//import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 
 public class Test {
 	/*
@@ -19,6 +19,7 @@ public class Test {
 		try {
 			new DBViaggio().run();
 			new DBAttivita().run();
+			new DBUtente().run();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -26,10 +27,14 @@ public class Test {
 		
 		//Chiudo la connessione ai database
 		try {
+			System.out.println("\n- closing database...");
 			new DBViaggio().closeDB();
 			new DBAttivita().closeDB();
+			new DBUtente().closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 	}
+	
 }

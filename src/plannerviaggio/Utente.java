@@ -1,42 +1,47 @@
 package plannerviaggio;
 
+import java.util.UUID;
+
 public class Utente {
 	/*
-	 * Questa � la classe con cui definiamo ogni Utente.
+	 * Con questa classe definiamo l'utente che utilizza l'applicaizone
 	 * Ha come attributi i seguenti:
-	 * name: nome dell'utente
-	 * surname: cognome dell'utente
-	 * eta: eta dell'utente
-	 * born: data di nascita dell'utente
-	 * codicefiscale: codicefiscale dell'utente
+	 * nome: nome dell'utente
+	 * cognome: cognome dell'utente
 	 * email: email dell'utente
 	 * citta: la citta di residenza dell'utente
 	 */
+	
+	UUID idUtente;
 	String nome;
 	String cognome;
-	double eta;
-	String dataNascita;
-	String codiceFiscale;
 	String email;
 	String citta;
 	
 	//Costruttore
-	public Utente(String nome, String cognome, double eta, String dataNascita, String codiceFiscale, String email, String citta) {
+	public Utente(UUID idUtente, String nome, String cognome, String email, String citta) {
 		super();
+		this.idUtente = idUtente;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.eta = eta;
-		this.dataNascita = dataNascita;
-		this.codiceFiscale = codiceFiscale;
 		this.email = email;
 		this.citta = citta;
 	}
 
 	//Getters and Setters
+
+	public UUID getIdUtente() {
+		return idUtente;
+	}
+
+	public void setIdUtente(UUID idUtente) {
+		this.idUtente = idUtente;
+	}
+
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -47,30 +52,6 @@ public class Utente {
 	
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
-	}
-	
-	public double getEta() {
-		return eta;
-	}
-
-	public void setEta(double eta) {
-		this.eta = eta;
-	}
-
-	public String getDataNascita() {
-		return dataNascita;
-	}
-
-	public void setDataNascita(String dataNascita) {
-		this.dataNascita = dataNascita;
-	}
-
-	public String getCodiceFiscale() {
-		return codiceFiscale;
-	}
-
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
 	}
 
 	public String getEmail() {
@@ -89,11 +70,11 @@ public class Utente {
 		this.citta = citta;
 	}
 
-	//toString
 	@Override
 	public String toString() {
-		return "Utente [nome=" + nome + ", cognome=" + cognome + ", eta=" + eta + ", dataNascita=" + dataNascita
-				+ ", codiceFiscale=" + codiceFiscale + ", email=" + email + ", citta=" + citta + "]";
+		return "Utente [idUtente=" + idUtente + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", citta="
+				+ citta + "]";
 	}
+	
 	
 }

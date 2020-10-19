@@ -14,13 +14,10 @@ public class DBAttivita{
 			// Database manager for SQLite
 			dbA = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
 			
-			//Database manager for MySQL
-			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL);
-			
 			
 			dbA.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
-			dbA.executeUpdate("DROP TABLE IF EXISTS attività");
+			dbA.executeUpdate("DROP TABLE IF EXISTS attivita");
 			dbA.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
 					+ "oraInizio TEXT, " + "oraFine TEXT, " + "luogo VARCHAR(30))");
 	
@@ -56,17 +53,6 @@ public class DBAttivita{
 		}
 	}
 
-	/**
-	 * Update the content of the attività table
-	 * 
-	 * @throws SQLException
-	 */
-	public void testUpdate() throws SQLException {
-		
-		modelA.insert("Museo di Roma", "14,00", "15,30", "Piazza");
-		
-	}
-
 	
 	public void run() {
 		try {
@@ -76,12 +62,8 @@ public class DBAttivita{
 			System.out.println("Something went wrong... " + e.getMessage());
 		}
 
-		try {
-			System.out.println("\n- updating database...");
-			testUpdate();
-		} catch (SQLException e) {
-			System.out.println("Something went wrong... " + e.getMessage());
-		}
+		System.out.println("\n- updating database...");
+		modelA.insert("Museo di Roma", "14,00", "15,30", "Piazza");
 
 		try {
 			System.out.println("\n- reading database...");
@@ -94,7 +76,6 @@ public class DBAttivita{
 	
 	public void closeDB() {
 		try {
-			System.out.println("\n- closing database...");
 			dbA.close();
 		} catch (SQLException e) {
 			System.out.println("Something went wrong... " + e.getMessage());

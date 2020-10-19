@@ -11,9 +11,6 @@ import java.sql.Statement;
 public class DBManager {
 	public static final String JDBCDriverSQLite = "org.sqlite.JDBC";
 	public static final String JDBCURLSQLite = "jdbc:sqlite:Viaggio.db";
-	
-	//public static final String JDBCDriverMySQL = "com.mysql.cj.jdbc.Driver";
-	//public static final String JDBCURLMySQL = "jdbc:mysql://localhost:3306/viaggio?user=root&password=M10M14f31";
 
 	protected Statement statement;
 	protected Connection connection;
