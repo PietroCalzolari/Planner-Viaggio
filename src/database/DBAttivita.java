@@ -29,7 +29,7 @@ public class DBAttivita{
 	}
 	
 	/**
-	 * Prints the current ResultSet row
+	 * Stampa la riga corrente del ResultSet
 	 * 
 	 * @param rs
 	 * @throws SQLException

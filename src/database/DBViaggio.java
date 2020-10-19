@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class DBViaggio {
 	DBManager db;
-	DBModel model;
+	DBModelViaggio model;
 
 	public DBViaggio() throws SQLException{
 		
@@ -31,7 +31,7 @@ public class DBViaggio {
 			e.printStackTrace();
 		}
 		
-		model = new DBModel(db);
+		model = new DBModelViaggio(db);
 	}
 	
 	/**

@@ -7,13 +7,13 @@ import java.util.List;
 
 import plannerviaggio.Viaggio;
 
-public class DBModel {
+public class DBModelViaggio {
 	DBManager db;
 	List<Viaggio> lv;
 	int selectedIndex;
 	
 	
-	public DBModel(DBManager db) {
+	public DBModelViaggio(DBManager db) {
 		this.db = db;
 		lv = new ArrayList<Viaggio>();
 
