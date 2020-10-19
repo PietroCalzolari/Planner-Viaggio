@@ -5,27 +5,30 @@ import java.sql.SQLException;
 
 
 public class DBAttivita{
-	protected DBManager db;
+	DBManager dbA;
+	DBModelAttivita modelA;
 
 	public DBAttivita() throws SQLException{
 		
 		try {
 			// Database manager for SQLite
-			db = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
+			dbA = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
 			
 			//Database manager for MySQL
 			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL);
 			
 			
-			db.executeQuery("SELECT * FROM attivita LIMIT 1");
+			dbA.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
-			db.executeUpdate("DROP TABLE IF EXISTS attività");
-			db.executeUpdate("CREATE TABLE attivita (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
+			dbA.executeUpdate("DROP TABLE IF EXISTS attività");
+			dbA.executeUpdate("CREATE TABLE attivita (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
 					+ "oraInizio TEXT, " + "oraFine TEXT, " + "luogo VARCHAR(30))");
 	
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		modelA = new DBModelAttivita(dbA);
 	}
 	
 	/**
@@ -47,7 +50,7 @@ public class DBAttivita{
 	 * @throws SQLException
 	 */
 	public void testSelect() throws SQLException {
-		ResultSet rs = db.executeQuery("SELECT * FROM attivita LIMIT 100");
+		ResultSet rs = dbA.executeQuery("SELECT * FROM attivita LIMIT 100");
 		while (rs.next()) {
 			printRow(rs);
 		}
@@ -62,7 +65,7 @@ public class DBAttivita{
 	
 		String query = String.format(
 				"INSERT INTO attivita (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae79', 'Museo di quadri di roma', '11:30', '13:00', 'Piazza')");
-		db.executeUpdate(query);
+		dbA.executeUpdate(query);
 		
 	}
 
@@ -89,14 +92,15 @@ public class DBAttivita{
 			System.out.println("Something went wrong... " + e.getMessage());
 		}
 
+	}
+	
+	public void closeDB() {
 		try {
 			System.out.println("\n- closing database...");
-			db.close();
+			dbA.close();
 		} catch (SQLException e) {
 			System.out.println("Something went wrong... " + e.getMessage());
 		}
 	}
-
-	
 	
 }

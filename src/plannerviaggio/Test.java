@@ -11,11 +11,23 @@ public class Test {
 	 * Questa classe la useremo come Main per far andare la nostra applicazione e per testarla.
 	 * Non ha attributi e ha il metodo main.
 	 */
+	
 	public static void main(String[] args) {
 		new ControlPanel();
+		
+		//Apro la connessione ai database
 		try {
 			new DBViaggio().run();
 			new DBAttivita().run();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		//Chiudo la connessione ai database
+		try {
+			new DBViaggio().closeDB();
+			new DBAttivita().closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

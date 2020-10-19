@@ -4,14 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBViaggio {
-	DBManager db;
-	DBModelViaggio model;
+	DBManager dbV;
+	DBModelViaggio modelV;
 
 	public DBViaggio() throws SQLException{
 		
 		try {
 			// Database manager for SQLite
-			db = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
+			dbV = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
 			
 			//Database manager for MySQL
 			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL, ResultSet.TYPE_SCROLL_SENSITIVE,
@@ -20,10 +20,10 @@ public class DBViaggio {
 			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL);
 			
 			
-			db.executeQuery("SELECT * FROM viaggio LIMIT 1");
+			dbV.executeQuery("SELECT * FROM viaggio LIMIT 1");
 		} catch (SQLException e) {
-			db.executeUpdate("DROP TABLE IF EXISTS viaggio");
-			db.executeUpdate("CREATE TABLE viaggio (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, "
+			dbV.executeUpdate("DROP TABLE IF EXISTS viaggio");
+			dbV.executeUpdate("CREATE TABLE viaggio (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, "
 					+ "Partenza TEXT, " + "Ritorno TEXT)");
 			
 	
@@ -31,7 +31,7 @@ public class DBViaggio {
 			e.printStackTrace();
 		}
 		
-		model = new DBModelViaggio(db);
+		modelV = new DBModelViaggio(dbV);
 	}
 	
 	/**
@@ -53,7 +53,7 @@ public class DBViaggio {
 	 * @throws SQLException
 	 */
 	public void testSelect() throws SQLException {
-		ResultSet rs = db.executeQuery("SELECT * FROM viaggio LIMIT 100");
+		ResultSet rs = dbV.executeQuery("SELECT * FROM viaggio LIMIT 100");
 		while (rs.next()) {
 			printRow(rs);
 		}
@@ -68,11 +68,11 @@ public class DBViaggio {
 		
 		String query = String.format(
 				"INSERT INTO viaggio (id, nomeViaggio, mezzo, Partenza, Ritorno) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae79', 'Roma', 'Auto', '22/01/2021', '27/01/2021')");
-		db.executeUpdate(query);
+		dbV.executeUpdate(query);
 					
 		String query2 = String.format(
 				"INSERT INTO viaggio (id, nomeViaggio, mezzo, Partenza, Ritorno) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae80', 'Napoli', 'Aereo', '22/07/2021', '27/08/2021')");
-		db.executeUpdate(query2);
+		dbV.executeUpdate(query2);
 		
 	}
 
@@ -98,10 +98,12 @@ public class DBViaggio {
 		} catch (SQLException e) {
 			System.out.println("Something went wrong... " + e.getMessage());
 		}
-
+	}	
+	
+	public void closeDB() {
 		try {
 			System.out.println("\n- closing database...");
-			db.close();
+			dbV.close();
 		} catch (SQLException e) {
 			System.out.println("Something went wrong... " + e.getMessage());
 		}
