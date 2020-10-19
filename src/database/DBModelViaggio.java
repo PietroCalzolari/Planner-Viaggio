@@ -20,7 +20,7 @@ public class DBModelViaggio {
 		try {
 			ResultSet rs = db.executeQuery("SELECT * FROM viaggio");
 			while (rs.next()) {
-				lv.add(new Viaggio(java.util.UUID.fromString(rs.getString("id")), rs.getString("nomeViaggio"), rs.getString("mezzo"),
+				lv.add(new Viaggio(java.util.UUID.fromString(rs.getString("idViaggio")), rs.getString("nomeViaggio"), rs.getString("mezzo"),
 						rs.getString("partenza"), rs.getString("ritorno")));
 			}
 		} catch (SQLException e) {
@@ -57,7 +57,7 @@ public class DBModelViaggio {
 		Viaggio v = new Viaggio(java.util.UUID.randomUUID(), nomeViaggio, mezzo, partenza, ritorno);
 		try {
 			String query = String.format(
-					"INSERT INTO viaggio (idViaggio, nomeViaggio, mezzo, partenza, ritorno) VALUES ('%s', %s, %s, %s, '%s')",
+					"INSERT INTO viaggio (idViaggio, nomeViaggio, mezzo, partenza, ritorno) VALUES ('%s', '%s', '%s', '%s', '%s')",
 					v.getIdViaggio().toString(), v.getNomeViaggio(), v.getMezzo(), v.getPartenza(), v.getRitorno());
 			db.executeUpdate(query);
 			lv.add(v);

@@ -21,7 +21,7 @@ public class DBAttivita{
 			dbA.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
 			dbA.executeUpdate("DROP TABLE IF EXISTS attività");
-			dbA.executeUpdate("CREATE TABLE attivita (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
+			dbA.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), "
 					+ "oraInizio TEXT, " + "oraFine TEXT, " + "luogo VARCHAR(30))");
 	
 		} catch (ClassNotFoundException e) {
@@ -38,7 +38,7 @@ public class DBAttivita{
 	 * @throws SQLException
 	 */
 	public void printRow(ResultSet rs) throws SQLException {
-		System.out.println("id=" + rs.getString("id") + ", nomeAttivita=" + rs.getString("nomeAttivita") + ", oraInizio="
+		System.out.println("id=" + rs.getString("idAttivita") + ", nomeAttivita=" + rs.getString("nomeAttivita") + ", oraInizio="
 				+ rs.getString("oraInizio") + ", oraFine=" + rs.getString("oraFine") + ", luogo=" + rs.getString("luogo"));
 
 	}
@@ -62,10 +62,8 @@ public class DBAttivita{
 	 * @throws SQLException
 	 */
 	public void testUpdate() throws SQLException {
-	
-		String query = String.format(
-				"INSERT INTO attivita (id, nomeAttivita, oraInizio, oraFine, luogo) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae79', 'Museo di quadri di roma', '11:30', '13:00', 'Piazza')");
-		dbA.executeUpdate(query);
+		
+		modelA.insert("Museo di Roma", "14,00", "15,30", "Piazza");
 		
 	}
 

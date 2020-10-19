@@ -19,7 +19,7 @@ public class DBModelAttivita {
 		try {
 			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
 			while (rs.next()) {
-				la.add(new Attivita(java.util.UUID.fromString(rs.getString("id")), rs.getString("nomeAttivita"), rs.getString("oraInizio"),
+				la.add(new Attivita(java.util.UUID.fromString(rs.getString("idAttivita")), rs.getString("nomeAttivita"), rs.getString("oraInizio"),
 						rs.getString("oraFine"), rs.getString("luogo")));
 			}
 		} catch (SQLException e) {
@@ -56,7 +56,7 @@ public class DBModelAttivita {
 		Attivita a = new Attivita(java.util.UUID.randomUUID(), nomeAttivita, oraInizio, oraFine, luogo);
 		try {
 			String query = String.format(
-					"INSERT INTO attivita (idAttivita, nomeAttivita, oraInizio, oraFine, luogo) VALUES ('%s', %s, %s, %s, '%s')",
+					"INSERT INTO attivita (idAttivita, nomeAttivita, oraInizio, oraFine, luogo) VALUES ('%s', '%s', '%s', '%s', '%s')",
 					a.getIdAttivita().toString(), a.getNomeAttivita(), a.getOraInizio(), a.getOraFine(), a.getLuogo());
 			db.executeUpdate(query);
 			la.add(a);

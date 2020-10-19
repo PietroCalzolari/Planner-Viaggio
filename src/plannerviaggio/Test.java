@@ -4,7 +4,7 @@ import database.DBViaggio;
 import graphicinterface.ControlPanel;
 
 import java.sql.SQLException;
-import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
+//import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 
 public class Test {
 	/*

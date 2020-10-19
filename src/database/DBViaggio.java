@@ -23,7 +23,7 @@ public class DBViaggio {
 			dbV.executeQuery("SELECT * FROM viaggio LIMIT 1");
 		} catch (SQLException e) {
 			dbV.executeUpdate("DROP TABLE IF EXISTS viaggio");
-			dbV.executeUpdate("CREATE TABLE viaggio (" + "id VARCHAR(50) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, "
+			dbV.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(50) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, "
 					+ "Partenza TEXT, " + "Ritorno TEXT)");
 			
 	
@@ -41,7 +41,7 @@ public class DBViaggio {
 	 * @throws SQLException
 	 */
 	public void printRow(ResultSet rs) throws SQLException {
-		System.out.println("id=" + rs.getString("id") + ", nomeViaggio=" + rs.getString("nomeViaggio") + ", Partenza="
+		System.out.println("id=" + rs.getString("idViaggio") + ", nomeViaggio=" + rs.getString("nomeViaggio") + ", mezzo=" + rs.getString("mezzo") + ", Partenza="
 				+ rs.getString("Partenza") + ", Ritorno=" + rs.getString("Ritorno"));
  
 	}
@@ -66,13 +66,9 @@ public class DBViaggio {
 	 */
 	public void testUpdate() throws SQLException {
 		
-		String query = String.format(
-				"INSERT INTO viaggio (id, nomeViaggio, mezzo, Partenza, Ritorno) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae79', 'Roma', 'Auto', '22/01/2021', '27/01/2021')");
-		dbV.executeUpdate(query);
-					
-		String query2 = String.format(
-				"INSERT INTO viaggio (id, nomeViaggio, mezzo, Partenza, Ritorno) VALUES ('214bb0db-aa52-48be-b052-cd30f730ae80', 'Napoli', 'Aereo', '22/07/2021', '27/08/2021')");
-		dbV.executeUpdate(query2);
+		modelV.insert("Milano", "Aereo", "10/05/2021", "15/05/2021");
+		modelV.insert("Roma", "Treno", "22/01/2021", "30/01/2021");
+		modelV.insert("Napoli", "Auto", "15/08/2021", "28/08/2021");
 		
 	}
 
