@@ -11,14 +11,7 @@ public class DBViaggio {
 		
 		try {
 			// Database manager for SQLite
-			dbV = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
-			
-			//Database manager for MySQL
-			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL, ResultSet.TYPE_SCROLL_SENSITIVE,
-			//		ResultSet.CONCUR_UPDATABLE);
-
-			//db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL);
-			
+			dbV = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);		
 			
 			dbV.executeQuery("SELECT * FROM viaggio LIMIT 1");
 		} catch (SQLException e) {
