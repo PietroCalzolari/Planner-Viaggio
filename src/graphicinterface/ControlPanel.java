@@ -1,5 +1,6 @@
 package graphicinterface;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Menu;
@@ -20,12 +21,14 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 	private MenuItem openFile;
 	private MenuItem saveFile;
 	private MenuItem close;
-	private MenuItem nuovoViaggio;
-	private MenuItem nuovaAttivita;
+	private JButton nuovoViaggio;
+	private JButton nuovaAttivita;
 	private JTabbedPane tabbedPane;
 	private JPanel primopannello;
 	private JPanel secondopannello;
-
+	private JPanel aggiungere;
+	private JPanel controllo;
+	
 	public ControlPanel() {
 		menuBar = new MenuBar();
 		
@@ -35,7 +38,7 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		openFile = new MenuItem("Open");
 		openFile.addActionListener(this);
 		file.add(openFile);
-		
+
 		saveFile = new MenuItem("Save");
 		saveFile.addActionListener(this);
 		file.add(saveFile);
@@ -44,30 +47,41 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		close.addActionListener(this);
 		file.add(close);
 		
-		nuovoViaggio = new MenuItem("Nuovo Viaggio");
+		nuovoViaggio = new JButton("Aggiungi Viaggio");
 		nuovoViaggio.addActionListener(this);
-		aggiungi.add(nuovoViaggio);
-		
-		nuovaAttivita = new MenuItem("Nuova Attivita");
+		nuovaAttivita = new JButton("Aggiungi Attività");
 		nuovaAttivita.addActionListener(this);
-		aggiungi.add(nuovaAttivita);
 		
 		primopannello = new JPanel();
+		
 		primopannello.setLayout(new GridLayout(3,1));
+		
 		secondopannello = new JPanel();
+		
 		secondopannello.setLayout(new GridLayout(3,1));
+		
 		tabbedPane = new JTabbedPane();
+		
 		tabbedPane.addTab("Primo Viaggio", primopannello);
-		tabbedPane.addTab("Secondo Viaggio", secondopannello);		
+		tabbedPane.addTab("Secondo Viaggio", secondopannello);	
+		
+		aggiungere = new JPanel(new GridLayout(1,2));
+		
+		aggiungere.add(nuovoViaggio);
+		aggiungere.add(nuovaAttivita);
 		
 		menuBar.add(file);
-		menuBar.add(aggiungi);
 		setMenuBar(menuBar);
 		
 		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
 		tabbedPane.addChangeListener(this);
+		
+		controllo = new JPanel(new BorderLayout());
 
-		setContentPane(tabbedPane);
+		controllo.add(tabbedPane,BorderLayout.CENTER);
+		controllo.add(aggiungere,BorderLayout.PAGE_END);
+		
+		add(controllo);
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(500, 150);
@@ -75,9 +89,23 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
+		if(e.getSource() == this.nuovoViaggio) {
+			new DialogoViaggio();
+		}
+		if(e.getSource() == this.nuovaAttivita) {
+			new DialogoAttivita();
+		}
+		if(e.getSource() == this.openFile) {
+			
+		}
+		if(e.getSource() == this.saveFile) {
+			
+		}
+		if(e.getSource() == this.close) {
+			this.dispose();
+		}
 	}
 
 	@Override
@@ -85,5 +113,4 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		// TODO Auto-generated method stub
 		
 	}
-
 }
