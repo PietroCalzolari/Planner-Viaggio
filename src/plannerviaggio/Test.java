@@ -19,7 +19,7 @@ public class Test {
 		try {
 			new DBViaggio().run();
 			new DBAttivita().run();
-			//new DBUtente().run();
+			new DBUtente().run();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -30,7 +30,7 @@ public class Test {
 			System.out.println("\n- closing database...");
 			new DBViaggio().closeDB();
 			new DBAttivita().closeDB();
-			//new DBUtente().closeDB();
+			new DBUtente().closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

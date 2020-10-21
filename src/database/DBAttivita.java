@@ -28,24 +28,14 @@ public class DBAttivita{
 		modelA = new DBModelAttivita(dbA);
 	}
 	
-	/**
-	 * Stampa la riga corrente del ResultSet
-	 * 
-	 * @param rs
-	 * @throws SQLException
-	 */
+	
 	public void printRow(ResultSet rs) throws SQLException {
 		System.out.println("id=" + rs.getString("idAttivita") + ", nomeAttivita=" + rs.getString("nomeAttivita") + ", oraInizio="
 				+ rs.getString("oraInizio") + ", oraFine=" + rs.getString("oraFine") + ", luogo=" + rs.getString("luogo"));
 
 	}
 
-	/**
-	 * Reads the content of the person table Results are limited using "LIMIT 100"
-	 * This is useful for very large tables
-	 * 
-	 * @throws SQLException
-	 */
+	
 	public void testSelect() throws SQLException {
 		ResultSet rs = dbA.executeQuery("SELECT * FROM attivita LIMIT 100");
 		while (rs.next()) {

@@ -27,24 +27,14 @@ public class DBViaggio {
 		modelV = new DBModelViaggio(dbV);
 	}
 	
-	/**
-	 * Stampa la riga del ResultSet corrente
-	 * 
-	 * @param rs
-	 * @throws SQLException
-	 */
+	
 	public void printRow(ResultSet rs) throws SQLException {
 		System.out.println("id=" + rs.getString("idViaggio") + ", nomeViaggio=" + rs.getString("nomeViaggio") + ", mezzo=" + rs.getString("mezzo") + ", Partenza="
 				+ rs.getString("Partenza") + ", Ritorno=" + rs.getString("Ritorno"));
  
 	}
 
-	/**
-	 * Reads the content of the person table Results are limited using "LIMIT 100"
-	 * This is useful for very large tables
-	 * 
-	 * @throws SQLException
-	 */
+	
 	public void testSelect() throws SQLException {
 		ResultSet rs = dbV.executeQuery("SELECT * FROM viaggio LIMIT 100");
 		while (rs.next()) {
