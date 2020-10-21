@@ -3,9 +3,16 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBViaggio {
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+import graphicinterface.ControlPanel;
+import plannerviaggio.Test;
+
+public class DBViaggio extends JFrame{
 	DBManager dbV;
 	public static DBModelViaggio modelV;
+	private JLabel inizio;
 
 	public DBViaggio() throws SQLException{
 		
@@ -18,7 +25,6 @@ public class DBViaggio {
 			dbV.executeUpdate("DROP TABLE IF EXISTS viaggio");
 			dbV.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(50) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, "
 					+ "Partenza TEXT, " + "Ritorno TEXT)");
-			
 	
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

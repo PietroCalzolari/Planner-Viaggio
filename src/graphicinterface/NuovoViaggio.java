@@ -17,56 +17,40 @@ import javax.swing.JTextField;
 public class NuovoViaggio extends JDialog implements ActionListener {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textFieldNomeViaggio;
-	private JTextField textFieldMezzo;
-	private JTextField textFieldPartenza;
-	private JTextField textFieldArrivo;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			NuovoViaggio dialog = new NuovoViaggio();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private JButton okButton;
+	private JButton cancelButton;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Create the dialog.
 	 */
 	public NuovoViaggio() {
-		setBounds(100, 100, 481, 329);
+		setBounds(100, 100, 559, 372);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			textFieldNomeViaggio = new JTextField();
-			textFieldNomeViaggio.setBounds(26, 108, 127, 20);
-			contentPanel.add(textFieldNomeViaggio);
-			textFieldNomeViaggio.setColumns(10);
-		}
-		{
-			JLabel lblCreazioneViaggio = new JLabel("Crea Viaggio, compila tutti i dati del tuo viaggio");
-			lblCreazioneViaggio.setBounds(36, 18, 408, 36);
-			lblCreazioneViaggio.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
+			JLabel lblCreazioneViaggio = new JLabel("Creazione nuovo Viaggio! Compila tutti i dati del tuo viaggio");
+			lblCreazioneViaggio.setBounds(53, 11, 447, 36);
+			lblCreazioneViaggio.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
 			contentPanel.add(lblCreazioneViaggio);
 		}
 		{
-			JButton okButton = new JButton("Ok");
-			okButton.setBounds(59, 235, 127, 46);
+			okButton = new JButton("Ok");
+			okButton.setBounds(67, 267, 127, 45);
 			contentPanel.add(okButton);
 			okButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 			okButton.addActionListener(this);
 			getRootPane().setDefaultButton(okButton);
 		}
 		{
-			JButton cancelButton = new JButton("Cancel");
-			cancelButton.setBounds(258, 236, 141, 44);
+			cancelButton = new JButton("Cancel");
+			cancelButton.addActionListener(this);
+			cancelButton.setBounds(303, 268, 127, 45);
 			contentPanel.add(cancelButton);
 			cancelButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 			cancelButton.setActionCommand("Cancel");
@@ -74,43 +58,55 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		
 		JLabel lblNomeViaggio = new JLabel("Nome del Viaggio");
 		lblNomeViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblNomeViaggio.setBounds(26, 65, 141, 32);
+		lblNomeViaggio.setBounds(53, 65, 141, 32);
 		contentPanel.add(lblNomeViaggio);
 		
 		JLabel lblMezzo = new JLabel("Mezzo Di Trasporto");
 		lblMezzo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblMezzo.setBounds(284, 69, 160, 25);
+		lblMezzo.setBounds(303, 69, 160, 25);
 		contentPanel.add(lblMezzo);
-		
-		textFieldMezzo = new JTextField();
-		textFieldMezzo.setColumns(10);
-		textFieldMezzo.setBounds(284, 108, 127, 20);
-		contentPanel.add(textFieldMezzo);
 		
 		JLabel lblPartenza = new JLabel("Data di Partenza");
 		lblPartenza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblPartenza.setBounds(26, 139, 160, 36);
+		lblPartenza.setBounds(53, 146, 160, 36);
 		contentPanel.add(lblPartenza);
-		
-		textFieldPartenza = new JTextField();
-		textFieldPartenza.setColumns(10);
-		textFieldPartenza.setBounds(26, 186, 127, 20);
-		contentPanel.add(textFieldPartenza);
 		
 		JLabel lblArrivo = new JLabel("Data di Arrivo");
 		lblArrivo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblArrivo.setBounds(284, 139, 141, 36);
+		lblArrivo.setBounds(303, 146, 141, 36);
 		contentPanel.add(lblArrivo);
 		
-		textFieldArrivo = new JTextField();
-		textFieldArrivo.setColumns(10);
-		textFieldArrivo.setBounds(284, 186, 127, 20);
-		contentPanel.add(textFieldArrivo);
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(53, 108, 136, 35);
+		contentPanel.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(303, 108, 136, 35);
+		contentPanel.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(303, 193, 136, 35);
+		contentPanel.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(53, 193, 136, 35);
+		contentPanel.add(textField_3);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//Fare i bottoni di OK e di Cancel
+		if(e.getSource() == this.okButton) {
+			dispose();//è una cosa temporanea che chiude la pagina senza fare niente
+			//Marti qui dobbiamo unire le nostre parti e fare l'if per vedere se tutti i campi sono compilati
+		}
+		if(e.getSource() == this.cancelButton) {
+			dispose();
+		}
 	}
 }

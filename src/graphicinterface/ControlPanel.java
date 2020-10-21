@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +20,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private static final long serialVersionUID = -2785150052774704558L;
 	private JPanel contentPane, panelViaggio;
 	private JButton btnAggViaggio;
+	private JButton btnAggAttivita;
+	public JLabel lblInizio;
 	
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
@@ -45,6 +48,11 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAggViaggio.setBounds(32, 422, 188, 29);
 		panelViaggio.add(btnAggViaggio);
 		
+		lblInizio = new JLabel("Per iniziare, aggiungi un viaggio!");
+		lblInizio.setBounds(10, 123, 239, 90);
+		panelViaggio.add(lblInizio);
+		lblInizio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(128, 128, 128)));
 		panel_1.setBackground(Color.WHITE);
@@ -52,7 +60,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JButton btnAggAttivita = new JButton("Aggiungi Attività");
+		btnAggAttivita = new JButton("Aggiungi Attività");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(165, 423, 188, 29);
@@ -60,9 +68,26 @@ public class ControlPanel extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		//Devo fare i due bottoni
+		if(e.getSource() == this.btnAggViaggio) {
+			try {
+				NuovoViaggio dialog = new NuovoViaggio();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} catch (Exception a) {
+				a.printStackTrace();
+			}
+		}
+		if(e.getSource() == this.btnAggAttivita) {
+			try {
+				NuovaAttivita dialog = new NuovaAttivita();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} catch (Exception a) {
+				a.printStackTrace();
+			}
+		}
 	}
 
 }
