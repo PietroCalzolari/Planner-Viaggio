@@ -1,4 +1,4 @@
-package graphicinterface;
+/*package graphicinterface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,7 +12,6 @@ import java.text.ParseException;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import de.javasoft.synthetica.aluoxide.SyntheticaAluOxideLookAndFeel;
 
 public class ControlPanel extends JFrame implements ActionListener, ChangeListener {
 	private static final long serialVersionUID = 1L;
@@ -83,16 +82,7 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		controllo.add(aggiungere,BorderLayout.PAGE_END);
 		
 		add(controllo);
-		
-		try {
-			UIManager.setLookAndFeel(new SyntheticaAluOxideLookAndFeel());
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(500, 150);
 		setVisible(true);
@@ -124,3 +114,4 @@ public class ControlPanel extends JFrame implements ActionListener, ChangeListen
 		
 	}
 }
+*/
