@@ -19,6 +19,8 @@ public class DBAttivita{
 		} catch (SQLException e) {
 			dbA.executeUpdate("DROP TABLE IF EXISTS attivita");
 			dbA.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT)");
+			
+			//forse non serve
 			dbA.executeUpdate("CREATE TABLE ViaggioAttivita( idViaggio VARCHAR(50) NOT NULL, idAttivita VARCHAR(50) NOT NULL, PRIMARY KEY (idViaggio, idAttivita), FOREIGN KEY (idViaggio) REFERENCES viaggio (idViaggio), FOREIGN KEY (idAttivita) REFERENCES attivita (idAttivita))");
 			
 		} catch (ClassNotFoundException e) {

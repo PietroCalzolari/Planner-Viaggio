@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class DBViaggio {
 	DBManager dbV;
-	DBModelViaggio modelV;
+	public static DBModelViaggio modelV;
 
 	public DBViaggio() throws SQLException{
 		

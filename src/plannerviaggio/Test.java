@@ -4,6 +4,7 @@ import database.DBUtente;
 import database.DBViaggio;
 import graphicinterface.ControlPanel;
 
+import java.awt.EventQueue;
 import java.sql.SQLException;
 
 public class Test {
@@ -14,6 +15,17 @@ public class Test {
 	
 	public static void main(String[] args) {
 		new ControlPanel();
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ControlPanel frame = new ControlPanel();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		
 		//Apro la connessione ai database
 		try {
