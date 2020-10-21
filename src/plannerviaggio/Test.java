@@ -3,7 +3,9 @@ import database.DBAttivita;
 import database.DBUtente;
 import database.DBViaggio;
 import graphicinterface.ControlPanel;
+import graphicinterface.PannelloControllo;
 
+import java.awt.EventQueue;
 import java.sql.SQLException;
 
 public class Test {
@@ -13,7 +15,6 @@ public class Test {
 	 */
 	
 	public static void main(String[] args) {
-		new ControlPanel();
 		
 		//Apro la connessione ai database
 		try {
