@@ -1,117 +1,93 @@
-/*package graphicinterface;
+package graphicinterface;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-public class ControlPanel extends JFrame implements ActionListener, ChangeListener {
-	private static final long serialVersionUID = 1L;
-	private MenuBar menuBar;
-	private Menu file;
-	private Menu aggiungi;
-	private MenuItem openFile;
-	private MenuItem saveFile;
-	private MenuItem close;
-	private JButton nuovoViaggio;
-	private JButton nuovaAttivita;
-	private JTabbedPane tabbedPane;
-	private JPanel primopannello;
-	private JPanel secondopannello;
-	private JPanel aggiungere;
-	private JPanel controllo;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import database.DBViaggio;
+
+public class ControlPanel extends JFrame implements ActionListener {
+
+	private static final long serialVersionUID = -2785150052774704558L;
+	private JPanel contentPane, panelViaggio;
+	private JButton btnAggViaggio;
+	private JButton btnAggAttivita;
+	public JLabel lblInizio;
 	
 	public ControlPanel() {
-		menuBar = new MenuBar();
+		super("PLANNER VIAGGIO");
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 800, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		file = new Menu("File");
-		aggiungi = new Menu("Aggiungi");
+		panelViaggio = new JPanel();
+		panelViaggio.setBorder(new LineBorder(Color.GRAY));
+		panelViaggio.setBackground(Color.ORANGE);
+		panelViaggio.setBounds(0, 0, 259, 463);
+		contentPane.add(panelViaggio);
+		panelViaggio.setLayout(null);
 		
-		openFile = new MenuItem("Open");
-		openFile.addActionListener(this);
-		file.add(openFile);
-
-		saveFile = new MenuItem("Save");
-		saveFile.addActionListener(this);
-		file.add(saveFile);
+		btnAggViaggio = new JButton("Aggiungi Viaggio");
+		btnAggViaggio.setForeground(Color.BLACK);
+		btnAggViaggio.setBackground(Color.WHITE);
+		btnAggViaggio.addActionListener(this);
+		btnAggViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		btnAggViaggio.setBounds(32, 422, 188, 29);
+		panelViaggio.add(btnAggViaggio);
 		
-		close = new MenuItem("Close");
-		close.addActionListener(this);
-		file.add(close);
+		lblInizio = new JLabel("Per iniziare, aggiungi un viaggio!");
+		lblInizio.setBounds(10, 123, 239, 90);
+		panelViaggio.add(lblInizio);
+		lblInizio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		
-		nuovoViaggio = new JButton("Aggiungi Viaggio");
-		nuovoViaggio.addActionListener(this);
-		nuovaAttivita = new JButton("Aggiungi Attività");
-		nuovaAttivita.addActionListener(this);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(128, 128, 128)));
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(256, 0, 541, 463);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
 		
-		primopannello = new JPanel();
-		
-		primopannello.setLayout(new GridLayout(3,1));
-		
-		secondopannello = new JPanel();
-		
-		secondopannello.setLayout(new GridLayout(3,1));
-		
-		tabbedPane = new JTabbedPane();
-		
-		tabbedPane.addTab("Primo Viaggio", primopannello);
-		tabbedPane.addTab("Secondo Viaggio", secondopannello);	
-		
-		aggiungere = new JPanel(new GridLayout(1,2));
-		
-		aggiungere.add(nuovoViaggio);
-		aggiungere.add(nuovaAttivita);
-		
-		menuBar.add(file);
-		setMenuBar(menuBar);
-		
-		tabbedPane.setTabPlacement(JTabbedPane.LEFT);
-		tabbedPane.addChangeListener(this);
-		
-		controllo = new JPanel(new BorderLayout());
-
-		controllo.add(tabbedPane,BorderLayout.CENTER);
-		controllo.add(aggiungere,BorderLayout.PAGE_END);
-		
-		add(controllo);
-
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(500, 150);
-		setVisible(true);
+		btnAggAttivita = new JButton("Aggiungi Attività");
+		btnAggAttivita.addActionListener(this);
+		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		btnAggAttivita.setBounds(165, 423, 188, 29);
+		panel_1.add(btnAggAttivita);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == this.nuovoViaggio) {
-			new DialogoViaggio();
+		if(e.getSource() == this.btnAggViaggio) {
+			try {
+				NuovoViaggio dialog = new NuovoViaggio();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} catch (Exception a) {
+				a.printStackTrace();
+			}
 		}
-		if(e.getSource() == this.nuovaAttivita) {
-			new DialogoAttivita();
-		}
-		if(e.getSource() == this.openFile) {
-			
-		}
-		if(e.getSource() == this.saveFile) {
-			
-		}
-		if(e.getSource() == this.close) {
-			this.dispose();
+		if(e.getSource() == this.btnAggAttivita) {
+			try {
+				NuovaAttivita dialog = new NuovaAttivita();
+				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+				dialog.setVisible(true);
+			} catch (Exception a) {
+				a.printStackTrace();
+			}
 		}
 	}
 
-	@Override
-	public void stateChanged(ChangeEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 }
-*/

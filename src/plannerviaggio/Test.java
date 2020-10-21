@@ -3,7 +3,6 @@ import database.DBAttivita;
 import database.DBUtente;
 import database.DBViaggio;
 import graphicinterface.ControlPanel;
-import graphicinterface.PannelloControllo;
 
 import java.awt.EventQueue;
 import java.sql.SQLException;
