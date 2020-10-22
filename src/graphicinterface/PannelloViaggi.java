@@ -15,9 +15,8 @@ public class PannelloViaggi extends JPanel implements ActionListener{
 
 	private JButton btnAggViaggio;
 	private JButton btnEliminaViaggio;
-	/**
-	 * Create the panel.
-	 */
+	
+	
 	public PannelloViaggi() {
 		setLayout(null);
 		
@@ -51,8 +50,7 @@ public class PannelloViaggi extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.btnAggViaggio) {
 			try {
-				//Bisogna mettere il giusto parametro al posto di null
-				NuovoViaggio dialog = new NuovoViaggio(null);
+				NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {

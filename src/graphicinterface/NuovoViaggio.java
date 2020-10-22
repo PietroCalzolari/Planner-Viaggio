@@ -28,11 +28,12 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private UUID IDViaggio;
 
-	/**
-	 * Create the dialog.
-	 */
-	public NuovoViaggio(UUID idviaggio) {
+	
+	public NuovoViaggio(UUID IDViaggio) {
+		this.IDViaggio = IDViaggio;
+		
 		setBounds(100, 100, 559, 372);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -98,16 +99,18 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		contentPanel.add(textField_3);
 		
 		//Marti qui dobbiamo mettere il nome del viaggio con l'ID che questo pannello prende come input
-		contentPanel.add(new JLabel("QUI CI VA IL NOME DEL VIAGGIO"));
+		//contentPanel.add(new JLabel("QUI CI VA IL NOME DEL VIAGGIO"));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.okButton) {
 
-			Database.modelViaggio.insert(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
 			dispose();
 			//A questo punto, una volta chiusa la finestra di dialogo, bisogna fare in modo che il viaggio si veda nel pannello principale
+			
+			
 		}
 		if(e.getSource() == this.cancelButton) {
 			dispose();

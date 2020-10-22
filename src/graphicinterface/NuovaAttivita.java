@@ -13,6 +13,7 @@ import database.Database;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -25,11 +26,12 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 	private JTextField textFieldLuogo;
 	private JTextField textFieldOraInizio;
 	private JTextField textFieldOraFine;
+	private UUID IDViaggio;
 
-	/**
-	 * Create the dialog.
-	 */
-	public NuovaAttivita() {
+	
+	public NuovaAttivita(UUID IDViaggio) {
+		this.IDViaggio = IDViaggio;
+		
 		setBounds(100, 100, 559, 372);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,12 +55,12 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 			cancelButton.setActionCommand("Cancel");
 		}
 		
-		JLabel lblNuovaAttivita = new JLabel("Creazione nuova Attività! Compila tutti i dati sottostanti");
+		JLabel lblNuovaAttivita = new JLabel("Creazione nuova Attivitï¿½! Compila tutti i dati sottostanti");
 		lblNuovaAttivita.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		lblNuovaAttivita.setBounds(25, 11, 496, 53);
 		contentPanel.add(lblNuovaAttivita);
 		
-		JLabel lblNomeAttivita = new JLabel("Nome Attività");
+		JLabel lblNomeAttivita = new JLabel("Nome Attivitï¿½");
 		lblNomeAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblNomeAttivita.setBounds(71, 60, 136, 35);
 		contentPanel.add(lblNomeAttivita);
@@ -104,7 +106,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.okButton) {
 			
-			Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText());
+			Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText(), IDViaggio);
 			dispose();
 		}
 		if(e.getSource() == this.cancelButton) {

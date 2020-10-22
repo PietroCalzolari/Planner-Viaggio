@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import plannerviaggio.Attivita;
 
@@ -52,12 +53,12 @@ public class DBModelAttivita {
 		selectedIndex = Math.max(selectedIndex - 1, 0);
 	}
 
-	public void insert(String nomeAttivita, String oraInizio, String oraFine, String luogo) {
+	public void insert(String nomeAttivita, String oraInizio, String oraFine, String luogo, UUID IDViaggio) {
 		Attivita a = new Attivita(java.util.UUID.randomUUID(), nomeAttivita, oraInizio, oraFine, luogo);
 		try {
 			String query = String.format(
-					"INSERT INTO attivita (idAttivita, nomeAttivita, oraInizio, oraFine, luogo) VALUES ('%s', '%s', '%s', '%s', '%s')",
-					a.getIdAttivita().toString(), a.getNomeAttivita(), a.getOraInizio(), a.getOraFine(), a.getLuogo());
+					"INSERT INTO attivita (idAttivita, nomeAttivita, oraInizio, oraFine, luogo, idViaggio) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
+					a.getIdAttivita().toString(), a.getNomeAttivita(), a.getOraInizio(), a.getOraFine(), a.getLuogo(), IDViaggio.toString());
 			db.executeUpdate(query);
 			la.add(a);
 		} catch (SQLException e) {

@@ -1,12 +1,14 @@
 package database;
 
+import java.awt.EventQueue;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import graphicinterface.FinestraIniziale;
 import plannerviaggio.Utente;
 
 public class Database {
-	DBManager db;
+	static DBManager db;
 	public static DBModelViaggio modelViaggio;
 	public static DBModelAttivita modelAttivita;
 
@@ -21,7 +23,18 @@ public Database() throws SQLException{
 			db.executeQuery("SELECT * FROM utente LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS utente");
-			db.executeUpdate("CREATE TABLE utente (" + "idUtente VARCHAR(50) PRIMARY KEY, " + "nome TEXT, " + "cognome TEXT, " + "email TEXT, " + "citta TEXT)");
+			db.executeUpdate("CREATE TABLE utente (" + "idUtente VARCHAR(50) PRIMARY KEY, " + "nome TEXT, " + "cognome TEXT, " + "email TEXT)");
+			
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						FinestraIniziale login = new FinestraIniziale();
+						login.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -44,11 +57,9 @@ public Database() throws SQLException{
 			db.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS attivita");
-			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT)");
+			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT, "
+					+ "idViaggio VARCHAR(50))");
 			
-			//forse non serve
-			db.executeUpdate("CREATE TABLE ViaggioAttivita( idViaggio VARCHAR(50) NOT NULL, idAttivita VARCHAR(50) NOT NULL, PRIMARY KEY (idViaggio, idAttivita), FOREIGN KEY (idViaggio) REFERENCES viaggio (idViaggio), FOREIGN KEY (idAttivita) REFERENCES attivita (idAttivita))");
-		
 		}
 		
 		modelAttivita = new DBModelAttivita(db);
@@ -58,8 +69,7 @@ public Database() throws SQLException{
 
 
 	public void stampaUtente(ResultSet rs) throws SQLException {
-		System.out.println("id=" + rs.getString("idUtente") + ", nome=" + rs.getString("nome") + ", cognome=" + rs.getString("cognome") + ", email="
-			+ rs.getString("email") + ", citta=" + rs.getString("citta"));
+		System.out.println("id=" + rs.getString("idUtente") + ", nome=" + rs.getString("nome") + ", cognome=" + rs.getString("cognome") + ", email=" + rs.getString("email"));
 
 	}
 	
@@ -99,12 +109,12 @@ public Database() throws SQLException{
 	}
 	
 		
-	public void insertUtente(String nome, String cognome, String email, String citta) {
-		Utente v = new Utente(java.util.UUID.randomUUID(), nome, cognome, email, citta);
+	public static void insertUtente(String nome, String cognome, String email) {
+		Utente v = new Utente(java.util.UUID.randomUUID(), nome, cognome, email);
 		try {
 			String query = String.format(
-					"INSERT INTO utente (idUtente, nome, cognome, email, citta) VALUES ('%s', '%s', '%s', '%s', '%s')",
-					v.getIdUtente().toString(), v.getNome(), v.getCognome(), v.getEmail(), v.getCitta());
+					"INSERT INTO utente (idUtente, nome, cognome, email) VALUES ('%s', '%s', '%s', '%s')",
+					v.getIdUtente().toString(), v.getNome(), v.getCognome(), v.getEmail());
 			db.executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,7 +124,6 @@ public Database() throws SQLException{
 	
 	public void run() {
 		try {
-			insertUtente("Martina","Carella","carellamartina@gmial.com","Modena");
 			testSelect();
 		} catch (SQLException e) {
 			System.out.println("Something went wrong... " + e.getMessage());

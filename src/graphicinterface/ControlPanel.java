@@ -63,13 +63,13 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		btnAggAttivita = new JButton("Aggiungi Attività");
+		btnAggAttivita = new JButton("Aggiungi Attivitï¿½");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
 		
-		btnEliminaAttivita = new JButton("Elimina Attività");
+		btnEliminaAttivita = new JButton("Elimina Attivitï¿½");
 		btnEliminaAttivita.addActionListener(this);
 		btnEliminaAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnEliminaAttivita.setBounds(308, 423, 188, 29);
@@ -81,8 +81,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.btnAggViaggio) {
 			try {
-				//Ci va messo il giusto parametro al posto di null
-				NuovoViaggio dialog = new NuovoViaggio(null);
+				NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {
@@ -94,7 +93,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 		if(e.getSource() == this.btnAggAttivita) {
 			try {
-				NuovaAttivita dialog = new NuovaAttivita();
+				//Per il momento inserisco in ID randoma ma ci va aggiunto l'id del viaggio a cui si riferisce
+				NuovaAttivita dialog = new NuovaAttivita(java.util.UUID.randomUUID());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {
@@ -102,7 +102,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			}
 		}
 		if(e.getSource() == this.btnEliminaAttivita) {
-			//Aprire la lista delle attività riferite a quel viaggio e eliminare dal DB una di quelle
+			//Aprire la lista delle attivitï¿½ riferite a quel viaggio e eliminare dal DB una di quelle
 		}
 	}
 

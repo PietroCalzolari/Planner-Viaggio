@@ -11,13 +11,12 @@ public class Utente {
 	String citta;
 	
 	//Costruttore
-	public Utente(UUID idUtente, String nome, String cognome, String email, String citta) {
+	public Utente(UUID idUtente, String nome, String cognome, String email) {
 		super();
 		this.idUtente = idUtente;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
-		this.citta = citta;
 	}
 
 	//Getters and Setters
@@ -54,18 +53,10 @@ public class Utente {
 		this.email = email;
 	}
 
-	public String getCitta() {
-		return citta;
-	}
-
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
 
 	@Override
 	public String toString() {
-		return "Utente [idUtente=" + idUtente + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + ", citta="
-				+ citta + "]";
+		return "Utente [idUtente=" + idUtente + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email + "]";
 	}
 	
 	

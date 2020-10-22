@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import plannerviaggio.Viaggio;
 
@@ -53,8 +54,8 @@ public class DBModelViaggio {
 		selectedIndex = Math.max(selectedIndex - 1, 0);
 	}
 
-	public void insert(String nomeViaggio, String mezzo, String partenza, String ritorno) {
-		Viaggio v = new Viaggio(java.util.UUID.randomUUID(), nomeViaggio, mezzo, partenza, ritorno);
+	public void insert(UUID idViaggio, String nomeViaggio, String mezzo, String partenza, String ritorno) {
+		Viaggio v = new Viaggio(idViaggio, nomeViaggio, mezzo, partenza, ritorno);
 		try {
 			String query = String.format(
 					"INSERT INTO viaggio (idViaggio, nomeViaggio, mezzo, partenza, ritorno) VALUES ('%s', '%s', '%s', '%s', '%s')",
