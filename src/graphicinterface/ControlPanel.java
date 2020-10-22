@@ -20,7 +20,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JPanel contentPane, panelViaggio;
 	private JButton btnAggViaggio;
 	private JButton btnAggAttivita;
-	public JLabel lblInizio;
+	private JButton btnEliminaViaggio;
+	private JButton btnEliminaAttivita;
 	
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
@@ -44,13 +45,16 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAggViaggio.setBackground(Color.WHITE);
 		btnAggViaggio.addActionListener(this);
 		btnAggViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		btnAggViaggio.setBounds(32, 422, 188, 29);
+		btnAggViaggio.setBounds(30, 369, 188, 29);
 		panelViaggio.add(btnAggViaggio);
 		
-		lblInizio = new JLabel("Per iniziare, aggiungi un viaggio!");
-		lblInizio.setBounds(10, 123, 239, 90);
-		panelViaggio.add(lblInizio);
-		lblInizio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		btnEliminaViaggio = new JButton("Elimina Viaggio");
+		btnEliminaViaggio.addActionListener(this);
+		btnEliminaViaggio.setForeground(Color.BLACK);
+		btnEliminaViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		btnEliminaViaggio.setBackground(Color.WHITE);
+		btnEliminaViaggio.setBounds(30, 423, 188, 29);
+		panelViaggio.add(btnEliminaViaggio);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(128, 128, 128)));
@@ -59,11 +63,17 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		btnAggAttivita = new JButton("Aggiungi Attivitï¿½");
+		btnAggAttivita = new JButton("Aggiungi Attività");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		btnAggAttivita.setBounds(165, 423, 188, 29);
+		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
+		
+		btnEliminaAttivita = new JButton("Elimina Attività");
+		btnEliminaAttivita.addActionListener(this);
+		btnEliminaAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		btnEliminaAttivita.setBounds(308, 423, 188, 29);
+		panel_1.add(btnEliminaAttivita);
 	}
 
 	@Override
@@ -71,12 +81,16 @@ public class ControlPanel extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.btnAggViaggio) {
 			try {
-				NuovoViaggio dialog = new NuovoViaggio();
+				//Ci va messo il giusto parametro al posto di null
+				NuovoViaggio dialog = new NuovoViaggio(null);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {
 				a.printStackTrace();
 			}
+		}
+		if(e.getSource() == this.btnEliminaViaggio) {
+			//Aprire la lista dei viaggi e scegliere quale
 		}
 		if(e.getSource() == this.btnAggAttivita) {
 			try {
@@ -86,6 +100,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 			} catch (Exception a) {
 				a.printStackTrace();
 			}
+		}
+		if(e.getSource() == this.btnEliminaAttivita) {
+			//Aprire la lista delle attività riferite a quel viaggio e eliminare dal DB una di quelle
 		}
 	}
 

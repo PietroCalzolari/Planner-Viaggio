@@ -2,7 +2,6 @@ package plannerviaggio;
 
 import database.Database;
 import graphicinterface.ControlPanel;
-
 import java.awt.EventQueue;
 import java.sql.SQLException;
 
