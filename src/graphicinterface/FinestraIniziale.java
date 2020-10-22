@@ -76,8 +76,9 @@ public class FinestraIniziale extends JPanel implements ActionListener{
 		if(e.getSource() == this.btnPrimoViaggio) {
 			//Oltre che a fare ciò che ho scritto bisogna salvare sul DB i dati che sono stati scritti
 			//e magari anche guardare che tutte le textfield siano state scritte(forse questo lo devo fare io)
+			//Inoltre bisogna passare il giusto argomento alla riga 81: al posto di null ci va messo l'UUID giusto
 			try {
-				NuovoViaggio dialog = new NuovoViaggio();
+				NuovoViaggio dialog = new NuovoViaggio(null);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {
