@@ -51,7 +51,8 @@ public class PannelloViaggi extends JPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.btnAggViaggio) {
 			try {
-				NuovoViaggio dialog = new NuovoViaggio();
+				//Bisogna mettere il giusto parametro al posto di null
+				NuovoViaggio dialog = new NuovoViaggio(null);
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {
