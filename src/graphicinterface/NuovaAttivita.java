@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+//import database.DBAttivita;
+import database.Database;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -99,8 +103,9 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.okButton) {
-			dispose();//è una cosa temporanea che chiude la pagina senza fare niente
-			//Marti qui dobbiamo unire le nostre parti e fare l'if per vedere se tutti i campi sono compilati
+			
+			Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText());
+			dispose();
 		}
 		if(e.getSource() == this.cancelButton) {
 			dispose();

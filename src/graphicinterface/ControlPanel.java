@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import database.DBViaggio;
 
 public class ControlPanel extends JFrame implements ActionListener {
 
@@ -60,7 +59,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		btnAggAttivita = new JButton("Aggiungi Attività");
+		btnAggAttivita = new JButton("Aggiungi Attivitï¿½");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(165, 423, 188, 29);

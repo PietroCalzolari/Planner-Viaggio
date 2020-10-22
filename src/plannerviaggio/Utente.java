@@ -3,14 +3,6 @@ package plannerviaggio;
 import java.util.UUID;
 
 public class Utente {
-	/*
-	 * Con questa classe definiamo l'utente che utilizza l'applicaizone
-	 * Ha come attributi i seguenti:
-	 * nome: nome dell'utente
-	 * cognome: cognome dell'utente
-	 * email: email dell'utente
-	 * citta: la citta di residenza dell'utente
-	 */
 	
 	UUID idUtente;
 	String nome;

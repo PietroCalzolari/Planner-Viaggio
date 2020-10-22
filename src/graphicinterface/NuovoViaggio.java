@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.Database;
+//import database.DBViaggio;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -102,8 +106,10 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		// TODO Auto-generated method stub
 		//Fare i bottoni di OK e di Cancel
 		if(e.getSource() == this.okButton) {
-			dispose();//è una cosa temporanea che chiude la pagina senza fare niente
-			//Marti qui dobbiamo unire le nostre parti e fare l'if per vedere se tutti i campi sono compilati
+			
+			Database.modelViaggio.insert(textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+			dispose();
+			//A questo punto, una volta chiusa la finestra di dialogo, bisogna fare in modo che il viaggio si veda nel pannello principale
 		}
 		if(e.getSource() == this.cancelButton) {
 			dispose();

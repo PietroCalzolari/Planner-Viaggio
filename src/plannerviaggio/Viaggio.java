@@ -4,15 +4,6 @@ import java.util.UUID;
 
 public class Viaggio {
 	
-	/*
-	 * Questa classe rappresenta i viaggi.
-	 * Un oggetto viaggio avr� i seguenti attributi:
-	 * nomeViaggio: nome del viaggio
-	 * mezzo: il mezzo di trasporto del viaggio(aereo, treno, autobus, macchina, camper, ...)
-	 * partenza: data di partenza del viaggio
-	 * ritorno: data di ritorno o arrivo del viaggio
-	 */
-
 	UUID idViaggio;
 	String nomeViaggio;
 	String mezzo;
@@ -28,6 +19,8 @@ public class Viaggio {
 		this.partenza = partenza;
 		this.ritorno = ritorno;
 	}
+	
+	
 	//Getters and Setters
 	public UUID getIdViaggio() {
 		return idViaggio;
@@ -40,27 +33,36 @@ public class Viaggio {
 	public String getNomeViaggio() {
 		return nomeViaggio;
 	}
+	
 	public void setNomeViaggio(String nomeViaggio) {
 		this.nomeViaggio = nomeViaggio;
 	}
+	
 	public String getMezzo() {
 		return mezzo;
 	}
+	
 	public void setMezzo(String mezzo) {
 		this.mezzo = mezzo;
 	}
+	
 	public String getPartenza() {
 		return partenza;
 	}
+	
 	public void setPartenza(String partenza) {
 		this.partenza = partenza;
 	}
+	
 	public String getRitorno() {
 		return ritorno;
 	}
+	
 	public void setRitorno(String ritorno) {
 		this.ritorno = ritorno;
 	}
+	
+	
 	//toString
 	@Override
 	public String toString() {

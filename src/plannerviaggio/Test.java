@@ -1,7 +1,6 @@
 package plannerviaggio;
-import database.DBAttivita;
-import database.DBUtente;
-import database.DBViaggio;
+
+import database.Database;
 import graphicinterface.ControlPanel;
 
 import java.awt.EventQueue;
@@ -28,24 +27,21 @@ public class Test {
 		
 		//Apro la connessione ai database
 		try {
-			new DBViaggio().run();
-			new DBAttivita().run();
-			new DBUtente().run();
+			new Database().run();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		
 		//Chiudo la connessione ai database
+		/*
 		try {
 			System.out.println("\n- closing database...");
-			new DBViaggio().closeDB();
-			new DBAttivita().closeDB();
-			new DBUtente().closeDB();
+			new Database().closeDB();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 	}
 	
 }
