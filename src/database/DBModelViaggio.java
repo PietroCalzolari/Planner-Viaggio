@@ -53,6 +53,7 @@ public class DBModelViaggio {
 	public void previous() {
 		selectedIndex = Math.max(selectedIndex - 1, 0);
 	}
+	
 
 	public void insert(UUID idViaggio, String nomeViaggio, String mezzo, String partenza, String ritorno) {
 		Viaggio v = new Viaggio(idViaggio, nomeViaggio, mezzo, partenza, ritorno);
@@ -70,7 +71,7 @@ public class DBModelViaggio {
 	
 	public void remove() {
 		try {
-			String query = String.format("DELETE FROM viaggio WHERE id='%s'", getSelectedItem().getIdViaggio());
+			String query = String.format("DELETE FROM viaggio WHERE idViaggio='%s'", getSelectedItem().getIdViaggio());
 			db.executeUpdate(query);
 			lv.remove(selectedIndex);
 			previous();

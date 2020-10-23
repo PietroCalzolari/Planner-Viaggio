@@ -23,7 +23,7 @@ public Database() throws SQLException{
 			db.executeQuery("SELECT * FROM utente LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS utente");
-			db.executeUpdate("CREATE TABLE utente (" + "idUtente VARCHAR(50) PRIMARY KEY, " + "nome TEXT, " + "cognome TEXT, " + "email TEXT)");
+			db.executeUpdate("CREATE TABLE utente (" + "idUtente VARCHAR(10) PRIMARY KEY, " + "nome TEXT, " + "cognome TEXT, " + "email TEXT)");
 			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
@@ -46,7 +46,7 @@ public Database() throws SQLException{
 			db.executeQuery("SELECT * FROM viaggio LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS viaggio");
-			db.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(50) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, " + "Partenza TEXT, " + "Ritorno TEXT)");
+			db.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(10) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, " + "Partenza TEXT, " + "Ritorno TEXT)");
 		}
 		
 		modelViaggio = new DBModelViaggio(db);
@@ -57,7 +57,7 @@ public Database() throws SQLException{
 			db.executeQuery("SELECT * FROM attivita LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS attivita");
-			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(50) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT, "
+			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(10) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT, "
 					+ "idViaggio VARCHAR(50))");
 			
 		}

@@ -1,20 +1,18 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
+import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import database.Database;
-//import database.DBViaggio;
 
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.UUID;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -98,19 +96,23 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		textField_3.setBounds(53, 193, 136, 35);
 		contentPanel.add(textField_3);
 		
-		//Marti qui dobbiamo mettere il nome del viaggio con l'ID che questo pannello prende come input
-		//contentPanel.add(new JLabel("QUI CI VA IL NOME DEL VIAGGIO"));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.okButton) {
-
+			
+			//inserimento dati nel database
 			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+		    
+			//Imposto la label del control panel con il nome del viaggio inserito
+			//ovviamente non è il modo giusto, se aggiungi un secondo viaggio ti sostituisce la label v0 con il nome del nuovo viaggio 
+			ControlPanel.v0.setText(textField.getText());
+			
+			//stampo l'indice del viaggio corrente
+			System.out.println(Database.modelViaggio.getSelectedIndex());
 			dispose();
-			//A questo punto, una volta chiusa la finestra di dialogo, bisogna fare in modo che il viaggio si veda nel pannello principale
-			
-			
+
 		}
 		if(e.getSource() == this.cancelButton) {
 			dispose();

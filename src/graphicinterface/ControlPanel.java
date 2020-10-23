@@ -10,19 +10,30 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import database.Database;
+
+import java.util.UUID;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 
 public class ControlPanel extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = -2785150052774704558L;
-	private JPanel contentPane, panelViaggio;
+	private JPanel contentPane; 
+	private JPanel panelViaggio;
 	private JButton btnAggViaggio;
 	private JButton btnAggAttivita;
 	private JButton btnEliminaViaggio;
 	private JButton btnEliminaAttivita;
-	
+	public static  JLabel v0;
+
+
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
 		setBackground(Color.WHITE);
@@ -32,14 +43,14 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panelViaggio = new JPanel();
 		panelViaggio.setBorder(new LineBorder(Color.GRAY));
 		panelViaggio.setBackground(Color.ORANGE);
 		panelViaggio.setBounds(0, 0, 259, 463);
 		contentPane.add(panelViaggio);
 		panelViaggio.setLayout(null);
-		
+
 		btnAggViaggio = new JButton("Aggiungi Viaggio");
 		btnAggViaggio.setForeground(Color.BLACK);
 		btnAggViaggio.setBackground(Color.WHITE);
@@ -47,7 +58,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAggViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggViaggio.setBounds(30, 369, 188, 29);
 		panelViaggio.add(btnAggViaggio);
-		
+
+		//Questo bottone credo si possa eliminare
 		btnEliminaViaggio = new JButton("Elimina Viaggio");
 		btnEliminaViaggio.addActionListener(this);
 		btnEliminaViaggio.setForeground(Color.BLACK);
@@ -56,25 +68,46 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnEliminaViaggio.setBounds(30, 423, 188, 29);
 		panelViaggio.add(btnEliminaViaggio);
 		
+		
+		
+		//prova aggiunta label
+		v0 = new JLabel("");
+		v0.setBounds(30, 50, 140, 35);
+		panelViaggio.add(v0);
+		v0.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e)) {
+					//provo a eliminare il viaggio, speriamo funzioni
+					Database.modelViaggio.remove();
+					v0.setText("");
+				}
+			}
+		});
+
+		
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(128, 128, 128)));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(256, 0, 541, 463);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
-		btnAggAttivita = new JButton("Aggiungi Attività");
+
+		btnAggAttivita = new JButton("Aggiungi Attivitï¿½");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
-		
-		btnEliminaAttivita = new JButton("Elimina Attività");
+
+		//Questo bottone credo si possa eliminare se implementiamo il click del tasto destro anche sulle attivitÃ 
+		btnEliminaAttivita = new JButton("Elimina Attivitï¿½");
 		btnEliminaAttivita.addActionListener(this);
 		btnEliminaAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnEliminaAttivita.setBounds(308, 423, 188, 29);
 		panel_1.add(btnEliminaAttivita);
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -102,8 +135,9 @@ public class ControlPanel extends JFrame implements ActionListener {
 			}
 		}
 		if(e.getSource() == this.btnEliminaAttivita) {
-			//Aprire la lista delle attività riferite a quel viaggio e eliminare dal DB una di quelle
+			//Aprire la lista delle attivitï¿½ riferite a quel viaggio e eliminare dal DB una di quelle
 		}
 	}
-
+	
+	
 }
