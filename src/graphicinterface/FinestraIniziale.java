@@ -78,12 +78,10 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == this.btnPrimoViaggio) {
-			//guardare che tutte le textfield siano state scritte(forse questo lo devo fare io)
-			
+			//Fare un if e vedere che tutte le Textfield siano piene, magari questo lo facciamo come ultima cosa
 			Database.insertUtente(textFieldNome.getText(),textField.getText(),textField_1.getText());
-			
+			//Mettere i dati inseriti nella Label del ControlPanel con scritto "Ciao Pietro(o chi per me ahah)"
 			try {
 				NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

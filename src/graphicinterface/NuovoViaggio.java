@@ -27,7 +27,11 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private UUID IDViaggio;
-
+	private JLabel lblCreazioneViaggio;
+	private JLabel lblNomeViaggio;
+	private JLabel lblMezzo;
+	private JLabel lblPartenza;
+	private JLabel lblArrivo;
 	
 	public NuovoViaggio(UUID IDViaggio) {
 		this.IDViaggio = IDViaggio;
@@ -38,7 +42,7 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		JLabel lblCreazioneViaggio = new JLabel("Creazione nuovo Viaggio! Compila tutti i dati del tuo viaggio");
+		lblCreazioneViaggio = new JLabel("Creazione nuovo Viaggio! Compila tutti i dati del tuo viaggio");
 		lblCreazioneViaggio.setBounds(53, 11, 447, 36);
 		lblCreazioneViaggio.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
 		contentPanel.add(lblCreazioneViaggio);
@@ -56,22 +60,22 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		cancelButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		cancelButton.setActionCommand("Cancel");
 
-		JLabel lblNomeViaggio = new JLabel("Nome del Viaggio");
+		lblNomeViaggio = new JLabel("Nome del Viaggio");
 		lblNomeViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblNomeViaggio.setBounds(53, 65, 141, 32);
 		contentPanel.add(lblNomeViaggio);
 
-		JLabel lblMezzo = new JLabel("Mezzo Di Trasporto");
+		lblMezzo = new JLabel("Mezzo Di Trasporto");
 		lblMezzo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblMezzo.setBounds(303, 69, 160, 25);
 		contentPanel.add(lblMezzo);
 
-		JLabel lblPartenza = new JLabel("Data di Partenza");
+		lblPartenza = new JLabel("Data di Partenza");
 		lblPartenza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblPartenza.setBounds(53, 146, 160, 36);
 		contentPanel.add(lblPartenza);
 
-		JLabel lblArrivo = new JLabel("Data di Arrivo");
+		lblArrivo = new JLabel("Data di Arrivo");
 		lblArrivo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblArrivo.setBounds(303, 146, 141, 36);
 		contentPanel.add(lblArrivo);
@@ -105,9 +109,8 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 			//inserimento dati nel database
 			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
 		    
-			//Imposto la label del control panel con il nome del viaggio inserito
-			//ovviamente non è il modo giusto, se aggiungi un secondo viaggio ti sostituisce la label v0 con il nome del nuovo viaggio 
-			ControlPanel.v0.setText(textField.getText());
+			//Qui ci va messa la funzione che mette in lblViaggio il nome del Viaggio corrente
+			ControlPanel.lblViaggio.setText(textField.getText());
 			
 			//stampo l'indice del viaggio corrente
 			System.out.println(Database.modelViaggio.getSelectedIndex());
