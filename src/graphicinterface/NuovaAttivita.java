@@ -55,12 +55,12 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 			cancelButton.setActionCommand("Cancel");
 		}
 		
-		JLabel lblNuovaAttivita = new JLabel("Creazione nuova Attivitï¿½! Compila tutti i dati sottostanti");
+		JLabel lblNuovaAttivita = new JLabel("Creazione nuova Attività! Compila tutti i dati sottostanti");
 		lblNuovaAttivita.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		lblNuovaAttivita.setBounds(25, 11, 496, 53);
 		contentPanel.add(lblNuovaAttivita);
 		
-		JLabel lblNomeAttivita = new JLabel("Nome Attivitï¿½");
+		JLabel lblNomeAttivita = new JLabel("Nome Attività");
 		lblNomeAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblNomeAttivita.setBounds(71, 60, 136, 35);
 		contentPanel.add(lblNomeAttivita);

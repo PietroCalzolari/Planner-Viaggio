@@ -27,13 +27,13 @@ public class PannelloAttivita extends JPanel implements ActionListener{
 		panel_1.setBounds(0, 0, 541, 463);
 		add(panel_1);
 		
-		btnAggAttivita = new JButton("Aggiungi Attivitï¿½");
+		btnAggAttivita = new JButton("Aggiungi Attività");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
 		
-		btnEliminaAttivita = new JButton("Elimina Attivitï¿½");
+		btnEliminaAttivita = new JButton("Elimina Attività");
 		btnEliminaAttivita.addActionListener(this);
 		btnEliminaAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnEliminaAttivita.setBounds(308, 423, 188, 29);
@@ -57,7 +57,7 @@ public class PannelloAttivita extends JPanel implements ActionListener{
 			}
 		}
 		if(e.getSource() == this.btnEliminaAttivita) {
-			//Aprire la lista delle attivitï¿½ riferite a quel viaggio e eliminare dal DB una di quelle
+			//Aprire la lista delle attività riferite a quel viaggio e eliminare dal DB una di quelle
 		}
 	}
 
