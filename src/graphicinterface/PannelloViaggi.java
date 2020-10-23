@@ -3,13 +3,20 @@ package graphicinterface;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.UUID;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
 
 public class PannelloViaggi extends JPanel implements ActionListener{
 
@@ -17,7 +24,7 @@ public class PannelloViaggi extends JPanel implements ActionListener{
 	private JButton btnEliminaViaggio;
 	
 	
-	public PannelloViaggi() {
+	public PannelloViaggi(UUID idViaggio) {
 		setLayout(null);
 		
 		JPanel panelViaggio = new JPanel();
@@ -42,7 +49,17 @@ public class PannelloViaggi extends JPanel implements ActionListener{
 		btnEliminaViaggio.setBackground(Color.WHITE);
 		btnEliminaViaggio.setBounds(30, 423, 188, 29);
 		panelViaggio.add(btnEliminaViaggio);
-
+		/*
+		 * panelViaggio.add(new JLabel("NOMEVIAGGIO").addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e))
+					System.out.println("provissima");
+			}
+		}));
+		*/
+		//Marti qui dobbiamo mettere il nome del viaggio con l'ID che questo pannello prende come input
+		//contentPanel.add(new JLabel("QUI CI VA IL NOME DEL VIAGGIO"));
 	}
 
 	@Override

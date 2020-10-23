@@ -1,6 +1,7 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -14,10 +15,12 @@ import database.Database;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionListener;
 import java.util.UUID;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import plannerviaggio.Test;
 
 public class NuovoViaggio extends JDialog implements ActionListener {
 
@@ -98,8 +101,6 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		textField_3.setBounds(53, 193, 136, 35);
 		contentPanel.add(textField_3);
 		
-		//Marti qui dobbiamo mettere il nome del viaggio con l'ID che questo pannello prende come input
-		//contentPanel.add(new JLabel("QUI CI VA IL NOME DEL VIAGGIO"));
 	}
 
 	@Override
@@ -108,6 +109,7 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 
 			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
 			dispose();
+			contentPane.add(new PannelloViaggi(IDViaggio));
 			//A questo punto, una volta chiusa la finestra di dialogo, bisogna fare in modo che il viaggio si veda nel pannello principale
 			
 			

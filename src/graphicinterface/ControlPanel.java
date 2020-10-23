@@ -10,19 +10,25 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.event.MouseWheelListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class ControlPanel extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = -2785150052774704558L;
-	private JPanel contentPane, panelViaggio;
+	public JPanel contentPane; 
+	private JPanel panelViaggio;
 	private JButton btnAggViaggio;
 	private JButton btnAggAttivita;
 	private JButton btnEliminaViaggio;
 	private JButton btnEliminaAttivita;
-	
+
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
 		setBackground(Color.WHITE);
@@ -32,22 +38,30 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		panelViaggio = new JPanel();
 		panelViaggio.setBorder(new LineBorder(Color.GRAY));
 		panelViaggio.setBackground(Color.ORANGE);
 		panelViaggio.setBounds(0, 0, 259, 463);
 		contentPane.add(panelViaggio);
 		panelViaggio.setLayout(null);
-		
+
 		btnAggViaggio = new JButton("Aggiungi Viaggio");
+		/*IMPORTANTISSIMO PER L'ELIMINAZIONE DEI VIAGGI
+		btnAggViaggio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e))
+					System.out.println("provissima");
+			}
+		});*/
 		btnAggViaggio.setForeground(Color.BLACK);
 		btnAggViaggio.setBackground(Color.WHITE);
 		btnAggViaggio.addActionListener(this);
 		btnAggViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggViaggio.setBounds(30, 369, 188, 29);
 		panelViaggio.add(btnAggViaggio);
-		
+
 		btnEliminaViaggio = new JButton("Elimina Viaggio");
 		btnEliminaViaggio.addActionListener(this);
 		btnEliminaViaggio.setForeground(Color.BLACK);
@@ -55,20 +69,20 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnEliminaViaggio.setBackground(Color.WHITE);
 		btnEliminaViaggio.setBounds(30, 423, 188, 29);
 		panelViaggio.add(btnEliminaViaggio);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(128, 128, 128)));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(256, 0, 541, 463);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		btnAggAttivita = new JButton("Aggiungi Attività");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
-		
+
 		btnEliminaAttivita = new JButton("Elimina Attività");
 		btnEliminaAttivita.addActionListener(this);
 		btnEliminaAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
@@ -105,5 +119,4 @@ public class ControlPanel extends JFrame implements ActionListener {
 			//Aprire la lista delle attività riferite a quel viaggio e eliminare dal DB una di quelle
 		}
 	}
-
 }
