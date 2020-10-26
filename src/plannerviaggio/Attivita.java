@@ -9,15 +9,17 @@ public class Attivita {
 	String oraInizio;
 	String oraFine;
 	String luogo;
+	UUID idViaggioA;
 
 	//costruttore
-	public Attivita(UUID idAttivita, String nomeAttivita, String oraInizio, String oraFine, String luogo) {
+	public Attivita(UUID idAttivita, String nomeAttivita, String oraInizio, String oraFine, String luogo, UUID idViaggioA) {
 		super();
 		this.idAttivita = idAttivita;
 		this.nomeAttivita = nomeAttivita;
 		this.oraInizio = oraInizio;
 		this.oraFine = oraFine;
 		this.luogo = luogo;
+		this.idViaggioA = idViaggioA;
 	}
 	
 	
@@ -63,10 +65,20 @@ public class Attivita {
 	}
 	
 	
+	public UUID getIdViaggioA() {
+		return idViaggioA;
+	}
+
+
+	public void setIdViaggioA(UUID idViaggioA) {
+		this.idViaggioA = idViaggioA;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Attivita [idAttivita=" + idAttivita + ", nomeAttivita=" + nomeAttivita + ", oraInizio=" + oraInizio
-				+ ", oraFine=" + oraFine + ", luogo=" + luogo + "]";
+				+ ", oraFine=" + oraFine + ", luogo=" + luogo + ", idViaggioA=" + idViaggioA + "]";
 	}
 	
 

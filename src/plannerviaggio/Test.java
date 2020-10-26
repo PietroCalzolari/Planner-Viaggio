@@ -24,14 +24,6 @@ public class Test {
 			}
 		});
 		
-		//Apro la connessione ai database
-		try {
-			new Database().run();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
 		//Chiudo la connessione ai database
 		/*
 		try {

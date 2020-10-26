@@ -1,7 +1,6 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -12,7 +11,6 @@ import database.Database;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.UUID;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -106,13 +104,19 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.okButton) {
 			
-			//inserimento dati nel database
-			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
-		    
-			//Qui ci va messa la funzione che mette in lblViaggio il nome del Viaggio corrente
-			ControlPanel.lblViaggio.setText(textField.getText());
+			//QUI VANNO AGGIUNTE LE CONDIIZONI SULLE LABEL
 			
-			//stampo l'indice del viaggio corrente
+			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
+			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
+			
+			//VANNO AGGIUNTE LE TEXTFIELD NELL'INTERFACCIA GRAFICA PER MOSTRARE LE CARATTERISTICHE DEL VIAGGIO (MEZZO, DATA INIIO E DATA FINE)
+			
+			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
+			Database.modelViaggio.showItem();
+			ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
+			ControlPanel.cleanAttivita();
+			
+			//stampa l'indice del viaggio corrente, sarà da elimiare una volta terminata l'applicaizone
 			System.out.println(Database.modelViaggio.getSelectedIndex());
 			dispose();
 

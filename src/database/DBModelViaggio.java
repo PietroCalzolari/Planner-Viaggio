@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import graphicinterface.ControlPanel;
 import plannerviaggio.Viaggio;
 
 public class DBModelViaggio {
 	DBManager db;
-	List<Viaggio> lv;
+	public static List<Viaggio> lv;
 	int selectedIndex;
 	
 	
@@ -69,7 +70,10 @@ public class DBModelViaggio {
 		last();
 	}
 	
+	
 	public void remove() {
+		Database.modelAttivita.removeDaViaggio();
+		
 		try {
 			String query = String.format("DELETE FROM viaggio WHERE idViaggio='%s'", getSelectedItem().getIdViaggio());
 			db.executeUpdate(query);
@@ -81,6 +85,22 @@ public class DBModelViaggio {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void showItem() {
+		try {
+			String query = String.format("SELECT * FROM viaggio WHERE idViaggio='%s'", getSelectedItem().getIdViaggio());
+			ResultSet rs = db.executeQuery(query);
+			
+			ControlPanel.lblViaggio.setText(rs.getString("nomeViaggio"));
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	public void setnomeViaggio(String nomeViaggio) {
 		String query = String.format("UPDATE viaggio SET nomeViaggio=%s WHERE id='%s'", nomeViaggio, getSelectedItem().getIdViaggio());

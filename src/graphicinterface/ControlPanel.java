@@ -2,6 +2,7 @@ package graphicinterface;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,16 +11,14 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import database.DBModelAttivita;
+import database.DBModelViaggio;
 import database.Database;
+import java.sql.SQLException;
 
-import java.util.UUID;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import javax.swing.SwingConstants;
 
 
@@ -93,26 +92,24 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		btnAggAttivita = new JButton("Aggiungi Attività");
+		btnAggAttivita = new JButton("Aggiungi Attivita'");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
 
-		btnEliminaAttivita = new JButton("Elimina Attività");
+		btnEliminaAttivita = new JButton("Elimina Attivita'");
 		btnEliminaAttivita.addActionListener(this);
 		btnEliminaAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnEliminaAttivita.setBounds(308, 423, 188, 29);
 		panel_1.add(btnEliminaAttivita);
 
-		//QUI CI VA IL NOME DEL VIAGGIO PRESO DAL DB
-		lblViaggio = new JLabel("NOME DEL VIAGGIO");
+		lblViaggio = new JLabel("");
 		lblViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblViaggio.setBounds(30, 78, 170, 73);
 		panelViaggio.add(lblViaggio);
 
-		//QUESTA LABEL E' PER BELLEZZA, VA LASCIATA COSI'
 		lblTitoloViaggioBellezza = new JLabel("VIAGGIO");
 		lblTitoloViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
 		lblTitoloViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
@@ -133,7 +130,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 		
 		lblViaggioPrecedenteBellezza = new JLabel("Viaggio");
 		lblViaggioPrecedenteBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggioPrecedenteBellezza.setBounds(42, 224, 44, 41);
+		lblViaggioPrecedenteBellezza.setBounds(42, 224, 50, 41);
 		panelViaggio.add(lblViaggioPrecedenteBellezza);
 		
 		lblViaggioPrecedenteBellezza2 = new JLabel("Precedente");
@@ -148,61 +145,52 @@ public class ControlPanel extends JFrame implements ActionListener {
 		
 		lblViaggioSuccessivoBellezza = new JLabel("Viaggio");
 		lblViaggioSuccessivoBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggioSuccessivoBellezza.setBounds(160, 224, 44, 41);
+		lblViaggioSuccessivoBellezza.setBounds(160, 224, 50, 41);
 		panelViaggio.add(lblViaggioSuccessivoBellezza);
 
-		//IN QUESTA LABEL CI VA SCRITTO IL NOME PRESO DALLA CLASSE FINESTRAINIZIALE
-		lblCiao = new JLabel("Ciao, Pietro");
+		lblCiao = new JLabel("");
 		lblCiao.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblCiao.setBounds(359, 11, 143, 40);
 		panel_1.add(lblCiao);
 
-		//QUESTA LABEL E' PER BELLEZZA, VA LASCIATA COSI'
 		lblTitoloAttivitaBellezza = new JLabel("ATTIVITA'");
 		lblTitoloAttivitaBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitoloAttivitaBellezza.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
 		lblTitoloAttivitaBellezza.setBounds(60, 11, 194, 41);
 		panel_1.add(lblTitoloAttivitaBellezza);
 
-		//QUA DENTRO CI VA MESSO IL NOME DELL'ATTIVITA'
-		lblAttivita = new JLabel("NOME DELL'ATTIVITA'");
+		lblAttivita = new JLabel("");
 		lblAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblAttivita.setBounds(60, 63, 197, 73);
 		panel_1.add(lblAttivita);
 
-		//QUESTA LABEL E' PER BELLEZZA, VA LASCIATA COSI'
 		lblLuogoBellezza = new JLabel("Luogo");
 		lblLuogoBellezza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblLuogoBellezza.setBounds(66, 147, 60, 35);
 		panel_1.add(lblLuogoBellezza);
 
-		//QUI CI VA IL LUOGO PRESO DAL DB
-		lblLuogo = new JLabel("QUI CI VA IL LUOGO");
+		lblLuogo = new JLabel("");
 		lblLuogo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblLuogo.setBounds(203, 147, 231, 35);
 		panel_1.add(lblLuogo);
 
-		//QUESTA LABEL E' DI BELLEZZA, VA LASCIATA COSI'
 		lblOraInizioBellezza = new JLabel("Ora di Inizio");
 		lblOraInizioBellezza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblOraInizioBellezza.setBounds(60, 208, 136, 35);
 		panel_1.add(lblOraInizioBellezza);
 
-		//QUI CI VA L'ORARIO DI INIZIO PRESO DAL DB
-		lblOraInizio = new JLabel("QUI CI VA L'ORARIO INIZ");
+		lblOraInizio = new JLabel("");
 		lblOraInizio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblOraInizio.setBounds(203, 208, 231, 35);
 		panel_1.add(lblOraInizio);
 
-		//QUESTA LABEL E' PER BELLEZZA, VA LASCIATA COSI'
 		lblOraFineBellezza = new JLabel("Ora di Fine");
 		lblOraFineBellezza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblOraFineBellezza.setBounds(60, 266, 136, 35);
 		panel_1.add(lblOraFineBellezza);
 
-		//QUI CI VA MESSO L'ORARIO FINALE DAL DB
-		lblOraFine = new JLabel("QUI CI VA L'ORARIO FIN");
+		lblOraFine = new JLabel("");
 		lblOraFine.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblOraFine.setBounds(203, 266, 231, 35);
 		panel_1.add(lblOraFine);
@@ -218,11 +206,30 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAttivitaSuccessiva.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnAttivitaSuccessiva.setBounds(364, 358, 70, 54);
 		panel_1.add(btnAttivitaSuccessiva);
+		
+		try {
+			new Database().run();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
-
-
+	
+	
+	public static void cleanAttivita() {
+		lblAttivita.setText("");
+		lblLuogo.setText("");
+		lblOraInizio.setText("");
+		lblOraFine.setText("");
+	}
+	
+	public static void cleanViaggio() {
+		lblViaggio.setText("Aggiungi un viaggio!");
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource() == this.btnAggViaggio) {
 			try {
 				NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
@@ -232,33 +239,116 @@ public class ControlPanel extends JFrame implements ActionListener {
 				a.printStackTrace();
 			}
 		}
+		
+		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnEliminaViaggio) {
-			//ELIMINARE IL VIAGGIO CORRENTE
+			try {
+				Database.modelViaggio.remove();
+			} catch (IndexOutOfBoundsException ex) {
+				Toolkit.getDefaultToolkit().beep();
+			}
+			//FORSE manca la condizione che l'indice del viaggio sia non negativo
+			if(Database.modelViaggio.getSelectedIndex() < (DBModelViaggio.lv.size() - 1)) {
+				Database.modelViaggio.showItem();
+				if(Database.modelAttivita.getSelectedIndex() >= 0) {
+					Database.modelAttivita.showAttivitaDaViaggio();
+				}
+				else {
+					cleanAttivita();
+				}
+			}
+			else {
+				cleanViaggio();
+				cleanAttivita();
+			}
+				
 		}
+		
 		if(e.getSource() == this.btnAggAttivita) {
 			try {
-				//Per il momento inserisco in ID random ma ci va aggiunto l'id del viaggio a cui si riferisce
-				NuovaAttivita dialog = new NuovaAttivita(java.util.UUID.randomUUID());
+				NuovaAttivita dialog = new NuovaAttivita(Database.modelViaggio.getSelectedItem().getIdViaggio());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception a) {
 				a.printStackTrace();
 			}
 		}
-		if(e.getSource() == this.btnEliminaAttivita) {
-			//ELIMINARE L'ATTIVITA CORRENTE
+		
+		//ANCORA NON FUNZIONA
+		if(e.getSource() == this.btnEliminaAttivita) {	
+			Toolkit.getDefaultToolkit().beep();
+			//Database.modelAttivita.remove();
+			//mostrare a video la nuova attivita' o le label vuote se non ci sono attivitÃ 
 		}
+		
 		if(e.getSource() == this.btnViaggioPrecedente) {
-			//SCORRERE AL VIAGGIO PRECEDENTE
+			if(Database.modelViaggio.getSelectedIndex() > 0) {
+				Database.modelViaggio.previous();
+				Database.modelViaggio.showItem();
+				Database.modelAttivita.showAttivitaDaViaggio();
+			}
+			else {
+				Toolkit.getDefaultToolkit().beep();
+			}
 		}
+		
 		if(e.getSource() == this.btnViaggioSuccessivo) {
-			//SCORRERE AL VIAGGIO SUCCESSIVO
+			if(Database.modelViaggio.getSelectedIndex() < DBModelViaggio.lv.size() - 1) {
+				Database.modelViaggio.next();
+				Database.modelViaggio.showItem();
+				Database.modelAttivita.showAttivitaDaViaggio();
+			}
+			else {
+				Toolkit.getDefaultToolkit().beep();
+			}
 		}
+		
+		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnAttivitaPrecedente) {
-			//SCORRERE ALL'ATTIVITA' PRECEDENTE
-		}
+			System.out.println("A" + Database.modelAttivita.getSelectedIndex());
+			System.out.println("V" + Database.modelViaggio.getSelectedIndex());
+	
+		prova:
+			while (Database.modelAttivita.getSelectedIndex() > 0) {
+				Database.modelAttivita.previous();
+				
+				System.out.println("A" + Database.modelAttivita.getSelectedIndex());
+				System.out.println("V" + Database.modelViaggio.getSelectedIndex());
+				
+				if(Database.modelAttivita.getSelectedItem().getIdViaggioA() == Database.modelViaggio.getSelectedItem().getIdViaggio()) {
+					Database.modelAttivita.showAttivitaDaViaggio();
+					break prova;
+				}			
+			}
+			
+			if(Database.modelAttivita.getSelectedIndex() == 0) {
+				Toolkit.getDefaultToolkit().beep();
+			}
+		}		
+		
+		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnAttivitaSuccessiva) {
-			//SCORRERE ALL'ATTIVITA' SUCCESSIVA
+		
+			System.out.println("A" + Database.modelAttivita.getSelectedIndex());
+			System.out.println("V" + Database.modelViaggio.getSelectedIndex());
+			
+			prova:
+			while(Database.modelAttivita.getSelectedIndex() < (DBModelAttivita.la.size() - 1)) {
+				Database.modelAttivita.next();
+				
+				System.out.println("A" + Database.modelAttivita.getSelectedIndex());
+				System.out.println("V" + Database.modelViaggio.getSelectedIndex());
+				
+				if(Database.modelAttivita.getSelectedItem().getIdViaggioA() == Database.modelViaggio.getSelectedItem().getIdViaggio()) {
+					Database.modelAttivita.showAttivitaDaViaggio();
+					break prova;
+				}		
+			}
+			
+			if(Database.modelAttivita.getSelectedIndex() == (DBModelAttivita.la.size() - 1)) {
+				Toolkit.getDefaultToolkit().beep();
+			}
+			
 		}
 	}
 }

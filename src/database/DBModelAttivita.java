@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import graphicinterface.ControlPanel;
 import plannerviaggio.Attivita;
 
 public class DBModelAttivita {
 	DBManager db;
-	List<Attivita> la;
+	public static List<Attivita> la;
 	int selectedIndex;
 	
 	public DBModelAttivita(DBManager db) {
@@ -21,7 +22,7 @@ public class DBModelAttivita {
 			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
 			while (rs.next()) {
 				la.add(new Attivita(java.util.UUID.fromString(rs.getString("idAttivita")), rs.getString("nomeAttivita"), rs.getString("oraInizio"),
-						rs.getString("oraFine"), rs.getString("luogo")));
+						rs.getString("oraFine"), rs.getString("luogo"), java.util.UUID.fromString(rs.getString("idViaggio"))));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,7 +55,7 @@ public class DBModelAttivita {
 	}
 
 	public void insert(String nomeAttivita, String oraInizio, String oraFine, String luogo, UUID IDViaggio) {
-		Attivita a = new Attivita(java.util.UUID.randomUUID(), nomeAttivita, oraInizio, oraFine, luogo);
+		Attivita a = new Attivita(java.util.UUID.randomUUID(), nomeAttivita, oraInizio, oraFine, luogo, IDViaggio);
 		try {
 			String query = String.format(
 					"INSERT INTO attivita (idAttivita, nomeAttivita, oraInizio, oraFine, luogo, idViaggio) VALUES ('%s', '%s', '%s', '%s', '%s', '%s')",
@@ -67,9 +68,29 @@ public class DBModelAttivita {
 		last();
 	}
 	
+	public void removeDaViaggio() {
+		first();
+		
+		try {
+			String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", Database.modelViaggio.getSelectedItem().getIdViaggio());
+			ResultSet rs = db.executeQuery(query);
+			while (rs.next()) {
+				String queryDelete = String.format("DELETE FROM attivita WHERE idAttivita='%s'", rs.getString("idAttivita"));
+				db.executeUpdate(queryDelete);	
+				la.remove(selectedIndex);
+			}	
+		} catch (IndexOutOfBoundsException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		last();
+	}
+	
 	public void remove() {
 		try {
-			String query = String.format("DELETE FROM attivita WHERE id='%s'", getSelectedItem().getIdAttivita());
+			String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
 			db.executeUpdate(query);
 			la.remove(selectedIndex);
 			previous();
@@ -79,6 +100,41 @@ public class DBModelAttivita {
 			e.printStackTrace();
 		}
 	}
+	
+	public void showAttivitaDaViaggio() {
+		try {
+			String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", Database.modelViaggio.getSelectedItem().getIdViaggio());
+			ResultSet rs = db.executeQuery(query);
+			
+			ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
+			ControlPanel.lblLuogo.setText(rs.getString("luogo"));
+			ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
+			ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	public void showAttivitaInserita() {
+		try {
+			String query = String.format("SELECT * FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
+			ResultSet rs = db.executeQuery(query);
+			
+			ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
+			ControlPanel.lblLuogo.setText(rs.getString("luogo"));
+			ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
+			ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 	public void setnomeAttivita(String nomeAttivita) {
 		String query = String.format("UPDATE attivita SET nomeAttivita=%s WHERE id='%s'", nomeAttivita, getSelectedItem().getIdAttivita());

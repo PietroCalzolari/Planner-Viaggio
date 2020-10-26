@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import graphicinterface.ControlPanel;
 import graphicinterface.FinestraIniziale;
 import plannerviaggio.Utente;
 
@@ -19,7 +20,6 @@ public Database() throws SQLException{
 			// Database manager for SQLite
 			db = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
 			
-			//Prova apertura e creazione db utente
 			db.executeQuery("SELECT * FROM utente LIMIT 1");
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS utente");
@@ -40,27 +40,43 @@ public Database() throws SQLException{
 			e.printStackTrace();
 		}
 		
-		
-		//Prova apertura e creazione db viaggio
 		try {
-			db.executeQuery("SELECT * FROM viaggio LIMIT 1");
+			ResultSet rs = db.executeQuery("SELECT * FROM viaggio LIMIT 1");
+			ControlPanel.lblViaggio.setText(rs.getString("nomeViaggio"));
+			
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS viaggio");
 			db.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(10) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, " + "Partenza TEXT, " + "Ritorno TEXT)");
+			ControlPanel.cleanViaggio();
 		}
 		
 		modelViaggio = new DBModelViaggio(db);
 		
 		
-		//prova apertura e creazione db Attivita
 		try {
-			db.executeQuery("SELECT * FROM attivita LIMIT 1");
+			if(DBModelAttivita.la != null) {
+				ResultSet rsV = db.executeQuery("SELECT * FROM viaggio LIMIT 1");
+				
+				String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", rsV.getString("idViaggio"));
+				ResultSet rs = db.executeQuery(query);
+				
+				ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
+				ControlPanel.lblLuogo.setText(rs.getString("luogo"));
+				ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
+				ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+				
+			}
+			else {
+				db.executeQuery("SELECT * FROM attivita LIMIT 1");
+			}
+			
+			
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS attivita");
 			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(10) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT, "
-					+ "idViaggio VARCHAR(50))");
+					+ "idViaggio VARCHAR(50) REFERENCES viaggio(idViaggio))");
 			
-		}
+		} 
 		
 		modelAttivita = new DBModelAttivita(db);
 		
@@ -116,11 +132,23 @@ public Database() throws SQLException{
 					"INSERT INTO utente (idUtente, nome, cognome, email) VALUES ('%s', '%s', '%s', '%s')",
 					v.getIdUtente().toString(), v.getNome(), v.getCognome(), v.getEmail());
 			db.executeUpdate(query);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public static String nomeUtente() {
+		ResultSet rs;
+		try {
+			 rs = db.executeQuery("SELECT * FROM utente LIMIT 1");
+			 return " " + rs.getString("nome") + "!";
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "!";
+	}
 	
 	public void run() {
 		try {

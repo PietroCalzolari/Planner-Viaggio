@@ -1,14 +1,11 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-//import database.DBAttivita;
 import database.Database;
 
 import java.awt.Font;
@@ -57,12 +54,12 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		contentPanel.add(cancelButton);
 		cancelButton.setActionCommand("Cancel");
 
-		lblNuovaAttivita= new JLabel("Creazione nuova Attività! Compila tutti i dati sottostanti");
+		lblNuovaAttivita= new JLabel("Creazione nuova Attivita'! Compila tutti i dati sottostanti");
 		lblNuovaAttivita.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
 		lblNuovaAttivita.setBounds(25, 11, 496, 53);
 		contentPanel.add(lblNuovaAttivita);
 
-		lblNomeAttivita = new JLabel("Nome Attività");
+		lblNomeAttivita = new JLabel("Nome Attivitï¿½");
 		lblNomeAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblNomeAttivita.setBounds(71, 60, 136, 35);
 		contentPanel.add(lblNomeAttivita);
@@ -107,8 +104,14 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.okButton) {
-
+			
+			//QUI VANNO AGGIUNTE LE CONDIIZONI SULLE LABEL
+			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
+			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
+			
 			Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText(), IDViaggio);
+			Database.modelAttivita.showAttivitaInserita();
+			
 			dispose();
 		}
 		if(e.getSource() == this.cancelButton) {

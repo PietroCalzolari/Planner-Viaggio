@@ -3,7 +3,6 @@ package graphicinterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -11,8 +10,6 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-
 import database.Database;
 
 public class FinestraIniziale extends JFrame implements ActionListener{
@@ -79,9 +76,14 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnPrimoViaggio) {
+			
 			//Fare un if e vedere che tutte le Textfield siano piene, magari questo lo facciamo come ultima cosa
+			
+			//Se facciamo in tempo, inserire anche un controllo sul corretto inserimento della mail "qualcosa@qualcosa.qualcosa"
+			//INGRANDIRE LA TEXTFIELD DELLA MAIL NELL'INTERFACCIA GRAFICA
+			
 			Database.insertUtente(textFieldNome.getText(),textField.getText(),textField_1.getText());
-			//Mettere i dati inseriti nella Label del ControlPanel con scritto "Ciao Pietro(o chi per me ahah)"
+			
 			try {
 				NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -89,7 +91,7 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 			} catch (Exception a) {
 				a.printStackTrace();
 			}
-			
+		
 			dispose();
 		}
 	}
