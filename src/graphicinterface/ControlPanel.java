@@ -106,8 +106,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 
 		lblViaggio = new JLabel("");
 		lblViaggio.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblViaggio.setBounds(30, 78, 170, 73);
+		lblViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
+		lblViaggio.setBounds(30, 78, 188, 77);
 		panelViaggio.add(lblViaggio);
 
 		lblTitoloViaggioBellezza = new JLabel("VIAGGIO");
