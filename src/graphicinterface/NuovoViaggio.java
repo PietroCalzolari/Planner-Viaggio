@@ -20,20 +20,20 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
 	private JButton cancelButton;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textFieldNomeViaggio;
+	private JTextField textFieldTrasporto;
+	private JTextField textFieldArrivo;
+	private JTextField textFieldPartenza;
 	private UUID IDViaggio;
 	private JLabel lblCreazioneViaggio;
 	private JLabel lblNomeViaggio;
 	private JLabel lblMezzo;
 	private JLabel lblPartenza;
 	private JLabel lblArrivo;
-	
+
 	public NuovoViaggio(UUID IDViaggio) {
 		this.IDViaggio = IDViaggio;
-		
+
 		setBounds(100, 100, 559, 372);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,48 +78,56 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		lblArrivo.setBounds(303, 146, 141, 36);
 		contentPanel.add(lblArrivo);
 
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(53, 108, 136, 35);
-		contentPanel.add(textField);
+		textFieldNomeViaggio = new JTextField();
+		textFieldNomeViaggio.setColumns(10);
+		textFieldNomeViaggio.setBounds(53, 108, 136, 35);
+		contentPanel.add(textFieldNomeViaggio);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(303, 108, 136, 35);
-		contentPanel.add(textField_1);
+		textFieldTrasporto = new JTextField();
+		textFieldTrasporto.setColumns(10);
+		textFieldTrasporto.setBounds(303, 108, 136, 35);
+		contentPanel.add(textFieldTrasporto);
 
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(303, 193, 136, 35);
-		contentPanel.add(textField_2);
+		textFieldArrivo = new JTextField();
+		textFieldArrivo.setColumns(10);
+		textFieldArrivo.setBounds(303, 193, 136, 35);
+		contentPanel.add(textFieldArrivo);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(53, 193, 136, 35);
-		contentPanel.add(textField_3);
-		
+		textFieldPartenza = new JTextField();
+		textFieldPartenza.setColumns(10);
+		textFieldPartenza.setBounds(53, 193, 136, 35);
+		contentPanel.add(textFieldPartenza);
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.okButton) {
-			
+			if((textFieldPartenza.getText().length() == 0) || (textFieldArrivo.getText().length() == 0) || (textFieldTrasporto.getText().length() == 0) || (textFieldNomeViaggio.getText().length() == 0)) {
+				try {
+					Error dialog = new Error();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+			}
 			//QUI VANNO AGGIUNTE LE CONDIIZONI SULLE LABEL
-			
+
 			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
 			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
-			
-			//VANNO AGGIUNTE LE TEXTFIELD NELL'INTERFACCIA GRAFICA PER MOSTRARE LE CARATTERISTICHE DEL VIAGGIO (MEZZO, DATA INIIO E DATA FINE)
-			
-			Database.modelViaggio.insert(IDViaggio, textField.getText(),textField_1.getText(),textField_2.getText(),textField_3.getText());
-			Database.modelViaggio.showItem();
-			ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
-			ControlPanel.cleanAttivita();
-			
-			//stampa l'indice del viaggio corrente, sarà da elimiare una volta terminata l'applicaizone
-			System.out.println(Database.modelViaggio.getSelectedIndex());
-			dispose();
 
+			//VANNO AGGIUNTE LE TEXTFIELD NELL'INTERFACCIA GRAFICA PER MOSTRARE LE CARATTERISTICHE DEL VIAGGIO (MEZZO, DATA INIIO E DATA FINE)
+			else {
+				Database.modelViaggio.insert(IDViaggio, textFieldNomeViaggio.getText(),textFieldTrasporto.getText(),textFieldArrivo.getText(),textFieldPartenza.getText());
+				Database.modelViaggio.showItem();
+				ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
+				ControlPanel.cleanAttivita();
+
+				//stampa l'indice del viaggio corrente, sarà da elimiare una volta terminata l'applicaizone
+				System.out.println(Database.modelViaggio.getSelectedIndex());
+				dispose();
+			}
 		}
 		if(e.getSource() == this.cancelButton) {
 			dispose();

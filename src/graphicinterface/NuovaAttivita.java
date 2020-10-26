@@ -104,15 +104,25 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == this.okButton) {
-			
+			if((textFieldNomeAttivita.getText().length() == 0) || (textFieldOraFine.getText().length() == 0) || (textFieldOraInizio.getText().length() == 0) || (textFieldLuogo.getText().length() == 0)) {
+				try {
+					Error dialog = new Error();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
+			}
 			//QUI VANNO AGGIUNTE LE CONDIIZONI SULLE LABEL
 			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
 			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
-			
-			Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText(), IDViaggio);
-			Database.modelAttivita.showAttivitaInserita();
-			
-			dispose();
+
+			else{
+				Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText(), IDViaggio);
+				Database.modelAttivita.showAttivitaInserita();
+
+				dispose();
+			}
 		}
 		if(e.getSource() == this.cancelButton) {
 			dispose();
