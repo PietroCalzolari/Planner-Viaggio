@@ -1,8 +1,6 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -17,9 +15,7 @@ public class Error extends JDialog implements ActionListener{
 	private JButton btnOK;
 	
 	private final JPanel contentPanel = new JPanel();
-	/**
-	 * Create the dialog.
-	 */
+	
 	public Error() {
 		setBounds(100, 100, 409, 185);
 		getContentPane().setLayout(new BorderLayout());

@@ -211,8 +211,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			new Database().run();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 	
 	
@@ -242,25 +241,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 		
 		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnEliminaViaggio) {
-			try {
-				Database.modelViaggio.remove();
-			} catch (IndexOutOfBoundsException ex) {
-				Toolkit.getDefaultToolkit().beep();
-			}
-			//FORSE manca la condizione che l'indice del viaggio sia non negativo
-			if(Database.modelViaggio.getSelectedIndex() < (DBModelViaggio.lv.size() - 1)) {
-				Database.modelViaggio.showItem();
-				if(Database.modelAttivita.getSelectedIndex() >= 0) {
-					Database.modelAttivita.showAttivitaDaViaggio();
-				}
-				else {
-					cleanAttivita();
-				}
-			}
-			else {
-				cleanViaggio();
-				cleanAttivita();
-			}
+			Toolkit.getDefaultToolkit().beep();
+			
 				
 		}
 		
@@ -285,7 +267,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			if(Database.modelViaggio.getSelectedIndex() > 0) {
 				Database.modelViaggio.previous();
 				Database.modelViaggio.showItem();
-				Database.modelAttivita.showAttivitaDaViaggio();
+				Database.modelAttivita.showAttivita();
 			}
 			else {
 				Toolkit.getDefaultToolkit().beep();
@@ -296,59 +278,33 @@ public class ControlPanel extends JFrame implements ActionListener {
 			if(Database.modelViaggio.getSelectedIndex() < DBModelViaggio.lv.size() - 1) {
 				Database.modelViaggio.next();
 				Database.modelViaggio.showItem();
-				Database.modelAttivita.showAttivitaDaViaggio();
+				Database.modelAttivita.showAttivita();
 			}
 			else {
 				Toolkit.getDefaultToolkit().beep();
 			}
 		}
 		
-		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnAttivitaPrecedente) {
-			System.out.println("A" + Database.modelAttivita.getSelectedIndex());
-			System.out.println("V" + Database.modelViaggio.getSelectedIndex());
 	
-		prova:
-			while (Database.modelAttivita.getSelectedIndex() > 0) {
-				Database.modelAttivita.previous();
-				
-				System.out.println("A" + Database.modelAttivita.getSelectedIndex());
-				System.out.println("V" + Database.modelViaggio.getSelectedIndex());
-				
-				if(Database.modelAttivita.getSelectedItem().getIdViaggioA() == Database.modelViaggio.getSelectedItem().getIdViaggio()) {
-					Database.modelAttivita.showAttivitaDaViaggio();
-					break prova;
-				}			
+			if(Database.modelAttivita.getSelectedIndex() > 0) {
+				Database.modelAttivita.showPrecAttivita(Database.modelAttivita.getSelectedIndex());
 			}
-			
-			if(Database.modelAttivita.getSelectedIndex() == 0) {
+			else {
 				Toolkit.getDefaultToolkit().beep();
 			}
+			
 		}		
 		
-		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnAttivitaSuccessiva) {
-		
-			System.out.println("A" + Database.modelAttivita.getSelectedIndex());
-			System.out.println("V" + Database.modelViaggio.getSelectedIndex());
 			
-			prova:
-			while(Database.modelAttivita.getSelectedIndex() < (DBModelAttivita.la.size() - 1)) {
-				Database.modelAttivita.next();
-				
-				System.out.println("A" + Database.modelAttivita.getSelectedIndex());
-				System.out.println("V" + Database.modelViaggio.getSelectedIndex());
-				
-				if(Database.modelAttivita.getSelectedItem().getIdViaggioA() == Database.modelViaggio.getSelectedItem().getIdViaggio()) {
-					Database.modelAttivita.showAttivitaDaViaggio();
-					break prova;
-				}		
+			if(Database.modelAttivita.getSelectedIndex() < (DBModelAttivita.la.size() - 1)) {
+				Database.modelAttivita.showNextAttivita(Database.modelAttivita.getSelectedIndex());		
 			}
-			
-			if(Database.modelAttivita.getSelectedIndex() == (DBModelAttivita.la.size() - 1)) {
+			else {
 				Toolkit.getDefaultToolkit().beep();
-			}
-			
+			}			
 		}
 	}
+	
 }

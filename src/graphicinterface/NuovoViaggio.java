@@ -112,7 +112,6 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 					a.printStackTrace();
 				}
 			}
-			//QUI VANNO AGGIUNTE LE CONDIIZONI SULLE LABEL
 
 			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
 			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
@@ -123,9 +122,6 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 				Database.modelViaggio.showItem();
 				ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
 				ControlPanel.cleanAttivita();
-
-				//stampa l'indice del viaggio corrente, sarà da elimiare una volta terminata l'applicaizone
-				System.out.println(Database.modelViaggio.getSelectedIndex());
 				dispose();
 			}
 		}

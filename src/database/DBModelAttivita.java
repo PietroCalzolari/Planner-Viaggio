@@ -69,7 +69,6 @@ public class DBModelAttivita {
 	}
 	
 	public void removeDaViaggio() {
-		first();
 		
 		try {
 			String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", Database.modelViaggio.getSelectedItem().getIdViaggio());
@@ -101,22 +100,79 @@ public class DBModelAttivita {
 		}
 	}
 	
-	public void showAttivitaDaViaggio() {
+	public void showAttivita() {
+		first();
+		int c = 0;
 		try {
-			String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", Database.modelViaggio.getSelectedItem().getIdViaggio());
-			ResultSet rs = db.executeQuery(query);
+			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
 			
-			ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
-			ControlPanel.lblLuogo.setText(rs.getString("luogo"));
-			ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
-			ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+		prova:
+			while(rs.next()) {			
+				if(Database.modelAttivita.getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
+					ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
+					ControlPanel.lblLuogo.setText(rs.getString("luogo"));
+					ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
+					ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+					c = 1;
+					break prova;
+				}	
+				next();
+			}	
 			
+		if(c == 0) {
+			ControlPanel.cleanAttivita();
+		}
+					
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
+	public void showPrecAttivita(int index) {
+		first();
+		int i = index;
+		try {
+			ResultSet rs = db.executeQuery("SELECT * FROM attivita");		
+			while(rs.next()) {		
+				if(Database.modelAttivita.getSelectedIndex() < index) {
+					if(Database.modelAttivita.getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
+						ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
+						ControlPanel.lblLuogo.setText(rs.getString("luogo"));
+						ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
+						ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+						i = Database.modelAttivita.getSelectedIndex();
+					}
+				}	
+				next();
+			}
+			selectedIndex = i;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void showNextAttivita(int index) {
+		first();
+		try {
+			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
+		
+		prova:	
+			while(rs.next()) {			
+				if(Database.modelAttivita.getSelectedIndex() > index) {
+					if(Database.modelAttivita.getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
+						ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
+						ControlPanel.lblLuogo.setText(rs.getString("luogo"));
+						ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
+						ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+						break prova;
+					}
+				}	
+				next();
+			}				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public void showAttivitaInserita() {
 		try {

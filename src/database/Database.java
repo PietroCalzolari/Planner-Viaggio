@@ -21,6 +21,7 @@ public Database() throws SQLException{
 			db = new DBManager(DBManager.JDBCDriverSQLite, DBManager.JDBCURLSQLite);
 			
 			db.executeQuery("SELECT * FROM utente LIMIT 1");
+			ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS utente");
 			db.executeUpdate("CREATE TABLE utente (" + "idUtente VARCHAR(10) PRIMARY KEY, " + "nome TEXT, " + "cognome TEXT, " + "email TEXT)");
@@ -54,6 +55,9 @@ public Database() throws SQLException{
 		
 		
 		try {
+			
+			//condizione da ricontrollare
+			
 			if(DBModelAttivita.la != null) {
 				ResultSet rsV = db.executeQuery("SELECT * FROM viaggio LIMIT 1");
 				
