@@ -43,15 +43,17 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public static JLabel lblOraInizio;
 	private JLabel lblOraFineBellezza;
 	public static JLabel lblOraFine;
-	private JLabel lblViaggioPrecedenteBellezza2;
-	private JLabel lblViaggioSuccessivoBellezza2;
-	private JLabel lblViaggioSuccessivoBellezza;
 	private JButton btnViaggioPrecedente;
 	private JButton btnViaggioSuccessivo;
-	private JLabel lblViaggioPrecedenteBellezza;
 	private JButton btnAttivitaPrecedente;
 	private JButton btnAttivitaSuccessiva;
-
+	private JLabel lblTrasportoBellezza;
+	private JLabel lblDataPartenzaViaggioBellezza;
+	private JLabel lblDataArrivoViaggioBellezza;
+	private JLabel lblTrasporto;
+	private JLabel lblDataPartenzaViaggio;
+	private JLabel lblDataArrivoViaggio;
+	
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
 		setBackground(Color.WHITE);
@@ -107,13 +109,13 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblViaggio = new JLabel("");
 		lblViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
-		lblViaggio.setBounds(30, 78, 188, 77);
+		lblViaggio.setBounds(42, 67, 169, 48);
 		panelViaggio.add(lblViaggio);
 
 		lblTitoloViaggioBellezza = new JLabel("VIAGGIO");
 		lblTitoloViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
 		lblTitoloViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitoloViaggioBellezza.setBounds(10, 11, 194, 41);
+		lblTitoloViaggioBellezza.setBounds(30, 11, 194, 41);
 		panelViaggio.add(lblTitoloViaggioBellezza);
 		
 		btnViaggioPrecedente = new JButton("<");
@@ -128,25 +130,47 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnViaggioSuccessivo.setBounds(148, 296, 70, 54);
 		panelViaggio.add(btnViaggioSuccessivo);
 		
-		lblViaggioPrecedenteBellezza = new JLabel("Viaggio");
-		lblViaggioPrecedenteBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggioPrecedenteBellezza.setBounds(42, 224, 50, 41);
-		panelViaggio.add(lblViaggioPrecedenteBellezza);
+		//QUESTA LABEL E' SOLO PER BELLEZZA, VA LASCIATA COSI'
+		lblTrasportoBellezza = new JLabel("Trasporto");
+		lblTrasportoBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
+		lblTrasportoBellezza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTrasportoBellezza.setBounds(30, 134, 95, 22);
+		panelViaggio.add(lblTrasportoBellezza);
 		
-		lblViaggioPrecedenteBellezza2 = new JLabel("Precedente");
-		lblViaggioPrecedenteBellezza2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggioPrecedenteBellezza2.setBounds(30, 244, 70, 41);
-		panelViaggio.add(lblViaggioPrecedenteBellezza2);
+		//QUESTA LABEL E' SOLO PER BELLEZZA, VA LASCIATA COSI'
+		lblDataPartenzaViaggioBellezza = new JLabel("Dal");
+		lblDataPartenzaViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDataPartenzaViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
+		lblDataPartenzaViaggioBellezza.setBounds(30, 167, 95, 22);
+		panelViaggio.add(lblDataPartenzaViaggioBellezza);
 		
-		lblViaggioSuccessivoBellezza2 = new JLabel("Successivo");
-		lblViaggioSuccessivoBellezza2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggioSuccessivoBellezza2.setBounds(148, 244, 70, 41);
-		panelViaggio.add(lblViaggioSuccessivoBellezza2);
+		//QUESTA LABEL E' SOLO PER BELLEZZA, VA LASCIATA COSI'
+		lblDataArrivoViaggioBellezza = new JLabel("Al");
+		lblDataArrivoViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDataArrivoViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
+		lblDataArrivoViaggioBellezza.setBounds(30, 200, 95, 22);
+		panelViaggio.add(lblDataArrivoViaggioBellezza);
 		
-		lblViaggioSuccessivoBellezza = new JLabel("Viaggio");
-		lblViaggioSuccessivoBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggioSuccessivoBellezza.setBounds(160, 224, 50, 41);
-		panelViaggio.add(lblViaggioSuccessivoBellezza);
+		//QUI VA CANCELLATA LA PAROLA "Treno" E CI VA MESSO IL GIUSTO MEZZO DI TRASPORTO DAL DB
+		lblTrasporto = new JLabel("Treno");
+		lblTrasporto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTrasporto.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
+		lblTrasporto.setBounds(148, 134, 95, 22);
+		panelViaggio.add(lblTrasporto);
+		
+		//QUI VA CANCELLATA LA DATA E CI VA MESSA LA DATA DI INIZIO DEL VIAGGIO DAL DB
+		lblDataPartenzaViaggio = new JLabel("00/00/0000");
+		lblDataPartenzaViaggio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDataPartenzaViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
+		lblDataPartenzaViaggio.setBounds(148, 167, 95, 22);
+		panelViaggio.add(lblDataPartenzaViaggio);
+		
+		//QUI VA CANCELLATA LA DATA E CI VA MESSA LA DATA DI ARRIVO DEL VIAGGIO DAL DB
+		lblDataArrivoViaggio = new JLabel("11/11/1111");
+		lblDataArrivoViaggio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDataArrivoViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
+		lblDataArrivoViaggio.setBounds(148, 200, 95, 22);
+		panelViaggio.add(lblDataArrivoViaggio);
 
 		lblCiao = new JLabel("");
 		lblCiao.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
@@ -306,5 +330,4 @@ public class ControlPanel extends JFrame implements ActionListener {
 			}			
 		}
 	}
-	
 }
