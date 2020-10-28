@@ -57,7 +57,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public static JLabel lblNumeroAttivitaTotali;
 	private JLabel lblBarraViaggi;	
 	private JLabel lblBarraAttivita;
-	
+
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
 		setBackground(Color.WHITE);
@@ -123,70 +123,70 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblTitoloViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitoloViaggioBellezza.setBounds(30, 32, 194, 41);
 		panelViaggio.add(lblTitoloViaggioBellezza);
-		
+
 		btnViaggioPrecedente = new JButton("<");
 		btnViaggioPrecedente.addActionListener(this);
 		btnViaggioPrecedente.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnViaggioPrecedente.setBounds(30, 296, 55, 40);
 		panelViaggio.add(btnViaggioPrecedente);
-		
+
 		btnViaggioSuccessivo = new JButton(">");
 		btnViaggioSuccessivo.addActionListener(this);
 		btnViaggioSuccessivo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnViaggioSuccessivo.setBounds(148, 296, 55, 40);
 		panelViaggio.add(btnViaggioSuccessivo);
-		
+
 		lblTrasportoBellezza = new JLabel("Trasporto:");
 		lblTrasportoBellezza.setForeground(Color.DARK_GRAY);
 		lblTrasportoBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblTrasportoBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTrasportoBellezza.setBounds(30, 157, 95, 22);
 		panelViaggio.add(lblTrasportoBellezza);
-		
+
 		lblDataPartenzaViaggioBellezza = new JLabel("Partenza:");
 		lblDataPartenzaViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
 		lblDataPartenzaViaggioBellezza.setBounds(30, 203, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggioBellezza);
-		
+
 		lblDataRitornoViaggioBellezza = new JLabel("Ritorno:");
 		lblDataRitornoViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataRitornoViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
 		lblDataRitornoViaggioBellezza.setBounds(30, 236, 95, 22);
 		panelViaggio.add(lblDataRitornoViaggioBellezza);
-		
+
 		lblTrasporto = new JLabel("");
 		lblTrasporto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblViaggio.setForeground(Color.DARK_GRAY);
 		lblTrasporto.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblTrasporto.setBounds(148, 157, 95, 22);
 		panelViaggio.add(lblTrasporto);
-		
+
 		lblDataPartenzaViaggio = new JLabel("");
 		lblDataPartenzaViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
 		lblDataPartenzaViaggio.setBounds(148, 203, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggio);
-		
+
 		lblDataRitornoViaggio = new JLabel("");
 		lblDataRitornoViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataRitornoViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
 		lblDataRitornoViaggio.setBounds(148, 236, 95, 22);
 		panelViaggio.add(lblDataRitornoViaggio);
-		
+
 		//METTERE L'INDICE GIUSTO DEL VIAGGIO IN CUI SI E'
 		lblIndiceViaggio = new JLabel("1");
 		lblIndiceViaggio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblIndiceViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIndiceViaggio.setBounds(89, 296, 22, 29);
 		panelViaggio.add(lblIndiceViaggio);
-		
+
 		lblBarraViaggi = new JLabel("/");
 		lblBarraViaggi.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblBarraViaggi.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraViaggi.setBounds(103, 296, 22, 29);
 		panelViaggio.add(lblBarraViaggi);
-		
+
 		//METTERE IL NUMERO GIUSTO DI VIAGGI TOTALI DAL DB
 		lblNumeroViaggiTotali = new JLabel("1");
 		lblNumeroViaggiTotali.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -243,85 +243,85 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblOraFine.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblOraFine.setBounds(321, 266, 113, 35);
 		panel_1.add(lblOraFine);
-		
+
 		btnAttivitaPrecedente = new JButton("<");
 		btnAttivitaPrecedente.addActionListener(this);
 		btnAttivitaPrecedente.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnAttivitaPrecedente.setBounds(115, 358, 55, 40);
 		panel_1.add(btnAttivitaPrecedente);
-		
+
 		btnAttivitaSuccessiva = new JButton(">");
 		btnAttivitaSuccessiva.addActionListener(this);
 		btnAttivitaSuccessiva.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnAttivitaSuccessiva.setBounds(364, 358, 55, 40);
 		panel_1.add(btnAttivitaSuccessiva);
-		
+
 		//METTERE IL NUMERO GIUSTO DI ATTIVITA IN CUI SI E'
 		lblIndiceAttivita = new JLabel("1");
 		lblIndiceAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIndiceAttivita.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblIndiceAttivita.setBounds(232, 358, 22, 29);
 		panel_1.add(lblIndiceAttivita);
-		
+
 		lblBarraAttivita = new JLabel("/");
 		lblBarraAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraAttivita.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblBarraAttivita.setBounds(264, 358, 22, 29);
 		panel_1.add(lblBarraAttivita);
-		
+
 		//METTERE IL NUMERO GIUSTO DI ATTIVITA TOTALI DAL DB
 		lblNumeroAttivitaTotali = new JLabel("1");
 		lblNumeroAttivitaTotali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumeroAttivitaTotali.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNumeroAttivitaTotali.setBounds(306, 358, 22, 29);
 		panel_1.add(lblNumeroAttivitaTotali);
-	
-		
+
+
 		try {
 			new Database().run();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 	}
-	
-	
+
+
 	public static void cleanAttivita() {
 		lblAttivita.setText("");
 		lblLuogo.setText("");
 		lblOraInizio.setText("");
 		lblOraFine.setText("");
-		
+
 		lblLuogoBellezza.setVisible(false);
 		lblOraInizioBellezza.setVisible(false);
 		lblOraFineBellezza.setVisible(false);
 	}
-	
+
 	public static void showLabelAttivitaBellezza() {
 		lblLuogoBellezza.setVisible(true);
 		lblOraInizioBellezza.setVisible(true);
 		lblOraFineBellezza.setVisible(true);	
 	}
-	
+
 	public static void cleanViaggio() {
 		lblViaggio.setText("");
 		lblTrasporto.setText("");
 		lblDataPartenzaViaggio.setText("");
 		lblDataRitornoViaggio.setText("");
-		
+
 		lblTrasportoBellezza.setVisible(false);
 		lblDataPartenzaViaggioBellezza.setVisible(false);
 		lblDataRitornoViaggioBellezza.setVisible(false);		
 	}
-	
+
 	public static void showLabelViaggioBellezza() {
 		lblTrasportoBellezza.setVisible(true);
 		lblDataPartenzaViaggioBellezza.setVisible(true);
 		lblDataRitornoViaggioBellezza.setVisible(true);		
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if(e.getSource() == this.btnAggViaggio) {
 			try {
 				NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
@@ -331,12 +331,27 @@ public class ControlPanel extends JFrame implements ActionListener {
 				a.printStackTrace();
 			}
 		}
-		
+
 		if(e.getSource() == this.btnEliminaViaggio) {
 			Database.modelViaggio.remove();	
 		}
-		
+
 		if(e.getSource() == this.btnAggAttivita) {
+
+			/*FARE LA CONDIZIONE DELL'IF COSI:
+			if(non ci sono viaggi nel db){
+					try {
+							ErroreNuovaAttivita dialog = new ErroreNuovaAttivita();
+							dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							dialog.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+			}
+			SE QUESTA COSA NON AVVIENE ALLORA SI FA IL RESTO TUTTO NORMALE. QUINDI QUANDO HAI FINITO DI FARE
+			QUESTO IF BASTA AGGIUNGERE UN ELSE E METTERE TRA PARENTESI GRAFFE TUTTE CIò CHE C'é QUI SOTTO FINO
+			AL BOTTONE SUCCESSIVO, CIOè FINO ALLA RIGA PRIMA DI	"if(e.getSource() == this.btnEliminaAttivita) {"
+			*/
 			try {
 				NuovaAttivita dialog = new NuovaAttivita(Database.modelViaggio.getSelectedItem().getIdViaggio());
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -345,11 +360,11 @@ public class ControlPanel extends JFrame implements ActionListener {
 				a.printStackTrace();
 			}
 		}
-		
+
 		if(e.getSource() == this.btnEliminaAttivita) {	
 			Database.modelAttivita.remove();
 		}
-		
+
 		if(e.getSource() == this.btnViaggioPrecedente) {
 			if(Database.modelViaggio.getSelectedIndex() > 0) {
 				Database.modelViaggio.previous();
@@ -360,7 +375,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				Toolkit.getDefaultToolkit().beep();
 			}
 		}
-		
+
 		if(e.getSource() == this.btnViaggioSuccessivo) {
 			if(Database.modelViaggio.getSelectedIndex() < DBModelViaggio.lv.size() - 1) {
 				Database.modelViaggio.next();
@@ -371,7 +386,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				Toolkit.getDefaultToolkit().beep();
 			}
 		}
-		
+
 		if(e.getSource() == this.btnAttivitaPrecedente) {
 			if(Database.modelAttivita.getSelectedIndex() > 0) {
 				Database.modelAttivita.showPrecAttivita(Database.modelAttivita.getSelectedIndex());
@@ -380,7 +395,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 				Toolkit.getDefaultToolkit().beep();
 			}	
 		}		
-		
+
 		if(e.getSource() == this.btnAttivitaSuccessiva) {
 			if(Database.modelAttivita.getSelectedIndex() < (DBModelAttivita.la.size() - 1)) {
 				Database.modelAttivita.showNextAttivita(Database.modelAttivita.getSelectedIndex());		
