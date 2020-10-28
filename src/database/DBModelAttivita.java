@@ -1,5 +1,6 @@
 package database;
 
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -69,14 +70,25 @@ public class DBModelAttivita {
 	}
 	
 	public void removeDaViaggio() {
+		first();
 		
 		try {
-			String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", Database.modelViaggio.getSelectedItem().getIdViaggio());
-			ResultSet rs = db.executeQuery(query);
-			while (rs.next()) {
-				String queryDelete = String.format("DELETE FROM attivita WHERE idAttivita='%s'", rs.getString("idAttivita"));
-				db.executeUpdate(queryDelete);	
-				la.remove(selectedIndex);
+			String queryDelete = String.format("DELETE FROM attivita WHERE idViaggio='%s'", Database.modelViaggio.getSelectedItem().getIdViaggio());
+			db.executeUpdate(queryDelete);	
+			
+			while(selectedIndex < la.size()) {
+				if(la.get(selectedIndex).getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {
+					la.remove(selectedIndex);
+					continue;
+				}
+				next();
+				
+				if(selectedIndex == (la.size() - 1)) {
+					if(la.get(selectedIndex).getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {
+						la.remove(selectedIndex);
+					}
+					break;
+				}
 			}	
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
@@ -85,16 +97,58 @@ public class DBModelAttivita {
 		}
 		
 		last();
+		ControlPanel.cleanAttivita();
 	}
 	
 	public void remove() {
+		int index, returnIndex;
 		try {
-			String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
-			db.executeUpdate(query);
-			la.remove(selectedIndex);
-			previous();
+			
+			if(getSelectedIndex() < (la.size() - 1)) {
+				index = getSelectedIndex();
+				showNextAttivita(getSelectedIndex());
+				returnIndex = getSelectedIndex();
+				
+				if(getSelectedItem().getIdViaggioA().toString().equals(la.get(index).getIdViaggioA().toString())) {		
+					selectedIndex = index;
+					String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
+					db.executeUpdate(query);
+					la.remove(selectedIndex);
+					selectedIndex = returnIndex - 1;
+					return;
+				}
+				selectedIndex = index;
+			}
+			
+			if(getSelectedIndex() > 0) {
+				index = getSelectedIndex();
+				showPrecAttivita(getSelectedIndex());
+				returnIndex = getSelectedIndex();
+				
+				if((index != getSelectedIndex()) && getSelectedItem().getIdViaggioA().toString().equals(la.get(index).getIdViaggioA().toString())) {	
+					selectedIndex = index;
+					
+					String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
+					db.executeUpdate(query);
+					la.remove(selectedIndex);
+					selectedIndex = returnIndex;
+					return;
+				}
+				selectedIndex = index;
+				
+				String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
+				db.executeUpdate(query);
+				la.remove(selectedIndex);
+				ControlPanel.cleanAttivita();
+			}else {
+				String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
+				db.executeUpdate(query);
+				la.remove(selectedIndex);
+				ControlPanel.cleanAttivita();
+			}
+			
 		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();
+			Toolkit.getDefaultToolkit().beep();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -108,7 +162,7 @@ public class DBModelAttivita {
 			
 		prova:
 			while(rs.next()) {			
-				if(Database.modelAttivita.getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
+				if(getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
 					ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
 					ControlPanel.lblLuogo.setText(rs.getString("luogo"));
 					ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
@@ -118,6 +172,8 @@ public class DBModelAttivita {
 				}	
 				next();
 			}	
+			
+		ControlPanel.showLabelAttivitaBellezza();
 			
 		if(c == 0) {
 			ControlPanel.cleanAttivita();
@@ -134,13 +190,13 @@ public class DBModelAttivita {
 		try {
 			ResultSet rs = db.executeQuery("SELECT * FROM attivita");		
 			while(rs.next()) {		
-				if(Database.modelAttivita.getSelectedIndex() < index) {
-					if(Database.modelAttivita.getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
+				if(getSelectedIndex() < index) {
+					if(getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
 						ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
 						ControlPanel.lblLuogo.setText(rs.getString("luogo"));
 						ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
 						ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
-						i = Database.modelAttivita.getSelectedIndex();
+						i = getSelectedIndex();
 					}
 				}	
 				next();
@@ -157,9 +213,9 @@ public class DBModelAttivita {
 			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
 		
 		prova:	
-			while(rs.next()) {			
-				if(Database.modelAttivita.getSelectedIndex() > index) {
-					if(Database.modelAttivita.getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
+			while(rs.next()) {	
+				if(getSelectedIndex() > index) {
+					if(getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {		
 						ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
 						ControlPanel.lblLuogo.setText(rs.getString("luogo"));
 						ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
@@ -168,7 +224,8 @@ public class DBModelAttivita {
 					}
 				}	
 				next();
-			}				
+			}
+			ControlPanel.showLabelAttivitaBellezza();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -183,6 +240,7 @@ public class DBModelAttivita {
 			ControlPanel.lblLuogo.setText(rs.getString("luogo"));
 			ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
 			ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+			ControlPanel.showLabelAttivitaBellezza();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

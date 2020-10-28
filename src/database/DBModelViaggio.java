@@ -1,5 +1,6 @@
 package database;
 
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -79,8 +80,12 @@ public class DBModelViaggio {
 			db.executeUpdate(query);
 			lv.remove(selectedIndex);
 			previous();
+			showItem();
+			Database.modelAttivita.showAttivita();
 		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();
+			last();
+			ControlPanel.cleanViaggio();
+			Toolkit.getDefaultToolkit().beep();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -93,7 +98,9 @@ public class DBModelViaggio {
 			ResultSet rs = db.executeQuery(query);
 			
 			ControlPanel.lblViaggio.setText(rs.getString("nomeViaggio"));
-			
+			ControlPanel.lblTrasporto.setText(rs.getString("mezzo"));
+			ControlPanel.lblDataPartenzaViaggio.setText(rs.getString("partenza"));
+			ControlPanel.lblDataRitornoViaggio.setText(rs.getString("ritorno"));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

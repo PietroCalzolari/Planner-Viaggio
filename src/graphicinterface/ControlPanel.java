@@ -12,8 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
 import database.DBModelAttivita;
 import database.DBModelViaggio;
 import database.Database;
@@ -37,22 +35,22 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JLabel lblTitoloViaggioBellezza;
 	private JLabel lblTitoloAttivitaBellezza;
 	public static JLabel lblAttivita;
-	private JLabel lblLuogoBellezza;
+	private static JLabel lblLuogoBellezza;
 	public static JLabel lblLuogo;
-	private JLabel lblOraInizioBellezza;
+	private static JLabel lblOraInizioBellezza;
 	public static JLabel lblOraInizio;
-	private JLabel lblOraFineBellezza;
+	private static JLabel lblOraFineBellezza;
 	public static JLabel lblOraFine;
 	private JButton btnViaggioPrecedente;
 	private JButton btnViaggioSuccessivo;
 	private JButton btnAttivitaPrecedente;
 	private JButton btnAttivitaSuccessiva;
-	private JLabel lblTrasportoBellezza;
-	private JLabel lblDataPartenzaViaggioBellezza;
-	private JLabel lblDataArrivoViaggioBellezza;
-	private JLabel lblTrasporto;
-	private JLabel lblDataPartenzaViaggio;
-	private JLabel lblDataArrivoViaggio;
+	private static JLabel lblTrasportoBellezza;
+	private static JLabel lblDataPartenzaViaggioBellezza;
+	private static JLabel lblDataRitornoViaggioBellezza;
+	public static JLabel lblTrasporto;
+	public static JLabel lblDataPartenzaViaggio;
+	public static JLabel lblDataRitornoViaggio;
 	
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
@@ -65,9 +63,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 		contentPane.setLayout(null);
 
 		panelViaggio = new JPanel();
-		panelViaggio.setBorder(new LineBorder(Color.GRAY));
-		panelViaggio.setBackground(Color.ORANGE);
-		panelViaggio.setBounds(0, 0, 259, 463);
+		panelViaggio.setBackground(new Color(255, 165, 0));
+		panelViaggio.setBounds(0, 0, 259, 478);
 		contentPane.add(panelViaggio);
 		panelViaggio.setLayout(null);
 
@@ -75,27 +72,27 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAggViaggio.setForeground(Color.BLACK);
 		btnAggViaggio.setBackground(Color.WHITE);
 		btnAggViaggio.addActionListener(this);
-		btnAggViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
-		btnAggViaggio.setBounds(30, 369, 188, 29);
+		btnAggViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		btnAggViaggio.setBounds(30, 369, 188, 30);
 		panelViaggio.add(btnAggViaggio);
 
 		btnEliminaViaggio = new JButton("Elimina Viaggio");
 		btnEliminaViaggio.addActionListener(this);
 		btnEliminaViaggio.setForeground(Color.BLACK);
-		btnEliminaViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
+		btnEliminaViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		btnEliminaViaggio.setBackground(Color.WHITE);
-		btnEliminaViaggio.setBounds(30, 423, 188, 29);
+		btnEliminaViaggio.setBounds(30, 423, 188, 30);
 		panelViaggio.add(btnEliminaViaggio);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(128, 128, 128)));
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(256, 0, 541, 463);
+		panel_1.setBounds(258, 0, 542, 478);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
 		btnAggAttivita = new JButton("Aggiungi Attivita'");
 		btnAggAttivita.addActionListener(this);
+		btnAggAttivita.setVerticalAlignment(SwingConstants.CENTER);
 		btnAggAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 13));
 		btnAggAttivita.setBounds(66, 423, 188, 29);
 		panel_1.add(btnAggAttivita);
@@ -107,86 +104,88 @@ public class ControlPanel extends JFrame implements ActionListener {
 		panel_1.add(btnEliminaAttivita);
 
 		lblViaggio = new JLabel("");
+		//lblViaggio.setForeground(Color.DARK_GRAY);
+		lblViaggio.setForeground(Color.BLACK);
 		lblViaggio.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggio.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 17));
-		lblViaggio.setBounds(42, 67, 169, 48);
+		lblViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 24));
+		lblViaggio.setBounds(42, 80, 169, 40);
 		panelViaggio.add(lblViaggio);
 
-		lblTitoloViaggioBellezza = new JLabel("VIAGGIO");
-		lblTitoloViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
+		lblTitoloViaggioBellezza = new JLabel("V I A G G I O");
+		lblTitoloViaggioBellezza.setForeground(Color.WHITE);
+		lblTitoloViaggioBellezza.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
 		lblTitoloViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitoloViaggioBellezza.setBounds(30, 11, 194, 41);
+		lblTitoloViaggioBellezza.setBounds(30, 32, 194, 41);
 		panelViaggio.add(lblTitoloViaggioBellezza);
 		
 		btnViaggioPrecedente = new JButton("<");
 		btnViaggioPrecedente.addActionListener(this);
 		btnViaggioPrecedente.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		btnViaggioPrecedente.setBounds(30, 296, 70, 54);
+		btnViaggioPrecedente.setBounds(30, 296, 55, 40);
 		panelViaggio.add(btnViaggioPrecedente);
 		
 		btnViaggioSuccessivo = new JButton(">");
 		btnViaggioSuccessivo.addActionListener(this);
 		btnViaggioSuccessivo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		btnViaggioSuccessivo.setBounds(148, 296, 70, 54);
+		btnViaggioSuccessivo.setBounds(148, 296, 55, 40);
 		panelViaggio.add(btnViaggioSuccessivo);
 		
-		//QUESTA LABEL E' SOLO PER BELLEZZA, VA LASCIATA COSI'
-		lblTrasportoBellezza = new JLabel("Trasporto");
-		lblTrasportoBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
+		lblTrasportoBellezza = new JLabel("Trasporto:");
+		lblTrasportoBellezza.setForeground(Color.DARK_GRAY);
+		lblTrasportoBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblTrasportoBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTrasportoBellezza.setBounds(30, 134, 95, 22);
+		lblTrasportoBellezza.setBounds(30, 145, 95, 22);
 		panelViaggio.add(lblTrasportoBellezza);
 		
-		//QUESTA LABEL E' SOLO PER BELLEZZA, VA LASCIATA COSI'
-		lblDataPartenzaViaggioBellezza = new JLabel("Dal");
+		lblDataPartenzaViaggioBellezza = new JLabel("Partenza:");
 		lblDataPartenzaViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
-		lblDataPartenzaViaggioBellezza.setBounds(30, 167, 95, 22);
+		lblDataPartenzaViaggioBellezza.setBounds(30, 175, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggioBellezza);
 		
-		//QUESTA LABEL E' SOLO PER BELLEZZA, VA LASCIATA COSI'
-		lblDataArrivoViaggioBellezza = new JLabel("Al");
-		lblDataArrivoViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDataArrivoViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
-		lblDataArrivoViaggioBellezza.setBounds(30, 200, 95, 22);
-		panelViaggio.add(lblDataArrivoViaggioBellezza);
+		lblDataRitornoViaggioBellezza = new JLabel("Ritorno:");
+		lblDataRitornoViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDataRitornoViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
+		lblDataRitornoViaggioBellezza.setBounds(30, 205, 95, 22);
+		panelViaggio.add(lblDataRitornoViaggioBellezza);
 		
-		//QUI VA CANCELLATA LA PAROLA "Treno" E CI VA MESSO IL GIUSTO MEZZO DI TRASPORTO DAL DB
-		lblTrasporto = new JLabel("Treno");
+		lblTrasporto = new JLabel("");
 		lblTrasporto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTrasporto.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
-		lblTrasporto.setBounds(148, 134, 95, 22);
+		lblViaggio.setForeground(Color.DARK_GRAY);
+		lblTrasporto.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblTrasporto.setBounds(148, 145, 95, 22);
 		panelViaggio.add(lblTrasporto);
 		
-		//QUI VA CANCELLATA LA DATA E CI VA MESSA LA DATA DI INIZIO DEL VIAGGIO DAL DB
-		lblDataPartenzaViaggio = new JLabel("00/00/0000");
+		lblDataPartenzaViaggio = new JLabel("");
 		lblDataPartenzaViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
-		lblDataPartenzaViaggio.setBounds(148, 167, 95, 22);
+		lblDataPartenzaViaggio.setBounds(148, 175, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggio);
 		
-		//QUI VA CANCELLATA LA DATA E CI VA MESSA LA DATA DI ARRIVO DEL VIAGGIO DAL DB
-		lblDataArrivoViaggio = new JLabel("11/11/1111");
-		lblDataArrivoViaggio.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDataArrivoViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
-		lblDataArrivoViaggio.setBounds(148, 200, 95, 22);
-		panelViaggio.add(lblDataArrivoViaggio);
+		lblDataRitornoViaggio = new JLabel("");
+		lblDataRitornoViaggio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDataRitornoViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
+		lblDataRitornoViaggio.setBounds(148, 205, 95, 22);
+		panelViaggio.add(lblDataRitornoViaggio);
 
 		lblCiao = new JLabel("");
-		lblCiao.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblCiao.setBounds(359, 11, 143, 40);
+		lblCiao.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 13));
+		lblCiao.setBounds(390, 10, 143, 20);
 		panel_1.add(lblCiao);
 
-		lblTitoloAttivitaBellezza = new JLabel("ATTIVITA'");
+		lblTitoloAttivitaBellezza = new JLabel("A T T I V I T A'");
+		lblTitoloAttivitaBellezza.setForeground(new Color(255, 165, 0));
 		lblTitoloAttivitaBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitoloAttivitaBellezza.setFont(new Font("Comic Sans MS", Font.BOLD, 19));
-		lblTitoloAttivitaBellezza.setBounds(60, 11, 194, 41);
+		lblTitoloAttivitaBellezza.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
+		//centro a 271
+		lblTitoloAttivitaBellezza.setBounds(174, 32, 194, 41);
 		panel_1.add(lblTitoloAttivitaBellezza);
 
 		lblAttivita = new JLabel("");
+		lblAttivita.setForeground(Color.DARK_GRAY);
 		lblAttivita.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblAttivita.setBounds(60, 63, 197, 73);
+		lblAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 20));
+		lblAttivita.setBounds(172, 100, 197, 40);
 		panel_1.add(lblAttivita);
 
 		lblLuogoBellezza = new JLabel("Luogo");
@@ -222,14 +221,15 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAttivitaPrecedente = new JButton("<");
 		btnAttivitaPrecedente.addActionListener(this);
 		btnAttivitaPrecedente.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		btnAttivitaPrecedente.setBounds(115, 358, 70, 54);
+		btnAttivitaPrecedente.setBounds(115, 358, 55, 40);
 		panel_1.add(btnAttivitaPrecedente);
 		
 		btnAttivitaSuccessiva = new JButton(">");
 		btnAttivitaSuccessiva.addActionListener(this);
 		btnAttivitaSuccessiva.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		btnAttivitaSuccessiva.setBounds(364, 358, 70, 54);
+		btnAttivitaSuccessiva.setBounds(364, 358, 55, 40);
 		panel_1.add(btnAttivitaSuccessiva);
+	
 		
 		try {
 			new Database().run();
@@ -244,10 +244,33 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblLuogo.setText("");
 		lblOraInizio.setText("");
 		lblOraFine.setText("");
+		
+		lblLuogoBellezza.setVisible(false);
+		lblOraInizioBellezza.setVisible(false);
+		lblOraFineBellezza.setVisible(false);
+	}
+	
+	public static void showLabelAttivitaBellezza() {
+		lblLuogoBellezza.setVisible(true);
+		lblOraInizioBellezza.setVisible(true);
+		lblOraFineBellezza.setVisible(true);	
 	}
 	
 	public static void cleanViaggio() {
-		lblViaggio.setText("Aggiungi un viaggio!");
+		lblViaggio.setText("");
+		lblTrasporto.setText("");
+		lblDataPartenzaViaggio.setText("");
+		lblDataRitornoViaggio.setText("");
+		
+		lblTrasportoBellezza.setVisible(false);
+		lblDataPartenzaViaggioBellezza.setVisible(false);
+		lblDataRitornoViaggioBellezza.setVisible(false);		
+	}
+	
+	public static void showLabelViaggioBellezza() {
+		lblTrasportoBellezza.setVisible(true);
+		lblDataPartenzaViaggioBellezza.setVisible(true);
+		lblDataRitornoViaggioBellezza.setVisible(true);		
 	}
 	
 	@Override
@@ -263,11 +286,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 			}
 		}
 		
-		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnEliminaViaggio) {
-			Toolkit.getDefaultToolkit().beep();
-			
-				
+			Database.modelViaggio.remove();	
 		}
 		
 		if(e.getSource() == this.btnAggAttivita) {
@@ -280,11 +300,8 @@ public class ControlPanel extends JFrame implements ActionListener {
 			}
 		}
 		
-		//ANCORA NON FUNZIONA
 		if(e.getSource() == this.btnEliminaAttivita) {	
-			Toolkit.getDefaultToolkit().beep();
-			//Database.modelAttivita.remove();
-			//mostrare a video la nuova attivita' o le label vuote se non ci sono attività
+			Database.modelAttivita.remove();
 		}
 		
 		if(e.getSource() == this.btnViaggioPrecedente) {
@@ -310,18 +327,15 @@ public class ControlPanel extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource() == this.btnAttivitaPrecedente) {
-	
 			if(Database.modelAttivita.getSelectedIndex() > 0) {
 				Database.modelAttivita.showPrecAttivita(Database.modelAttivita.getSelectedIndex());
 			}
 			else {
 				Toolkit.getDefaultToolkit().beep();
-			}
-			
+			}	
 		}		
 		
 		if(e.getSource() == this.btnAttivitaSuccessiva) {
-			
 			if(Database.modelAttivita.getSelectedIndex() < (DBModelAttivita.la.size() - 1)) {
 				Database.modelAttivita.showNextAttivita(Database.modelAttivita.getSelectedIndex());		
 			}

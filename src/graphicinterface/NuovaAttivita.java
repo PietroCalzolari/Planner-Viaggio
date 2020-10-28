@@ -1,6 +1,8 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -32,10 +34,11 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 
 	public NuovaAttivita(UUID IDViaggio) {
 		this.IDViaggio = IDViaggio;
-
+	
 		setBounds(100, 100, 559, 372);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
@@ -59,7 +62,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		lblNuovaAttivita.setBounds(25, 11, 496, 53);
 		contentPanel.add(lblNuovaAttivita);
 
-		lblNomeAttivita = new JLabel("Nome Attivit�");
+		lblNomeAttivita = new JLabel("Nome Attivita'");
 		lblNomeAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		lblNomeAttivita.setBounds(71, 60, 136, 35);
 		contentPanel.add(lblNomeAttivita);
@@ -102,7 +105,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
 		if(e.getSource() == this.okButton) {
 			if((textFieldNomeAttivita.getText().length() == 0) || (textFieldOraFine.getText().length() == 0) || (textFieldOraInizio.getText().length() == 0) || (textFieldLuogo.getText().length() == 0)) {
 				try {
@@ -113,14 +116,12 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 					a.printStackTrace();
 				}
 			}
-			//QUI VANNO AGGIUNTE LE CONDIIZONI SULLE LABEL
 			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
 			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
 
 			else{
 				Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText(), IDViaggio);
 				Database.modelAttivita.showAttivitaInserita();
-
 				dispose();
 			}
 		}
