@@ -1,6 +1,8 @@
 package graphicinterface;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -22,21 +24,22 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	private JButton cancelButton;
 	private JTextField textFieldNomeViaggio;
 	private JTextField textFieldTrasporto;
-	private JTextField textFieldArrivo;
+	private JTextField textFieldRitorno;
 	private JTextField textFieldPartenza;
 	private UUID IDViaggio;
 	private JLabel lblCreazioneViaggio;
 	private JLabel lblNomeViaggio;
 	private JLabel lblMezzo;
 	private JLabel lblPartenza;
-	private JLabel lblArrivo;
+	private JLabel lblRitorno;
 
 	public NuovoViaggio(UUID IDViaggio) {
 		this.IDViaggio = IDViaggio;
-
+		
 		setBounds(100, 100, 559, 372);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
@@ -73,10 +76,10 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		lblPartenza.setBounds(53, 146, 160, 36);
 		contentPanel.add(lblPartenza);
 
-		lblArrivo = new JLabel("Data di Arrivo");
-		lblArrivo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblArrivo.setBounds(303, 146, 141, 36);
-		contentPanel.add(lblArrivo);
+		lblRitorno = new JLabel("Data di Ritorno");
+		lblRitorno.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		lblRitorno.setBounds(303, 146, 141, 36);
+		contentPanel.add(lblRitorno);
 
 		textFieldNomeViaggio = new JTextField();
 		textFieldNomeViaggio.setColumns(10);
@@ -88,10 +91,10 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		textFieldTrasporto.setBounds(303, 108, 136, 35);
 		contentPanel.add(textFieldTrasporto);
 
-		textFieldArrivo = new JTextField();
-		textFieldArrivo.setColumns(10);
-		textFieldArrivo.setBounds(303, 193, 136, 35);
-		contentPanel.add(textFieldArrivo);
+		textFieldRitorno = new JTextField();
+		textFieldRitorno.setColumns(10);
+		textFieldRitorno.setBounds(303, 193, 136, 35);
+		contentPanel.add(textFieldRitorno);
 
 		textFieldPartenza = new JTextField();
 		textFieldPartenza.setColumns(10);
@@ -103,7 +106,7 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.okButton) {
-			if((textFieldPartenza.getText().length() == 0) || (textFieldArrivo.getText().length() == 0) || (textFieldTrasporto.getText().length() == 0) || (textFieldNomeViaggio.getText().length() == 0)) {
+			if((textFieldPartenza.getText().length() == 0) || (textFieldRitorno.getText().length() == 0) || (textFieldTrasporto.getText().length() == 0) || (textFieldNomeViaggio.getText().length() == 0)) {
 				try {
 					Error dialog = new Error();
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -116,16 +119,24 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
 			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
 
-			//VANNO AGGIUNTE LE TEXTFIELD NELL'INTERFACCIA GRAFICA PER MOSTRARE LE CARATTERISTICHE DEL VIAGGIO (MEZZO, DATA INIIO E DATA FINE)
 			else {
-				Database.modelViaggio.insert(IDViaggio, textFieldNomeViaggio.getText(),textFieldTrasporto.getText(),textFieldArrivo.getText(),textFieldPartenza.getText());
+				Database.modelViaggio.insert(IDViaggio, textFieldNomeViaggio.getText(),textFieldTrasporto.getText(),textFieldRitorno.getText(),textFieldPartenza.getText());
 				Database.modelViaggio.showItem();
 				ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
-				ControlPanel.cleanAttivita();
+				ControlPanel.showLabelViaggioBellezza();
 				dispose();
+				
+				try {
+					NuovaAttivita dialog = new NuovaAttivita(Database.modelViaggio.getSelectedItem().getIdViaggio());
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception a) {
+					a.printStackTrace();
+				}
 			}
 		}
 		if(e.getSource() == this.cancelButton) {
+			ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
 			dispose();
 		}
 	}

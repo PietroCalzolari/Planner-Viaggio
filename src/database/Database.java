@@ -44,6 +44,9 @@ public Database() throws SQLException{
 		try {
 			ResultSet rs = db.executeQuery("SELECT * FROM viaggio LIMIT 1");
 			ControlPanel.lblViaggio.setText(rs.getString("nomeViaggio"));
+			ControlPanel.lblTrasporto.setText(rs.getString("mezzo"));
+			ControlPanel.lblDataPartenzaViaggio.setText(rs.getString("partenza"));
+			ControlPanel.lblDataRitornoViaggio.setText(rs.getString("ritorno"));
 			
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS viaggio");
@@ -54,36 +57,18 @@ public Database() throws SQLException{
 		modelViaggio = new DBModelViaggio(db);
 		
 		
-		try {
-			
-			//condizione da ricontrollare
-			
-			if(DBModelAttivita.la != null) {
-				ResultSet rsV = db.executeQuery("SELECT * FROM viaggio LIMIT 1");
-				
-				String query = String.format("SELECT * FROM attivita WHERE idViaggio='%s'", rsV.getString("idViaggio"));
-				ResultSet rs = db.executeQuery(query);
-				
-				ControlPanel.lblAttivita.setText(rs.getString("nomeAttivita"));
-				ControlPanel.lblLuogo.setText(rs.getString("luogo"));
-				ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
-				ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
-				
-			}
-			else {
-				db.executeQuery("SELECT * FROM attivita LIMIT 1");
-			}
-			
+		try {	
+			db.executeQuery("SELECT * FROM attivita");
 			
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS attivita");
 			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(10) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT, "
 					+ "idViaggio VARCHAR(50) REFERENCES viaggio(idViaggio))");
-			
+			ControlPanel.cleanAttivita();	
 		} 
 		
 		modelAttivita = new DBModelAttivita(db);
-		
+		Database.modelAttivita.showAttivita();
 	}
 
 

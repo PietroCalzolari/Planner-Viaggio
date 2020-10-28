@@ -22,7 +22,7 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 
 
 	public FinestraIniziale() {
-		getContentPane().setBackground(new Color(255, 140, 0));
+		getContentPane().setBackground(new Color(255, 204, 153));
 		setBackground(new Color(244, 164, 96));
 		setForeground(Color.BLACK);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,14 +85,10 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
-			}
-			//Fare un if e vedere che tutte le Textfield siano piene, magari questo lo facciamo come ultima cosa
-
-			//Se facciamo in tempo, inserire anche un controllo sul corretto inserimento della mail "qualcosa@qualcosa.qualcosa"
-			//INGRANDIRE LA TEXTFIELD DELLA MAIL NELL'INTERFACCIA GRAFICA
-			else{
+			} else {
 				Database.insertUtente(textFieldNome.getText(),textFieldCognome.getText(),textFieldEmail.getText());
-
+				dispose();
+				
 				try {
 					NuovoViaggio dialog = new NuovoViaggio(java.util.UUID.randomUUID());
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -101,7 +97,6 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 					a.printStackTrace();
 				}
 
-				dispose();
 			}
 		}
 	}
