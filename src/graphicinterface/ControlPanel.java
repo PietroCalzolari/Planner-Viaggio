@@ -51,6 +51,12 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public static JLabel lblTrasporto;
 	public static JLabel lblDataPartenzaViaggio;
 	public static JLabel lblDataRitornoViaggio;
+	public static JLabel lblIndiceViaggio;
+	public static JLabel lblIndiceAttivita;
+	public static JLabel lblNumeroViaggiTotali;
+	public static JLabel lblNumeroAttivitaTotali;
+	private JLabel lblBarraViaggi;	
+	private JLabel lblBarraAttivita;
 	
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
@@ -134,39 +140,59 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblTrasportoBellezza.setForeground(Color.DARK_GRAY);
 		lblTrasportoBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblTrasportoBellezza.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTrasportoBellezza.setBounds(30, 145, 95, 22);
+		lblTrasportoBellezza.setBounds(30, 157, 95, 22);
 		panelViaggio.add(lblTrasportoBellezza);
 		
 		lblDataPartenzaViaggioBellezza = new JLabel("Partenza:");
 		lblDataPartenzaViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
-		lblDataPartenzaViaggioBellezza.setBounds(30, 175, 95, 22);
+		lblDataPartenzaViaggioBellezza.setBounds(30, 203, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggioBellezza);
 		
 		lblDataRitornoViaggioBellezza = new JLabel("Ritorno:");
 		lblDataRitornoViaggioBellezza.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataRitornoViaggioBellezza.setFont(new Font("Comic Sans MS", Font.BOLD | Font.ITALIC, 15));
-		lblDataRitornoViaggioBellezza.setBounds(30, 205, 95, 22);
+		lblDataRitornoViaggioBellezza.setBounds(30, 236, 95, 22);
 		panelViaggio.add(lblDataRitornoViaggioBellezza);
 		
 		lblTrasporto = new JLabel("");
 		lblTrasporto.setHorizontalAlignment(SwingConstants.CENTER);
 		lblViaggio.setForeground(Color.DARK_GRAY);
 		lblTrasporto.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblTrasporto.setBounds(148, 145, 95, 22);
+		lblTrasporto.setBounds(148, 157, 95, 22);
 		panelViaggio.add(lblTrasporto);
 		
 		lblDataPartenzaViaggio = new JLabel("");
 		lblDataPartenzaViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
-		lblDataPartenzaViaggio.setBounds(148, 175, 95, 22);
+		lblDataPartenzaViaggio.setBounds(148, 203, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggio);
 		
 		lblDataRitornoViaggio = new JLabel("");
 		lblDataRitornoViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataRitornoViaggio.setFont(new Font("Comic Sans MS", Font.ITALIC, 15));
-		lblDataRitornoViaggio.setBounds(148, 205, 95, 22);
+		lblDataRitornoViaggio.setBounds(148, 236, 95, 22);
 		panelViaggio.add(lblDataRitornoViaggio);
+		
+		//METTERE L'INDICE GIUSTO DEL VIAGGIO IN CUI SI E'
+		lblIndiceViaggio = new JLabel("1");
+		lblIndiceViaggio.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblIndiceViaggio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIndiceViaggio.setBounds(89, 296, 22, 29);
+		panelViaggio.add(lblIndiceViaggio);
+		
+		lblBarraViaggi = new JLabel("/");
+		lblBarraViaggi.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBarraViaggi.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBarraViaggi.setBounds(103, 296, 22, 29);
+		panelViaggio.add(lblBarraViaggi);
+		
+		//METTERE IL NUMERO GIUSTO DI VIAGGI TOTALI DAL DB
+		lblNumeroViaggiTotali = new JLabel("1");
+		lblNumeroViaggiTotali.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumeroViaggiTotali.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNumeroViaggiTotali.setBounds(121, 296, 22, 29);
+		panelViaggio.add(lblNumeroViaggiTotali);
 
 		lblCiao = new JLabel("");
 		lblCiao.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 13));
@@ -185,37 +211,37 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblAttivita.setForeground(Color.DARK_GRAY);
 		lblAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 20));
-		lblAttivita.setBounds(172, 100, 197, 40);
+		lblAttivita.setBounds(115, 100, 319, 40);
 		panel_1.add(lblAttivita);
 
 		lblLuogoBellezza = new JLabel("Luogo");
 		lblLuogoBellezza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblLuogoBellezza.setBounds(66, 147, 60, 35);
+		lblLuogoBellezza.setBounds(213, 162, 60, 35);
 		panel_1.add(lblLuogoBellezza);
 
 		lblLuogo = new JLabel("");
 		lblLuogo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblLuogo.setBounds(203, 147, 231, 35);
+		lblLuogo.setBounds(283, 162, 231, 35);
 		panel_1.add(lblLuogo);
 
 		lblOraInizioBellezza = new JLabel("Ora di Inizio");
 		lblOraInizioBellezza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblOraInizioBellezza.setBounds(60, 208, 136, 35);
+		lblOraInizioBellezza.setBounds(213, 218, 136, 35);
 		panel_1.add(lblOraInizioBellezza);
 
 		lblOraInizio = new JLabel("");
 		lblOraInizio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblOraInizio.setBounds(203, 208, 231, 35);
+		lblOraInizio.setBounds(321, 218, 136, 35);
 		panel_1.add(lblOraInizio);
 
 		lblOraFineBellezza = new JLabel("Ora di Fine");
 		lblOraFineBellezza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblOraFineBellezza.setBounds(60, 266, 136, 35);
+		lblOraFineBellezza.setBounds(213, 266, 136, 35);
 		panel_1.add(lblOraFineBellezza);
 
 		lblOraFine = new JLabel("");
 		lblOraFine.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblOraFine.setBounds(203, 266, 231, 35);
+		lblOraFine.setBounds(321, 266, 113, 35);
 		panel_1.add(lblOraFine);
 		
 		btnAttivitaPrecedente = new JButton("<");
@@ -229,6 +255,26 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnAttivitaSuccessiva.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnAttivitaSuccessiva.setBounds(364, 358, 55, 40);
 		panel_1.add(btnAttivitaSuccessiva);
+		
+		//METTERE IL NUMERO GIUSTO DI ATTIVITA IN CUI SI E'
+		lblIndiceAttivita = new JLabel("1");
+		lblIndiceAttivita.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIndiceAttivita.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblIndiceAttivita.setBounds(232, 358, 22, 29);
+		panel_1.add(lblIndiceAttivita);
+		
+		lblBarraAttivita = new JLabel("/");
+		lblBarraAttivita.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBarraAttivita.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBarraAttivita.setBounds(264, 358, 22, 29);
+		panel_1.add(lblBarraAttivita);
+		
+		//METTERE IL NUMERO GIUSTO DI ATTIVITA TOTALI DAL DB
+		lblNumeroAttivitaTotali = new JLabel("1");
+		lblNumeroAttivitaTotali.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNumeroAttivitaTotali.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumeroAttivitaTotali.setBounds(306, 358, 22, 29);
+		panel_1.add(lblNumeroAttivitaTotali);
 	
 		
 		try {

@@ -43,8 +43,9 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		lblCreazioneViaggio = new JLabel("Creazione nuovo Viaggio! Compila tutti i dati del tuo viaggio");
-		lblCreazioneViaggio.setBounds(53, 11, 447, 36);
+		lblCreazioneViaggio = new JLabel("Creazione nuovo Viaggio!");
+		lblCreazioneViaggio.setForeground(Color.ORANGE);
+		lblCreazioneViaggio.setBounds(173, 12, 187, 36);
 		lblCreazioneViaggio.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
 		contentPanel.add(lblCreazioneViaggio);
 
@@ -83,12 +84,12 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 
 		textFieldNomeViaggio = new JTextField();
 		textFieldNomeViaggio.setColumns(10);
-		textFieldNomeViaggio.setBounds(53, 108, 136, 35);
+		textFieldNomeViaggio.setBounds(53, 108, 163, 35);
 		contentPanel.add(textFieldNomeViaggio);
 
 		textFieldTrasporto = new JTextField();
 		textFieldTrasporto.setColumns(10);
-		textFieldTrasporto.setBounds(303, 108, 136, 35);
+		textFieldTrasporto.setBounds(303, 108, 190, 35);
 		contentPanel.add(textFieldTrasporto);
 
 		textFieldRitorno = new JTextField();

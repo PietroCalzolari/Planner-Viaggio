@@ -57,9 +57,10 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		contentPanel.add(cancelButton);
 		cancelButton.setActionCommand("Cancel");
 
-		lblNuovaAttivita= new JLabel("Creazione nuova Attivita'! Compila tutti i dati sottostanti");
+		lblNuovaAttivita= new JLabel("Creazione nuova Attivita'!");
+		lblNuovaAttivita.setForeground(Color.ORANGE);
 		lblNuovaAttivita.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblNuovaAttivita.setBounds(25, 11, 496, 53);
+		lblNuovaAttivita.setBounds(156, 12, 222, 53);
 		contentPanel.add(lblNuovaAttivita);
 
 		lblNomeAttivita = new JLabel("Nome Attivita'");
@@ -83,13 +84,13 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		contentPanel.add(lblOraInizio);
 
 		textFieldNomeAttivita = new JTextField();
-		textFieldNomeAttivita.setBounds(71, 106, 136, 35);
+		textFieldNomeAttivita.setBounds(71, 106, 163, 35);
 		contentPanel.add(textFieldNomeAttivita);
 		textFieldNomeAttivita.setColumns(10);
 
 		textFieldLuogo = new JTextField();
 		textFieldLuogo.setColumns(10);
-		textFieldLuogo.setBounds(328, 106, 136, 35);
+		textFieldLuogo.setBounds(328, 106, 169, 35);
 		contentPanel.add(textFieldLuogo);
 
 		textFieldOraInizio = new JTextField();
