@@ -69,6 +69,10 @@ public class DBModelViaggio {
 			e.printStackTrace();
 		}
 		last();
+		
+		int num = lv.size();
+		String s = String.valueOf(num);
+		ControlPanel.lblNumeroViaggiTotali.setText(s);
 	}
 	
 	
@@ -89,6 +93,10 @@ public class DBModelViaggio {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		int num = lv.size();
+		String s = String.valueOf(num);
+		ControlPanel.lblNumeroViaggiTotali.setText(s);
 	}
 	
 	
@@ -104,49 +112,6 @@ public class DBModelViaggio {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-	
-	
-	public void setnomeViaggio(String nomeViaggio) {
-		String query = String.format("UPDATE viaggio SET nomeViaggio=%s WHERE id='%s'", nomeViaggio, getSelectedItem().getIdViaggio());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setNomeViaggio(nomeViaggio);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void setMezzo(String mezzo) {
-		String query = String.format("UPDATE viaggio SET mezzo=%s WHERE id='%s'", mezzo, getSelectedItem().getIdViaggio());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setMezzo(mezzo);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void setPartenza(String partenza) {
-		String query = String.format("UPDATE viaggio SET partenza=%s WHERE id='%s'", partenza, getSelectedItem().getIdViaggio());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setPartenza(partenza);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void setRitorno(String ritorno) {
-		String query = String.format("UPDATE viaggio SET ritorno=%s WHERE id='%s'", ritorno, getSelectedItem().getIdViaggio());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setRitorno(ritorno);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

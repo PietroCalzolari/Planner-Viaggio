@@ -22,53 +22,55 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 
 
 	public FinestraIniziale() {
-		getContentPane().setBackground(new Color(255, 204, 153));
-		setBackground(new Color(244, 164, 96));
-		setForeground(Color.BLACK);
+		getContentPane().setBackground(new Color(255, 165, 0));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 586, 422);
+		setBounds(320, 265, 560, 370);
 		getContentPane().setLayout(null);
 
 		JLabel lblInserisciDati = new JLabel("INSERISCI I TUOI DATI");
-		lblInserisciDati.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblInserisciDati.setBounds(142, 11, 240, 67);
+		lblInserisciDati.setForeground(Color.white);
+		lblInserisciDati.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
+		lblInserisciDati.setBounds(160, 30, 240, 36);
 		getContentPane().add(lblInserisciDati);
 
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblNome.setBounds(135, 114, 54, 24);
+		lblNome.setForeground(Color.DARK_GRAY);
+		lblNome.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblNome.setBounds(120, 114, 75, 24);
 		getContentPane().add(lblNome);
 
 		JLabel lblCognome = new JLabel("Cognome");
-		lblCognome.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblCognome.setBounds(135, 164, 69, 24);
+		lblCognome.setForeground(Color.DARK_GRAY);
+		lblCognome.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblCognome.setBounds(120, 164, 75, 24);
 		getContentPane().add(lblCognome);
 
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblEmail.setBounds(135, 213, 54, 24);
+		lblEmail.setForeground(Color.DARK_GRAY);
+		lblEmail.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblEmail.setBounds(120, 213, 75, 24);
 		getContentPane().add(lblEmail);
 
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(229, 118, 173, 20);
+		textFieldNome.setBounds(229, 111, 190, 30);
 		getContentPane().add(textFieldNome);
 		textFieldNome.setColumns(10);
 
 		textFieldCognome = new JTextField();
 		textFieldCognome.setColumns(10);
-		textFieldCognome.setBounds(229, 168, 173, 20);
+		textFieldCognome.setBounds(229, 161, 190, 30);
 		getContentPane().add(textFieldCognome);
 
 		textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
-		textFieldEmail.setBounds(229, 217, 173, 20);
+		textFieldEmail.setBounds(229, 210, 190, 30);
 		getContentPane().add(textFieldEmail);
 
 		btnPrimoViaggio = new JButton("Aggiungi il tuo primo Viaggio!");
 		btnPrimoViaggio.addActionListener(this);
 		btnPrimoViaggio.setForeground(Color.BLACK);
-		btnPrimoViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		btnPrimoViaggio.setBounds(165, 263, 240, 53);
+		btnPrimoViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		btnPrimoViaggio.setBounds(165, 263, 240, 40);
 		getContentPane().add(btnPrimoViaggio);
 
 	}
