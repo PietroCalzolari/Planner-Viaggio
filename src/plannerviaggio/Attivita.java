@@ -81,5 +81,4 @@ public class Attivita {
 				+ ", oraFine=" + oraFine + ", luogo=" + luogo + ", idViaggioA=" + idViaggioA + "]";
 	}
 	
-
 }

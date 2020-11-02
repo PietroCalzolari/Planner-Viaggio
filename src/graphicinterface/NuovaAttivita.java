@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import database.DBModelAttivita;
 import database.Database;
 
 import java.awt.Font;
@@ -35,7 +36,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 	public NuovaAttivita(UUID IDViaggio) {
 		this.IDViaggio = IDViaggio;
 	
-		setBounds(100, 100, 559, 372);
+		setBounds(320, 265, 560, 370);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(Color.WHITE);
@@ -44,7 +45,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 
 		okButton = new JButton("Ok");
 		okButton.addActionListener(this);
-		okButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		okButton.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		okButton.setBounds(80, 270, 127, 45);
 		contentPanel.add(okButton);
 		okButton.setActionCommand("OK");
@@ -52,34 +53,34 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 
 		cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(this);
-		cancelButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		cancelButton.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		cancelButton.setBounds(328, 270, 127, 45);
 		contentPanel.add(cancelButton);
 		cancelButton.setActionCommand("Cancel");
 
-		lblNuovaAttivita= new JLabel("Creazione nuova Attivita'!");
-		lblNuovaAttivita.setForeground(Color.ORANGE);
-		lblNuovaAttivita.setFont(new Font("Comic Sans MS", Font.BOLD, 17));
-		lblNuovaAttivita.setBounds(156, 12, 222, 53);
+		lblNuovaAttivita= new JLabel("CREAZIONE NUOVA ATTIVITA'");
+		lblNuovaAttivita.setForeground(new Color(255, 165, 0));
+		lblNuovaAttivita.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
+		lblNuovaAttivita.setBounds(115, 12, 320, 36);
 		contentPanel.add(lblNuovaAttivita);
 
 		lblNomeAttivita = new JLabel("Nome Attivita'");
-		lblNomeAttivita.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		lblNomeAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblNomeAttivita.setBounds(71, 60, 136, 35);
 		contentPanel.add(lblNomeAttivita);
 
 		lblLuogo = new JLabel("Luogo");
-		lblLuogo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		lblLuogo.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblLuogo.setBounds(328, 60, 136, 35);
 		contentPanel.add(lblLuogo);
 
 		lblOraFine = new JLabel("Ora di Fine");
-		lblOraFine.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		lblOraFine.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblOraFine.setBounds(328, 158, 136, 35);
 		contentPanel.add(lblOraFine);
 
 		lblOraInizio = new JLabel("Ora di Inizio");
-		lblOraInizio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
+		lblOraInizio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblOraInizio.setBounds(71, 158, 136, 35);
 		contentPanel.add(lblOraInizio);
 
@@ -116,13 +117,13 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
-			}
-			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
-			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
-
-			else{
+			} else {
 				Database.modelAttivita.insert(textFieldNomeAttivita.getText(),textFieldOraInizio.getText(),textFieldOraFine.getText(),textFieldLuogo.getText(), IDViaggio);
 				Database.modelAttivita.showAttivitaInserita();
+				
+				ControlPanel.indiceAttivita = Integer.valueOf(ControlPanel.lblNumeroAttivitaTotali.getText());
+				DBModelAttivita.convertIndexAttivita();
+				
 				dispose();
 			}
 		}

@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import database.DBModelAttivita;
 import database.Database;
 
 import javax.swing.JLabel;
@@ -18,7 +19,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
 public class NuovoViaggio extends JDialog implements ActionListener {
-
+	private static final long serialVersionUID = -1904910491700065906L;
 	private final JPanel contentPanel = new JPanel();
 	private JButton okButton;
 	private JButton cancelButton;
@@ -36,70 +37,71 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 	public NuovoViaggio(UUID IDViaggio) {
 		this.IDViaggio = IDViaggio;
 		
-		setBounds(100, 100, 559, 372);
+		setBounds(320, 265, 560, 370);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setBackground(Color.WHITE);
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		lblCreazioneViaggio = new JLabel("Creazione nuovo Viaggio!");
-		lblCreazioneViaggio.setForeground(Color.ORANGE);
-		lblCreazioneViaggio.setBounds(173, 12, 187, 36);
-		lblCreazioneViaggio.setFont(new Font("Comic Sans MS", Font.BOLD, 15));
+		lblCreazioneViaggio = new JLabel("CREAZIONE NUOVO VIAGGIO");
+		lblCreazioneViaggio.setForeground(new Color(255, 165, 0));
+		lblCreazioneViaggio.setBounds(130, 12, 300, 36);
+		lblCreazioneViaggio.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
 		contentPanel.add(lblCreazioneViaggio);
 
 		okButton = new JButton("Ok");
-		okButton.setBounds(67, 267, 127, 45);
+		okButton.setBounds(70, 267, 127, 45);
 		contentPanel.add(okButton);
-		okButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		okButton.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		okButton.addActionListener(this);
 		getRootPane().setDefaultButton(okButton);
+		
 		cancelButton = new JButton("Cancel");
 		cancelButton.addActionListener(this);
-		cancelButton.setBounds(303, 268, 127, 45);
+		cancelButton.setBounds(310, 268, 127, 45);
 		contentPanel.add(cancelButton);
-		cancelButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
+		cancelButton.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		cancelButton.setActionCommand("Cancel");
 
-		lblNomeViaggio = new JLabel("Nome del Viaggio");
-		lblNomeViaggio.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblNomeViaggio.setBounds(53, 65, 141, 32);
+		lblNomeViaggio = new JLabel("Nome del viaggio");
+		lblNomeViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblNomeViaggio.setBounds(70, 80, 141, 25);
 		contentPanel.add(lblNomeViaggio);
 
-		lblMezzo = new JLabel("Mezzo Di Trasporto");
-		lblMezzo.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblMezzo.setBounds(303, 69, 160, 25);
+		lblMezzo = new JLabel("Mezzo di trasporto");
+		lblMezzo.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblMezzo.setBounds(310, 80, 160, 25);
 		contentPanel.add(lblMezzo);
 
 		lblPartenza = new JLabel("Data di Partenza");
-		lblPartenza.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblPartenza.setBounds(53, 146, 160, 36);
+		lblPartenza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblPartenza.setBounds(70, 165, 150, 25);
 		contentPanel.add(lblPartenza);
 
 		lblRitorno = new JLabel("Data di Ritorno");
-		lblRitorno.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
-		lblRitorno.setBounds(303, 146, 141, 36);
+		lblRitorno.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
+		lblRitorno.setBounds(310, 165, 150, 25);
 		contentPanel.add(lblRitorno);
 
 		textFieldNomeViaggio = new JTextField();
 		textFieldNomeViaggio.setColumns(10);
-		textFieldNomeViaggio.setBounds(53, 108, 163, 35);
+		textFieldNomeViaggio.setBounds(70, 108, 170, 30);
 		contentPanel.add(textFieldNomeViaggio);
 
 		textFieldTrasporto = new JTextField();
 		textFieldTrasporto.setColumns(10);
-		textFieldTrasporto.setBounds(303, 108, 190, 35);
+		textFieldTrasporto.setBounds(310, 108, 170, 30);
 		contentPanel.add(textFieldTrasporto);
 
 		textFieldRitorno = new JTextField();
 		textFieldRitorno.setColumns(10);
-		textFieldRitorno.setBounds(303, 193, 136, 35);
+		textFieldRitorno.setBounds(310, 193, 170, 30);
 		contentPanel.add(textFieldRitorno);
 
 		textFieldPartenza = new JTextField();
 		textFieldPartenza.setColumns(10);
-		textFieldPartenza.setBounds(53, 193, 136, 35);
+		textFieldPartenza.setBounds(70, 193, 170, 30);
 		contentPanel.add(textFieldPartenza);
 
 	}
@@ -115,17 +117,20 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
-			}
-
-			//SE VUOI METTERE ANCHE DELLE CONDIZIONI SULLE DATE VANNO FATTE TUTTE IN JAVA E POI PASSATE COME STRINGHE ALLA FUNZIONE insert PERCHE' IN SQLITE NON ESISTE IL TIPO "DATA"
-			//Bisognerebbe cambiare il tipo all'interno della classe originaria, ora le date sono di tipo string
-
-			else {
+			} else {
 				Database.modelViaggio.insert(IDViaggio, textFieldNomeViaggio.getText(),textFieldTrasporto.getText(),textFieldRitorno.getText(),textFieldPartenza.getText());
 				Database.modelViaggio.showItem();
+				
 				ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
 				ControlPanel.showLabelViaggioBellezza();
+				ControlPanel.lblIndiceViaggio.setText(Database.IndiceViaggio());
+			
 				dispose();
+				
+				ControlPanel.cleanAttivita();
+				ControlPanel.lblNumeroAttivitaTotali.setText("0");
+				ControlPanel.indiceAttivita = 0;
+				DBModelAttivita.convertIndexAttivita();
 				
 				try {
 					NuovaAttivita dialog = new NuovaAttivita(Database.modelViaggio.getSelectedItem().getIdViaggio());

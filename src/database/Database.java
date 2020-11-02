@@ -51,11 +51,20 @@ public Database() throws SQLException{
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS viaggio");
 			db.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(10) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, " + "Partenza TEXT, " + "Ritorno TEXT)");
+			
 			ControlPanel.cleanViaggio();
+			ControlPanel.lblNumeroViaggiTotali.setText("0");
+			ControlPanel.lblIndiceViaggio.setText("0");
 		}
 		
 		modelViaggio = new DBModelViaggio(db);
 		
+		if(DBModelViaggio.lv.size() != 0) {
+			int num = DBModelViaggio.lv.size();
+			String s = String.valueOf(num);
+			ControlPanel.lblNumeroViaggiTotali.setText(s);
+			ControlPanel.lblIndiceViaggio.setText(IndiceViaggio());
+		}
 		
 		try {	
 			db.executeQuery("SELECT * FROM attivita");
@@ -64,14 +73,24 @@ public Database() throws SQLException{
 			db.executeUpdate("DROP TABLE IF EXISTS attivita");
 			db.executeUpdate("CREATE TABLE attivita (" + "idAttivita VARCHAR(10) PRIMARY KEY, " + "nomeAttivita VARCHAR(30), " + "oraInizio TEXT, " + "oraFine TEXT, " + "luogo TEXT, "
 					+ "idViaggio VARCHAR(50) REFERENCES viaggio(idViaggio))");
+			
 			ControlPanel.cleanAttivita();	
+			ControlPanel.lblNumeroAttivitaTotali.setText("0");
+			ControlPanel.indiceAttivita = 0;
+			DBModelAttivita.convertIndexAttivita();
 		} 
 		
 		modelAttivita = new DBModelAttivita(db);
+		
+		Database.modelAttivita.setNumAttivitaTotali(Database.modelAttivita.getSelectedIndex());
 		Database.modelAttivita.showAttivita();
 	}
 
-
+	public static String IndiceViaggio() {
+		int i = modelViaggio.getSelectedIndex() + 1;
+		String s = String.valueOf(i);
+		return s;
+	}
 
 	public void stampaUtente(ResultSet rs) throws SQLException {
 		System.out.println("id=" + rs.getString("idUtente") + ", nome=" + rs.getString("nome") + ", cognome=" + rs.getString("cognome") + ", email=" + rs.getString("email"));
@@ -92,7 +111,7 @@ public Database() throws SQLException{
 	
 	
 	
-	public void testSelect() throws SQLException {
+	public void testDB() throws SQLException {
 		ResultSet rsU = db.executeQuery("SELECT * FROM utente LIMIT 100");
 		System.out.println("\n- Utente");
 		while (rsU.next()) {
@@ -112,8 +131,7 @@ public Database() throws SQLException{
 		}
 		
 	}
-	
-		
+			
 	public static void insertUtente(String nome, String cognome, String email) {
 		Utente v = new Utente(java.util.UUID.randomUUID(), nome, cognome, email);
 		try {
@@ -138,16 +156,6 @@ public Database() throws SQLException{
 		}
 		return "!";
 	}
-	
-	public void run() {
-		try {
-			testSelect();
-		} catch (SQLException e) {
-			System.out.println("Something went wrong... " + e.getMessage());
-		}
-
-	}	
-	
 	
 	public void closeDB() {
 		try {

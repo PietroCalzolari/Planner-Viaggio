@@ -66,6 +66,7 @@ public class DBModelAttivita {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		setNumAttivitaTotali(getSelectedIndex());
 		last();
 	}
 	
@@ -105,46 +106,50 @@ public class DBModelAttivita {
 		try {
 			
 			if(getSelectedIndex() < (la.size() - 1)) {
-				index = getSelectedIndex();
+				index = selectedIndex;
 				showNextAttivita(getSelectedIndex());
-				returnIndex = getSelectedIndex();
+				
+				if((selectedIndex == index) && (selectedIndex == 0)) {
+					delete();
+					ControlPanel.cleanAttivita();				
+					setPrevIndexAttivita(selectedIndex);
+					return;
+				}
+			
+				returnIndex = selectedIndex;
 				
 				if(getSelectedItem().getIdViaggioA().toString().equals(la.get(index).getIdViaggioA().toString())) {		
 					selectedIndex = index;
-					String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
-					db.executeUpdate(query);
-					la.remove(selectedIndex);
+					delete();
 					selectedIndex = returnIndex - 1;
+					setNextIndexAttivita(selectedIndex);
 					return;
 				}
 				selectedIndex = index;
 			}
 			
 			if(getSelectedIndex() > 0) {
-				index = getSelectedIndex();
+				index = selectedIndex;
 				showPrecAttivita(getSelectedIndex());
-				returnIndex = getSelectedIndex();
+				returnIndex = selectedIndex;
 				
 				if((index != getSelectedIndex()) && getSelectedItem().getIdViaggioA().toString().equals(la.get(index).getIdViaggioA().toString())) {	
 					selectedIndex = index;
-					
-					String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
-					db.executeUpdate(query);
-					la.remove(selectedIndex);
+					delete();
 					selectedIndex = returnIndex;
+					setPrevIndexAttivita(selectedIndex);
 					return;
 				}
-				selectedIndex = index;
 				
-				String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
-				db.executeUpdate(query);
-				la.remove(selectedIndex);
-				ControlPanel.cleanAttivita();
+				selectedIndex = index;
+				delete();
+				ControlPanel.cleanAttivita();	
+				setPrevIndexAttivita(selectedIndex);
+				
 			}else {
-				String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
-				db.executeUpdate(query);
-				la.remove(selectedIndex);
+				delete();
 				ControlPanel.cleanAttivita();
+				setPrevIndexAttivita(selectedIndex);
 			}
 			
 		} catch (IndexOutOfBoundsException e) {
@@ -152,6 +157,12 @@ public class DBModelAttivita {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void delete() throws SQLException {
+		String query = String.format("DELETE FROM attivita WHERE idAttivita='%s'", getSelectedItem().getIdAttivita());
+		db.executeUpdate(query);
+		la.remove(selectedIndex);
 	}
 	
 	public void showAttivita() {
@@ -174,9 +185,13 @@ public class DBModelAttivita {
 			}	
 			
 		ControlPanel.showLabelAttivitaBellezza();
+		ControlPanel.indiceAttivita = 1;
+		convertIndexAttivita();
 			
 		if(c == 0) {
 			ControlPanel.cleanAttivita();
+			ControlPanel.indiceAttivita = 0;
+			convertIndexAttivita();
 		}
 					
 		} catch (SQLException e) {
@@ -209,6 +224,7 @@ public class DBModelAttivita {
 	
 	public void showNextAttivita(int index) {
 		first();
+		int c = 0;
 		try {
 			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
 		
@@ -220,11 +236,17 @@ public class DBModelAttivita {
 						ControlPanel.lblLuogo.setText(rs.getString("luogo"));
 						ControlPanel.lblOraInizio.setText(rs.getString("oraInizio"));
 						ControlPanel.lblOraFine.setText(rs.getString("oraFine"));
+						c = 1;
 						break prova;
 					}
 				}	
 				next();
 			}
+			
+			if(c == 0) {
+				selectedIndex = index;
+			}
+			
 			ControlPanel.showLabelAttivitaBellezza();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -245,49 +267,56 @@ public class DBModelAttivita {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
-	
-	
-	public void setnomeAttivita(String nomeAttivita) {
-		String query = String.format("UPDATE attivita SET nomeAttivita=%s WHERE id='%s'", nomeAttivita, getSelectedItem().getIdAttivita());
+	public void setNumAttivitaTotali(int index) {
+		first();
+		int c = 0;
 		try {
-			db.executeUpdate(query);
-			getSelectedItem().setNomeAttivita(nomeAttivita);
+			ResultSet rs = db.executeQuery("SELECT * FROM attivita");
+			
+			while(rs.next()) {			
+				if(getSelectedItem().getIdViaggioA().toString().equals(Database.modelViaggio.getSelectedItem().getIdViaggio().toString())) {	
+					c++;
+				}	
+				next();
+			}	
+			first();
+			
+			if(c == 0) {
+				ControlPanel.lblNumeroAttivitaTotali.setText("0");
+				ControlPanel.indiceAttivita = 0;
+				convertIndexAttivita();
+			} else {
+				String s = String.valueOf(c);
+				ControlPanel.lblNumeroAttivitaTotali.setText(s);
+				convertIndexAttivita();
+			}
+			
+			selectedIndex = index;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void setoraInizio(String oraInizio) {
-		String query = String.format("UPDATE attivita SET oraInizio=%s WHERE id='%s'", oraInizio, getSelectedItem().getIdAttivita());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setOraInizio(oraInizio);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public static void convertIndexAttivita() {	
+		ControlPanel.stringIndiceA = String.valueOf(ControlPanel.indiceAttivita);
+		ControlPanel.lblIndiceAttivita.setText(ControlPanel.stringIndiceA);
 	}
 	
-	public void setoraFine(String oraFine) {
-		String query = String.format("UPDATE attivita SET oraFine=%s WHERE id='%s'", oraFine, getSelectedItem().getIdAttivita());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setOraFine(oraFine);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public static void setNextIndexAttivita(int index) {	
+		Database.modelAttivita.setNumAttivitaTotali(index);	
+		if(ControlPanel.indiceAttivita < Integer.valueOf(ControlPanel.lblNumeroAttivitaTotali.getText())) {
+			ControlPanel.indiceAttivita ++;
+			convertIndexAttivita();
+		}	
 	}
 	
-	public void setluogo(String luogo) {
-		String query = String.format("UPDATE attivita SET luogo=%s WHERE id='%s'", luogo, getSelectedItem().getIdAttivita());
-		try {
-			db.executeUpdate(query);
-			getSelectedItem().setLuogo(luogo);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
+	public static void setPrevIndexAttivita(int index) {	
+		Database.modelAttivita.setNumAttivitaTotali(index);
+		if(ControlPanel.indiceAttivita > 1) {
+			ControlPanel.indiceAttivita --;
+			convertIndexAttivita();
+		}		
+	}	
 }
