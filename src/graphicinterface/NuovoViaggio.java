@@ -14,6 +14,10 @@ import database.Database;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
@@ -105,42 +109,130 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 		contentPanel.add(textFieldPartenza);
 
 	}
+	
+	public boolean formatoData(String stringData) {
+		Date d = new Date();
+		try {
+			DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+			f.setLenient(false);
+			d = f.parse(stringData);
+			System.out.println(d.toString());
+			return true;
+		} catch (ParseException e) {
+			return false;
+		}
+	}
+	
+	public boolean confrontoData(String stringData) {
+		Date today = new Date();
+		Date d = new Date();
+		try {
+			DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+			f.setLenient(false);
+			d = f.parse(stringData);
+			
+			if(today.compareTo(d) < 0) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (ParseException e) {
+			return false;
+		}
+	}
+	
+	public boolean confrontoDate(String stringData1, String stringData2) {
+		Date d1 = new Date();
+		Date d2 = new Date();
+		try {
+			DateFormat f1 = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+			f1.setLenient(false);
+			d1 = f1.parse(stringData1);
+			
+			DateFormat f2 = DateFormat.getDateInstance(DateFormat.SHORT, Locale.ITALY);
+			f2.setLenient(false);
+			d2 = f2.parse(stringData2);
+			
+			if(d1.compareTo(d2) <= 0) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (ParseException e) {
+			return false;
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.okButton) {
 			if((textFieldPartenza.getText().length() == 0) || (textFieldRitorno.getText().length() == 0) || (textFieldTrasporto.getText().length() == 0) || (textFieldNomeViaggio.getText().length() == 0)) {
 				try {
-					Error dialog = new Error();
+					Error dialog = new Error("Compilare tutti i campi.");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception a) {
 					a.printStackTrace();
 				}
 			} else {
-				Database.modelViaggio.insert(IDViaggio, textFieldNomeViaggio.getText(),textFieldTrasporto.getText(),textFieldRitorno.getText(),textFieldPartenza.getText());
-				Database.modelViaggio.showItem();
 				
-				ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
-				ControlPanel.showLabelViaggioBellezza();
-				ControlPanel.lblIndiceViaggio.setText(Database.IndiceViaggio());
-			
-				dispose();
-				
-				ControlPanel.cleanAttivita();
-				ControlPanel.lblNumeroAttivitaTotali.setText("0");
-				ControlPanel.indiceAttivita = 0;
-				DBModelAttivita.convertIndexAttivita();
-				
-				try {
-					NuovaAttivita dialog = new NuovaAttivita(Database.modelViaggio.getSelectedItem().getIdViaggio());
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception a) {
-					a.printStackTrace();
-				}
+				if((formatoData(textFieldPartenza.getText()) == true) || (formatoData(textFieldRitorno.getText()) == true)) {
+					if(confrontoData(textFieldPartenza.getText()) == true) {
+						if(confrontoDate(textFieldPartenza.getText(),textFieldRitorno.getText()) == true) {
+							Database.modelViaggio.insert(IDViaggio, textFieldNomeViaggio.getText(),textFieldTrasporto.getText(),textFieldPartenza.getText(), textFieldRitorno.getText());
+							Database.modelViaggio.showItem();
+						
+							ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
+							ControlPanel.showLabelViaggioBellezza();
+							ControlPanel.lblIndiceViaggio.setText(Database.IndiceViaggio());
+							ControlPanel.giorni(textFieldPartenza.getText());
+							dispose();
+						
+							ControlPanel.cleanAttivita();
+							ControlPanel.lblNumeroAttivitaTotali.setText("0");
+							ControlPanel.indiceAttivita = 0;
+							DBModelAttivita.convertIndexAttivita();
+						
+							try {
+								NuovaAttivita dialog = new NuovaAttivita(Database.modelViaggio.getSelectedItem().getIdViaggio());
+								dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								dialog.setVisible(true);
+							} catch (Exception a) {
+								a.printStackTrace();
+							}
+							
+						} else {
+							try {
+								Error dialog = new Error("Data di ritorno non valida.");
+								dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+								dialog.setVisible(true);
+							} catch (Exception a) {
+								a.printStackTrace();
+							}	
+						}	
+					} else {				
+						try {
+							Error dialog = new Error("Data di partenza non valida.");
+							dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+							dialog.setVisible(true);
+						} catch (Exception a) {
+							a.printStackTrace();
+						}				
+					}					
+				} else {
+					try {
+						Error dialog = new Error("Formato data richiesto: gg/mm/aaaa");
+						dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+						dialog.setVisible(true);
+					} catch (Exception a) {
+						a.printStackTrace();
+					}
+				}		
 			}
 		}
+		
 		if(e.getSource() == this.cancelButton) {
 			ControlPanel.lblCiao.setText("Ciao" + Database.nomeUtente());
 			dispose();

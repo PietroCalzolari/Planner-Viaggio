@@ -12,12 +12,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import database.DBModelAttivita;
 import database.DBModelViaggio;
 import database.Database;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Locale;
 
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 
 public class ControlPanel extends JFrame implements ActionListener {
@@ -29,7 +35,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 	private JButton btnAggAttivita;
 	private JButton btnEliminaViaggio;
 	private JButton btnEliminaAttivita;
-	private JPanel panel_1;
+	private JPanel panelAttivita;
 	public static JLabel lblViaggio;
 	public static JLabel lblCiao;
 	private JLabel lblTitoloViaggioBellezza;
@@ -55,10 +61,15 @@ public class ControlPanel extends JFrame implements ActionListener {
 	public static JLabel lblIndiceAttivita;
 	public static JLabel lblNumeroViaggiTotali;
 	public static JLabel lblNumeroAttivitaTotali;
+	public static JLabel lblOrologioIcona;
+	public static JLabel lblOrologio;
 	private JLabel lblBarraViaggi;	
 	private JLabel lblBarraAttivita;
 	public static int indiceAttivita;
 	public static String stringIndiceA;
+	private static JLabel lblOrologioIcona_1;
+	private static JLabel lblOrologioIcona_2;
+	private static JLabel lblOrologioIcona_3;
 
 	public ControlPanel() {
 		super("PLANNER VIAGGIO");
@@ -92,27 +103,26 @@ public class ControlPanel extends JFrame implements ActionListener {
 		btnEliminaViaggio.setBounds(40, 425, 180, 30);
 		panelViaggio.add(btnEliminaViaggio);
 
-		panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(260, 0, 540, 478);
-		contentPane.add(panel_1);
-		panel_1.setLayout(null);
+		panelAttivita = new JPanel();
+		panelAttivita.setBackground(Color.WHITE);
+		panelAttivita.setBounds(260, 0, 540, 478);
+		contentPane.add(panelAttivita);
+		panelAttivita.setLayout(null);
 
 		btnAggAttivita = new JButton("Aggiungi Attivita'");
 		btnAggAttivita.addActionListener(this);
 		btnAggAttivita.setVerticalAlignment(SwingConstants.CENTER);
 		btnAggAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		btnAggAttivita.setBounds(45, 425, 180, 30);
-		panel_1.add(btnAggAttivita);
+		panelAttivita.add(btnAggAttivita);
 
 		btnEliminaAttivita = new JButton("Elimina Attivita'");
 		btnEliminaAttivita.addActionListener(this);
 		btnEliminaAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		btnEliminaAttivita.setBounds(316, 425, 180, 30);
-		panel_1.add(btnEliminaAttivita);
+		panelAttivita.add(btnEliminaAttivita);
 
 		lblViaggio = new JLabel("");
-		//lblViaggio.setForeground(Color.DARK_GRAY);
 		lblViaggio.setForeground(Color.BLACK);
 		lblViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 24));
@@ -139,40 +149,40 @@ public class ControlPanel extends JFrame implements ActionListener {
 		panelViaggio.add(btnViaggioSuccessivo);
 
 		lblTrasportoBellezza = new JLabel("Trasporto:");
-		lblTrasportoBellezza.setForeground(Color.DARK_GRAY);
+		lblTrasportoBellezza.setForeground(Color.BLACK);
 		lblTrasportoBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblTrasportoBellezza.setBounds(30, 157, 80, 22);
+		lblTrasportoBellezza.setBounds(30, 262, 80, 22);
 		panelViaggio.add(lblTrasportoBellezza);
 
 		lblDataPartenzaViaggioBellezza = new JLabel("Partenza:");
-		lblDataPartenzaViaggioBellezza.setForeground(Color.DARK_GRAY);
+		lblDataPartenzaViaggioBellezza.setForeground(Color.BLACK);
 		lblDataPartenzaViaggioBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblDataPartenzaViaggioBellezza.setBounds(30, 203, 80, 22);
+		lblDataPartenzaViaggioBellezza.setBounds(30, 175, 80, 22);
 		panelViaggio.add(lblDataPartenzaViaggioBellezza);
 
 		lblDataRitornoViaggioBellezza = new JLabel("Ritorno:");
-		lblDataRitornoViaggioBellezza.setForeground(Color.DARK_GRAY);
+		lblDataRitornoViaggioBellezza.setForeground(Color.BLACK);
 		lblDataRitornoViaggioBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblDataRitornoViaggioBellezza.setBounds(30, 236, 80, 22);
+		lblDataRitornoViaggioBellezza.setBounds(30, 210, 80, 22);
 		panelViaggio.add(lblDataRitornoViaggioBellezza);
 
 		lblTrasporto = new JLabel("");
 		lblTrasporto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblViaggio.setForeground(Color.DARK_GRAY);
+		lblViaggio.setForeground(Color.BLACK);
 		lblTrasporto.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblTrasporto.setBounds(148, 157, 95, 22);
+		lblTrasporto.setBounds(148, 262, 95, 22);
 		panelViaggio.add(lblTrasporto);
 
 		lblDataPartenzaViaggio = new JLabel("");
 		lblDataPartenzaViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataPartenzaViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblDataPartenzaViaggio.setBounds(148, 203, 95, 22);
+		lblDataPartenzaViaggio.setBounds(148, 175, 95, 22);
 		panelViaggio.add(lblDataPartenzaViaggio);
 
 		lblDataRitornoViaggio = new JLabel("");
 		lblDataRitornoViaggio.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDataRitornoViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		lblDataRitornoViaggio.setBounds(148, 236, 95, 22);
+		lblDataRitornoViaggio.setBounds(148, 210, 95, 22);
 		panelViaggio.add(lblDataRitornoViaggio);
 
 		lblIndiceViaggio = new JLabel("");
@@ -192,11 +202,16 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblNumeroViaggiTotali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumeroViaggiTotali.setBounds(139, 339, 22, 22);
 		panelViaggio.add(lblNumeroViaggiTotali);
+		
+		lblOrologio = new JLabel("");
+		lblOrologio.setBounds(46, 132, 168, 25);
+		lblOrologio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 15));
+		panelViaggio.add(lblOrologio);
 
 		lblCiao = new JLabel("");
 		lblCiao.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 13));
 		lblCiao.setBounds(390, 10, 143, 20);
-		panel_1.add(lblCiao);
+		panelAttivita.add(lblCiao);
 
 		lblTitoloAttivitaBellezza = new JLabel("A T T I V I T A'");
 		lblTitoloAttivitaBellezza.setForeground(new Color(255, 165, 0));
@@ -204,74 +219,89 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblTitoloAttivitaBellezza.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
 		//centro a 271
 		lblTitoloAttivitaBellezza.setBounds(174, 32, 194, 41);
-		panel_1.add(lblTitoloAttivitaBellezza);
+		panelAttivita.add(lblTitoloAttivitaBellezza);
 
 		lblAttivita = new JLabel("");
-		lblAttivita.setForeground(Color.DARK_GRAY);
+		lblAttivita.setForeground(Color.BLACK);
 		lblAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 20));
 		lblAttivita.setBounds(115, 100, 319, 40);
-		panel_1.add(lblAttivita);
+		panelAttivita.add(lblAttivita);
 
 		lblLuogoBellezza = new JLabel("Luogo");
 		lblLuogoBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblLuogoBellezza.setBounds(148, 162, 60, 22);
-		panel_1.add(lblLuogoBellezza);
+		panelAttivita.add(lblLuogoBellezza);
 
 		lblLuogo = new JLabel("");
 		lblLuogo.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblLuogo.setBounds(289, 162, 231, 22);
-		panel_1.add(lblLuogo);
+		panelAttivita.add(lblLuogo);
 
 		lblOraInizioBellezza = new JLabel("Ora di Inizio");
 		lblOraInizioBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblOraInizioBellezza.setBounds(148, 218, 136, 22);
-		panel_1.add(lblOraInizioBellezza);
+		panelAttivita.add(lblOraInizioBellezza);
 
 		lblOraInizio = new JLabel("");
 		lblOraInizio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblOraInizio.setBounds(289, 218, 136, 22);
-		panel_1.add(lblOraInizio);
+		panelAttivita.add(lblOraInizio);
 
 		lblOraFineBellezza = new JLabel("Ora di Fine");
 		lblOraFineBellezza.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblOraFineBellezza.setBounds(148, 266, 136, 22);
-		panel_1.add(lblOraFineBellezza);
+		panelAttivita.add(lblOraFineBellezza);
 
 		lblOraFine = new JLabel("");
 		lblOraFine.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
 		lblOraFine.setBounds(289, 266, 113, 22);
-		panel_1.add(lblOraFine);
+		panelAttivita.add(lblOraFine);
 
 		btnAttivitaPrecedente = new JButton("<");
 		btnAttivitaPrecedente.addActionListener(this);
 		btnAttivitaPrecedente.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnAttivitaPrecedente.setBounds(108, 370, 54, 40);
-		panel_1.add(btnAttivitaPrecedente);
+		panelAttivita.add(btnAttivitaPrecedente);
 
 		btnAttivitaSuccessiva = new JButton(">");
 		btnAttivitaSuccessiva.addActionListener(this);
 		btnAttivitaSuccessiva.setFont(new Font("Comic Sans MS", Font.PLAIN, 15));
 		btnAttivitaSuccessiva.setBounds(379, 370, 54, 40);
-		panel_1.add(btnAttivitaSuccessiva);
+		panelAttivita.add(btnAttivitaSuccessiva);
 
 		lblIndiceAttivita = new JLabel("0");
 		lblIndiceAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIndiceAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 14));
 		lblIndiceAttivita.setBounds(229, 381, 22, 22);
-		panel_1.add(lblIndiceAttivita);
+		panelAttivita.add(lblIndiceAttivita);
 
 		lblBarraAttivita = new JLabel("/");
 		lblBarraAttivita.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBarraAttivita.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 14));
 		lblBarraAttivita.setBounds(259, 381, 22, 22);
-		panel_1.add(lblBarraAttivita);
+		panelAttivita.add(lblBarraAttivita);
 		
 		lblNumeroAttivitaTotali = new JLabel("");
 		lblNumeroAttivitaTotali.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNumeroAttivitaTotali.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 14));
 		lblNumeroAttivitaTotali.setBounds(289, 381, 22, 22);
-		panel_1.add(lblNumeroAttivitaTotali);
+		panelAttivita.add(lblNumeroAttivitaTotali);
+		
+		lblOrologioIcona_1 = new JLabel("");
+		lblOrologioIcona_1.setIcon(new ImageIcon(ControlPanel.class.getResource("/icon/icons8-address.png")));
+		lblOrologioIcona_1.setBounds(111, 159, 25, 25);
+		panelAttivita.add(lblOrologioIcona_1);
+		
+		lblOrologioIcona_2 = new JLabel("");
+		lblOrologioIcona_2.setIcon(new ImageIcon(ControlPanel.class.getResource("/icon/icons8-clock_8.png")));
+		lblOrologioIcona_2.setBounds(111, 215, 25, 25);
+		panelAttivita.add(lblOrologioIcona_2);
+		
+		lblOrologioIcona_3 = new JLabel("");
+		lblOrologioIcona_3.setIcon(new ImageIcon(ControlPanel.class.getResource("/icon/icons8-clock_8.png")));
+		lblOrologioIcona_3.setBounds(111, 263, 25, 25);
+		panelAttivita.add(lblOrologioIcona_3);
 
 
 		try {
@@ -291,12 +321,18 @@ public class ControlPanel extends JFrame implements ActionListener {
 		lblLuogoBellezza.setVisible(false);
 		lblOraInizioBellezza.setVisible(false);
 		lblOraFineBellezza.setVisible(false);
+		lblOrologioIcona_1.setVisible(false);
+		lblOrologioIcona_2.setVisible(false);
+		lblOrologioIcona_3.setVisible(false);
 	}
 
 	public static void showLabelAttivitaBellezza() {
 		lblLuogoBellezza.setVisible(true);
 		lblOraInizioBellezza.setVisible(true);
 		lblOraFineBellezza.setVisible(true);	
+		lblOrologioIcona_1.setVisible(true);
+		lblOrologioIcona_2.setVisible(true);
+		lblOrologioIcona_3.setVisible(true);
 	}
 
 	public static void cleanViaggio() {
@@ -307,13 +343,31 @@ public class ControlPanel extends JFrame implements ActionListener {
 
 		lblTrasportoBellezza.setVisible(false);
 		lblDataPartenzaViaggioBellezza.setVisible(false);
-		lblDataRitornoViaggioBellezza.setVisible(false);		
+		lblDataRitornoViaggioBellezza.setVisible(false);
+		
+		lblOrologio.setVisible(false);
 	}
 
 	public static void showLabelViaggioBellezza() {
 		lblTrasportoBellezza.setVisible(true);
 		lblDataPartenzaViaggioBellezza.setVisible(true);
-		lblDataRitornoViaggioBellezza.setVisible(true);		
+		lblDataRitornoViaggioBellezza.setVisible(true);	
+		
+		lblOrologio.setVisible(true);
+	}
+	
+	public static void giorni(String stringData) {
+		LocalDate today = LocalDate.now();
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyyy", Locale.ITALY);
+		LocalDate d = LocalDate.parse(stringData, format);
+		long diff = ChronoUnit.DAYS.between(today, d);
+		if (diff == 0){
+			lblOrologio.setText("Si Parte!");
+		} else if (diff == 1) {
+			lblOrologio.setText("- " + diff + " giorno alla partenza");
+		} else {
+			lblOrologio.setText("- " + diff + " giorni alla partenza");
+		}
 	}
 
 	@Override
@@ -364,6 +418,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			if(Database.modelViaggio.getSelectedIndex() > 0) {
 				Database.modelViaggio.previous();
 				Database.modelViaggio.showItem();
+				giorni(Database.modelViaggio.getSelectedItem().getPartenza());
 				Database.modelAttivita.setNumAttivitaTotali(Database.modelAttivita.getSelectedIndex());
 				Database.modelAttivita.showAttivita();
 				lblIndiceViaggio.setText(Database.IndiceViaggio());
@@ -376,6 +431,7 @@ public class ControlPanel extends JFrame implements ActionListener {
 			if(Database.modelViaggio.getSelectedIndex() < DBModelViaggio.lv.size() - 1) {
 				Database.modelViaggio.next();
 				Database.modelViaggio.showItem();
+				giorni(Database.modelViaggio.getSelectedItem().getPartenza());
 				Database.modelAttivita.setNumAttivitaTotali(Database.modelAttivita.getSelectedIndex());
 				Database.modelAttivita.showAttivita();	
 				lblIndiceViaggio.setText(Database.IndiceViaggio());			

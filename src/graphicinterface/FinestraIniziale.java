@@ -78,10 +78,9 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnPrimoViaggio) {
-			//QUI CERCO DI VEDERE SE TUTTE LE TEXTFIELD SONO PIENE
 			if((textFieldEmail.getText().length() == 0) || (textFieldCognome.getText().length() == 0) || (textFieldNome.getText().length() == 0)) {
 				try {
-					Error dialog = new Error();
+					Error dialog = new Error("Compila tutti i campi");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception a) {

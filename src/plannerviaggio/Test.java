@@ -4,10 +4,6 @@ import graphicinterface.ControlPanel;
 import java.awt.EventQueue;
 
 public class Test {
-	/*
-	 * Questa classe la useremo come Main per far andare la nostra applicazione e per testarla.
-	 * Non ha attributi e ha il metodo main.
-	 */
 	
 	public static void main(String[] args) {
 		

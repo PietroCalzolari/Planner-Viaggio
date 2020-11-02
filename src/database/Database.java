@@ -48,6 +48,8 @@ public Database() throws SQLException{
 			ControlPanel.lblDataPartenzaViaggio.setText(rs.getString("partenza"));
 			ControlPanel.lblDataRitornoViaggio.setText(rs.getString("ritorno"));
 			
+			ControlPanel.giorni(rs.getString("partenza"));
+			
 		} catch (SQLException e) {
 			db.executeUpdate("DROP TABLE IF EXISTS viaggio");
 			db.executeUpdate("CREATE TABLE viaggio (" + "idViaggio VARCHAR(10) PRIMARY KEY, " + "nomeViaggio VARCHAR(30), " + "mezzo TEXT, " + "Partenza TEXT, " + "Ritorno TEXT)");

@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class NuovaAttivita extends JDialog implements ActionListener {
+	private static final long serialVersionUID = -7246564913593800401L;
 	private JButton okButton;
 	private JButton cancelButton;
 	private final JPanel contentPanel = new JPanel();
@@ -111,7 +112,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		if(e.getSource() == this.okButton) {
 			if((textFieldNomeAttivita.getText().length() == 0) || (textFieldOraFine.getText().length() == 0) || (textFieldOraInizio.getText().length() == 0) || (textFieldLuogo.getText().length() == 0)) {
 				try {
-					Error dialog = new Error();
+					Error dialog = new Error("Compila tutti i campi");
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception a) {

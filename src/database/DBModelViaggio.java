@@ -77,7 +77,9 @@ public class DBModelViaggio {
 	
 	
 	public void remove() {
-		Database.modelAttivita.removeDaViaggio();
+		if (lv.size() > 0) {
+			Database.modelAttivita.removeDaViaggio();
+		}
 		
 		try {
 			String query = String.format("DELETE FROM viaggio WHERE idViaggio='%s'", getSelectedItem().getIdViaggio());
