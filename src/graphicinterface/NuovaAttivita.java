@@ -62,7 +62,7 @@ public class NuovaAttivita extends JDialog implements ActionListener {
 		lblNuovaAttivita= new JLabel("CREAZIONE NUOVA ATTIVITA'");
 		lblNuovaAttivita.setForeground(new Color(255, 165, 0));
 		lblNuovaAttivita.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
-		lblNuovaAttivita.setBounds(115, 12, 320, 36);
+		lblNuovaAttivita.setBounds(106, 12, 349, 36);
 		contentPanel.add(lblNuovaAttivita);
 
 		lblNomeAttivita = new JLabel("Nome Attivita'");

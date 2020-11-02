@@ -50,7 +50,7 @@ public class NuovoViaggio extends JDialog implements ActionListener {
 
 		lblCreazioneViaggio = new JLabel("CREAZIONE NUOVO VIAGGIO");
 		lblCreazioneViaggio.setForeground(new Color(255, 165, 0));
-		lblCreazioneViaggio.setBounds(130, 12, 300, 36);
+		lblCreazioneViaggio.setBounds(124, 12, 313, 36);
 		lblCreazioneViaggio.setFont(new Font("Shree Devanagari 714", Font.BOLD, 22));
 		contentPanel.add(lblCreazioneViaggio);
 

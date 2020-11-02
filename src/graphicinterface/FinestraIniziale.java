@@ -70,7 +70,7 @@ public class FinestraIniziale extends JFrame implements ActionListener{
 		btnPrimoViaggio.addActionListener(this);
 		btnPrimoViaggio.setForeground(Color.BLACK);
 		btnPrimoViaggio.setFont(new Font("Shree Devanagari 714", Font.PLAIN, 16));
-		btnPrimoViaggio.setBounds(165, 263, 240, 40);
+		btnPrimoViaggio.setBounds(160, 263, 245, 40);
 		getContentPane().add(btnPrimoViaggio);
 
 	}
